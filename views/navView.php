@@ -1,10 +1,8 @@
 <?php
 include_once 'libs/Smarty.class.php';
 
-/**
- *
- */
-class partialRender
+
+class homeView
 {
   private $vista;
 

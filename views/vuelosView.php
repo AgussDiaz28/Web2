@@ -1,18 +1,20 @@
 <?php
+include_once 'libs/Smarty.class.php';
 
-
-class Vuelo
+class vuelosView
 {
   private $vuelo;
 
-  function __construct(argument)
+  function __construct()
   {
     $this->vuelo = new smarty();
   }
 
-  function mostrarVuelos(){
-    
-    $this->vista->display('templates/vuelos.tpl');
+  function mostrarVuelos($vuelos=''){
+
+    //    $this->vuelo->assing();
+
+    $this->vuelo->display('templates/vuelos.tpl');
   }
 }
 

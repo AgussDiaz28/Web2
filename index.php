@@ -1,6 +1,7 @@
 <?php
 include_once 'libs/Smarty.class.php';
 include_once 'views/navView.php';
+include_once 'views/vuelosView.php';
 
     //define('HOME', 'http://'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -12,8 +13,13 @@ function home()
 }
 
 function mostrarHome(){
- $home = new  partialRender();
+ $home = new  homeView();
  $home->mostrarHome();
+}
+
+function mostrarVuelos(){
+  $vuelos = new vuelosView();
+  $vuelos->mostrarVuelos();
 }
 
  ?>
