@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-09-15 20:42:03
+/* Smarty version 3.1.30, created on 2017-09-15 23:13:04
   from "/Applications/MAMP/htdocs/projects/web2-P1/templates/header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59bc1efb41aa85_82918376',
+  'unifunc' => 'content_59bc4260418325_47536444',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1d115749ca5208b844f937fd2f28f38b22e6b3f3' => 
     array (
       0 => '/Applications/MAMP/htdocs/projects/web2-P1/templates/header.tpl',
-      1 => 1505500885,
+      1 => 1505504246,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59bc1efb41aa85_82918376 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59bc4260418325_47536444 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,9 +58,8 @@ function content_59bc1efb41aa85_82918376 (Smarty_Internal_Template $_smarty_tpl)
             <div class="collapse navbar-collapse" id="myNavbar">
                <ul class="nav navbar-nav">
                   <li class="active" id="home"><a>Home</a></li>
-                  <li id="paquetes"><a>Paquetes</a></li>
-                  <li id="experiencias"><a>Experiencias</a></li>
-                  <li id="contacto"><a>Contacto</a></li>
+                  <li id="vuelos"><a>Vuelos</a></li>
+                  <li id="admin"><a>Admin</a></li>
                </ul>
             </div>
          </div>
