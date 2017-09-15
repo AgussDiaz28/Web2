@@ -1,4 +1,8 @@
 <?php
+
+  // include_once 'controller/navController.php';
+  // $controllerView = new homeController();
+
   define('ACTION', 0);
   define('VALOR1', 1);
   define('VALOR2', 2);
