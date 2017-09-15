@@ -32,9 +32,8 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                <ul class="nav navbar-nav">
                   <li class="active" id="home"><a>Home</a></li>
-                  <li id="paquetes"><a>Paquetes</a></li>
-                  <li id="experiencias"><a>Experiencias</a></li>
-                  <li id="contacto"><a>Contacto</a></li>
+                  <li id="vuelos"><a>Vuelos</a></li>
+                  <li id="admin"><a>Admin</a></li>
                </ul>
             </div>
          </div>
