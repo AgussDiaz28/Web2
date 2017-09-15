@@ -1,45 +1,54 @@
 $( document ).ready( function() {
 
 	function cargar(data){
-	$( "#main" ).html( data );
+		$( "#main" ).html();
+		$( "#main" ).html( data );
 	};
 
-	function partialRender( pagina ) {
-		//let v1 = 'templates/';
-		//let result = v1.concat(pagina)
-		console.log("entro");
-		//result =  pagina.concat('.tpl');
+	function renderAdmin(){
 		$.ajax({
 			type:'GET',
-			url:'http://localhost:8888/projects/web2-P1/mostrarHome', //FINDLOCATION JS
+			url:'http://localhost:8888/projects/web2-P1/adminABM',
+			success: cargar
+		});
+		$( "li" ).removeClass( "active" );
+		$("#admin" ).addClass( "active" );
+	}
+
+	function renderHome(){
+		$.ajax({
+			type:'GET',
+			url:'http://localhost:8888/projects/web2-P1/mostrarHome',
 			success: cargar
  		});
-
-
-
 		$( "li" ).removeClass( "active" );
-		$( "#" + pagina ).addClass( "active" );
+		$( "#home" ).addClass( "active" );
 	};
+
+	function renderVuelos(){
+		$.ajax({
+			type:'GET',
+			url:'http://localhost:8888/projects/web2-P1/mostrarVuelos',
+			success: cargar
+ 		});
+		$( "li" ).removeClass( "active" );
+		$("#vuelos" ).addClass( "active" );
+	}
 
 	$( "#home" ).on( "click", function(e) {
 		e.preventDefault();
-		partialRender( "home" );
+		renderHome();
 	} );
 
-	$( "#experiencias" ).on( "click", function() {
+	$( "#vuelos" ).on( "click", function() {
 		e.preventDefault();
-		partialRender( "experiencias" );
-	} );
+		renderVuelos();
 
-	$( "#paquetes" ).on( "click", function() {
+	});
+
+	$( "#admin" ).on( "click", function() {
 		e.preventDefault();
-		partialRender( "paquetes" );
-	} );
-
-	$( "#contacto" ).on( "click", function() {
-		e.preventDefault();
-		partialRender( "contacto" );
-	} );
-
+		renderAdmin();
+	});
 
 });

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-09-15 23:13:04
+/* Smarty version 3.1.30, created on 2017-09-16 01:48:32
   from "/Applications/MAMP/htdocs/projects/web2-P1/templates/header.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59bc4260418325_47536444',
+  'unifunc' => 'content_59bc66d0b35ce7_61740127',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '1d115749ca5208b844f937fd2f28f38b22e6b3f3' => 
     array (
       0 => '/Applications/MAMP/htdocs/projects/web2-P1/templates/header.tpl',
-      1 => 1505504246,
+      1 => 1505519282,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59bc4260418325_47536444 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59bc66d0b35ce7_61740127 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +31,7 @@ function content_59bc4260418325_47536444 (Smarty_Internal_Template $_smarty_tpl)
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       <link rel="stylesheet" href="css/style.css">
-      <?php echo '<script'; ?>
- src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"><?php echo '</script'; ?>
->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>      
       <!-- Agustin Diaz Gargiulo  - Nicolas Strella 2017 -->
    </head>
 
