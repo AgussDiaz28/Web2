@@ -5,17 +5,15 @@ class vuelosView
 {
   private $vuelo;
 
-  function __construct()
-  {
+  function __construct(){
     $this->vuelo = new smarty();
   }
 
   function mostrarVuelos($vuelos=''){
-
     //    $this->vuelo->assing();
-
     $this->vuelo->display('templates/vuelos.tpl');
   }
+
 }
 
 
