@@ -7,7 +7,8 @@ class ConfigApp
     public static $ACTIONS = [
       'home'=> 'home',
       //''=> 'home',
-      'mostrarHome' => 'mostrarHome'
+      'mostrarHome' => 'mostrarHome',
+      'mostrarVuelos' => 'mostrarVuelos',
     ];
 
 }
