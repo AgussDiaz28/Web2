@@ -5,7 +5,6 @@ include_once 'views/HomeView.php';
 class NavController
 {
   private $view;
-  private $model;
 
   function __construct()
   {
