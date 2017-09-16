@@ -6,9 +6,17 @@
   define('ACTION', 0);
   define('VALOR1', 1);
   define('VALOR2', 2);
+  include_once 'controllers/AerolineaController.php';
+  include_once 'controllers/CiudadController.php';
+  include_once 'controllers/NavController.php';
+  include_once 'controllers/VueloController.php';
   include_once 'config/ConfigApp.php';
   include_once 'index.php';
 
+  $controllerAerolinea = new AerolineaController();
+  $controllerCiudad = new CiudadController();
+  $controllerNav = new NavController();
+  $controllerVuelo = new VueloController();
 
   function parseURL($url)
   {

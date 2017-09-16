@@ -1,12 +1,12 @@
 <?php
 include_once 'libs/Smarty.class.php';
 
-class homeView
+class HomeView
 {
   private $vista;
 
   function __construct(){
-    $this->vista = new smarty();
+    $this->vista = new Smarty();
   }
 
   function mostrarHome(){

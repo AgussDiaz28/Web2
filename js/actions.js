@@ -3,12 +3,12 @@ $( document ).ready( function() {
 	function cargar(data){
 		$( "#main" ).html();
 		$( "#main" ).html( data );
-	};
+	}
 
 	function renderAdmin(){
 		$.ajax({
 			type:'GET',
-			url:'http://localhost:8888/projects/web2-P1/adminABM',
+			url:'http://localhost/git-nico/web2/adminABM',
 			success: cargar
 		});
 		$( "li" ).removeClass( "active" );
@@ -18,17 +18,17 @@ $( document ).ready( function() {
 	function renderHome(){
 		$.ajax({
 			type:'GET',
-			url:'http://localhost:8888/projects/web2-P1/mostrarHome',
+			url:'http://localhost/git-nico/web2/mostrarHome',
 			success: cargar
  		});
 		$( "li" ).removeClass( "active" );
 		$( "#home" ).addClass( "active" );
-	};
+	}
 
 	function renderVuelos(){
 		$.ajax({
 			type:'GET',
-			url:'http://localhost:8888/projects/web2-P1/mostrarVuelos',
+			url:'http://localhost/git-nico/web2/mostrarVuelos',
 			success: cargar
  		});
 		$( "li" ).removeClass( "active" );
@@ -40,13 +40,13 @@ $( document ).ready( function() {
 		renderHome();
 	} );
 
-	$( "#vuelos" ).on( "click", function() {
+	$( "#vuelos" ).on( "click", function(e) {
 		e.preventDefault();
 		renderVuelos();
 
 	});
 
-	$( "#admin" ).on( "click", function() {
+	$( "#admin" ).on( "click", function(e) {
 		e.preventDefault();
 		renderAdmin();
 	});
