@@ -3,7 +3,7 @@
 /**
  *
  */
-class ClassName extends AnotherClass
+class NavModel
 {
   private $db;
 
@@ -14,7 +14,7 @@ class ClassName extends AnotherClass
 
   function getHome()
   {
-    
+
   }
 
 

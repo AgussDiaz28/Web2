@@ -1,12 +1,12 @@
 <?php
 include_once 'libs/Smarty.class.php';
 
-class vuelosView
+class VueloView
 {
   private $vuelo;
 
   function __construct(){
-    $this->vuelo = new smarty();
+    $this->vuelo = new Smarty();
   }
 
   function mostrarVuelos($vuelos=''){

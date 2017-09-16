@@ -1,16 +1,14 @@
 <?php
 
-/**
- *
- */
-class ClassName extends AnotherClass
+include_once 'views/HomeView.php';
+
+class NavController
 {
   private $view;
-  private $model;
 
-  function __construct(argument)
+  function __construct()
   {
-    $this->view =  new mostrarHome();
+    $this->view =  new HomeView();
   }
 
   function homeController()

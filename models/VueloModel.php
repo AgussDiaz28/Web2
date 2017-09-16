@@ -1,18 +1,18 @@
 <?php
 
-class ciudadModel
+class VueloModel
 {
-    private $ciudad;
+    private $vuelo;
     private $db;
 
-    function __construct(argument)
+    function __construct()
     {
       $this->db = new PDO('mysql:host=localhost;dbname=db_turismo;charset=utf8', 'root', 'root');
-      $this->vuelo = getCiudades();
+      $this->vuelo = getVuelos();
     }
 
-    private function getCiudades(){
-      $sentencia = $this->db->prepare( "select * from Ciudades");
+    private function getVuelos(){
+      $sentencia = $this->db->prepare( "select * from Vuelos");
       $sentencia->execute($sentencia);
       return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }

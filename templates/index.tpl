@@ -1,7 +1,7 @@
-    {include file="header.tpl"}
+{include file="header.tpl"}
 
-    <div class="container-fluid text-center" id="main">
+  <div class="container-fluid text-center" id="main">
+    {include file="home.tpl"}
+  </div>
 
-    </div>
-
-    {include file="footer.tpl"}
+{include file="footer.tpl"}

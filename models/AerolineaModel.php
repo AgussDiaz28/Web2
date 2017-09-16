@@ -3,7 +3,7 @@
 /**
  *
  */
-class aerolineaModel
+class AerolineaModel
 {
 
   private $aerolinea;
