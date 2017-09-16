@@ -1,6 +1,6 @@
 <?php
 
-include_once 'views/AdmintView.php';
+include_once 'views/AdminView.php';
 
 class AdminController
 {

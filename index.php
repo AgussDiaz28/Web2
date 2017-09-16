@@ -1,4 +1,5 @@
 <?php
+/*
 include_once 'libs/Smarty.class.php';
 include_once 'views/HomeView.php';
 include_once 'views/VueloView.php';
@@ -29,5 +30,5 @@ function adminABM(){
   $admin->mostrarAdmin();
 }
 
-
+*/
  ?>
