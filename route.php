@@ -3,7 +3,7 @@
   define('ACTION', 0);
   define('VALOR1', 1);
   define('VALOR2', 2);
-  include_once 'controllers/IndexController.php';  
+  include_once 'controllers/IndexController.php';
   include_once 'config/ConfigApp.php';
   //include_once 'index.php';
 

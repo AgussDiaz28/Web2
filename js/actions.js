@@ -8,7 +8,7 @@ $( document ).ready( function() {
 	function renderAdmin(){
 		$.ajax({
 			type:'GET',
-			url:'http://localhost/git-nico/web2/adminABM',
+			url: window.location.origin + window.location.pathname + '/adminABM',//'http://localhost/git-nico/web2/adminABM',
 			success: cargar
 		});
 		$( "li" ).removeClass( "active" );
@@ -18,7 +18,7 @@ $( document ).ready( function() {
 	function renderHome(){
 		$.ajax({
 			type:'GET',
-			url:'http://localhost/git-nico/web2/mostrarHome',
+			url: window.location.origin + window.location.pathname + '/mostrarHome', //'http://localhost/git-nico/web2/mostrarHome',
 			success: cargar
  		});
 		$( "li" ).removeClass( "active" );
@@ -28,7 +28,7 @@ $( document ).ready( function() {
 	function renderVuelos(){
 		$.ajax({
 			type:'GET',
-			url:'http://localhost/git-nico/web2/mostrarVuelos',
+			url: window.location.origin + window.location.pathname + '/mostrarVuelos', //'http://localhost/git-nico/web2/mostrarVuelos',
 			success: cargar
  		});
 		$( "li" ).removeClass( "active" );
