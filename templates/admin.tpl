@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-4">
-      <label>Ciudad Destino</label>
+      <label>Ciudad</label>
       <select class="" name="">
           {if isset($ciudades) }
             {foreach from=$ciudades key=row item=ciudad}

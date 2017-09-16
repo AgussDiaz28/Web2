@@ -1,14 +1,13 @@
 <?php
 
-  // include_once 'controller/navController.php';
-  // $controllerView = new homeController();
-
   define('ACTION', 0);
   define('VALOR1', 1);
   define('VALOR2', 2);
+  include_once 'controllers/IndexController.php';
   include_once 'config/ConfigApp.php';
-  include_once 'index.php';
+  //include_once 'index.php';
 
+  $controllerIndex = new IndexController();
 
   function parseURL($url)
   {
@@ -25,10 +24,10 @@
           $params = $urlData[ConfigApp::$PARAMS];
           $metodo = ConfigApp::$ACTIONS[$action];
           if(isset($params) &&  $params != null){
-              echo $metodo($params);
+              echo $controllerIndex->$metodo($params);
           }
           else{
-              echo $metodo();
+              echo $controllerIndex->$metodo();
           }
       }
   }
