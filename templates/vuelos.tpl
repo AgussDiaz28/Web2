@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-sm-4">
-      <label>Ciudad</label>
+      <label>Ciudad Destino</label>
       <select class="" name="">
           {if isset($ciudades) }
-            {foreach from=$ciudades key=row item=ciudad}
-              <option id="{$ciudades[id]}">{$ciudades[Nombre]}/option>
+            {foreach from=$ciudades item=ciudad}
+              <option>{$ciudad.NOMBRE_CIUDAD}</option>
             {/foreach}
           {/if}
       </select>
@@ -13,14 +13,13 @@
       <label>Aerolinea</label>
       <select class="" name="">
           {if isset($Aerolineas) }
-              {foreach from=$Aerolineas key=column item=aerolinea}
-                <option id="{$Aerolineas[id]}">{$Aerolineas[Nombre]}/option>
+              {foreach from=$Aerolineas item=Aerolinea}
+                <option id="{$Aerolinea.ID_AEROLINEA}">{$Aerolinea.NOMBRE_AEROLINEA}</option>
               {/foreach}
           {/if}
       </select>
     </div>
     <div class="col-sm-4">
-      <label>Fecha</label>
          <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
     </div>
 </div>
@@ -30,22 +29,20 @@
         <thead>
           <tr>
             <th>Codigo Vuelo</th>
-            <th>Fecha</th>
-            <th>Origen</th>
+            <th>Aerolinea</th>
             <th>Destino</th>
-            <th>Fecha</th>
+            <th>Fecha de Salida</th>
             <th>Precio</th>
           </tr>
         </thead>
         <tbody>
-          {if isset($vuelo) }
-              {foreach from=$vuelos key=index item=vuelo}
-                  <td>{$vuelo[Codigo]}</td>
-                  <td>{$vuelo[Fecha]}</td>
-                  <td>{$vuelo[Origen]}</td>
-                  <td>{$vuelo[Destino]}</td>
-                  <td>{$vuelo[Fecha]}</td>
-                  <td>{$vuelo[Precio]}</td>
+          {if isset($vuelos) }
+              {foreach from=$vuelos  item=vuelo}
+                  <td>{$vuelo.CODIGO_VUELO}</td>
+                  <td>{$vuelo.NOMBRE_AEROLINEA}</td>
+                  <td>{$vuelo.NOMBRE_CIUDAD}</td>
+                  <td>{$vuelo.FECHA_SALIDA}</td>
+                  <td>{$vuelo.PRECIO}</td>
               {/foreach}
           {/if}
         </tbody>

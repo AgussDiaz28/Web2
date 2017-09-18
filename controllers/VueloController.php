@@ -1,18 +1,20 @@
 <?php
 include_once 'models/VueloModel.php';
-include_once 'views/VueloView.php';
-
 
 class VueloController
 {
-    private $vista;
     private $modelo;
 
   function __construct()
   {
-    //$this->modelo = new VueloModel();
-    //$this->vista = new VueloView();
+    $this->modelo = new VueloModel();
   }
+
+  function getVuelos(){
+    $vuelos = $this->modelo->getVuelos();
+    return $vuelos;
+  }
+
 }
 
 
