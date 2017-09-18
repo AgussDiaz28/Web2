@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-09-16 01:48:32
+/* Smarty version 3.1.30, created on 2017-09-18 20:46:52
   from "/Applications/MAMP/htdocs/projects/web2-P1/templates/footer.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59bc66d0b3a453_58962677',
+  'unifunc' => 'content_59c0149cda86c0_71633797',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59bc66d0b3a453_58962677 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59c0149cda86c0_71633797 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <footer class="container-fluid bg-4 text-center">
       <p> Trabajo Practico Realizado por  <a href="https://www.instagram.com/agussdiaz28/">Agustin Diaz Gargiulo & Nicolas Estrella</a></p>

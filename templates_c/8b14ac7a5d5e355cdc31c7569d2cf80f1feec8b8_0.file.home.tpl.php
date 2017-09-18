@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.30, created on 2017-09-05 03:18:59
+/* Smarty version 3.1.30, created on 2017-09-18 20:46:52
   from "/Applications/MAMP/htdocs/projects/web2-P1/templates/home.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_59adfb839154c8_33710610',
+  'unifunc' => 'content_59c0149cda2841_98959236',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_59adfb839154c8_33710610 (Smarty_Internal_Template $_smarty_tpl) {
+function content_59c0149cda2841_98959236 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <h3>Where are you going?</h3><br>
 
