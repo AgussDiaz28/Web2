@@ -10,6 +10,7 @@ class ConfigApp
       'mostrarHome' => 'mostrarHome',
       'mostrarVuelos' => 'mostrarVuelos',
       'adminABM' => 'adminABM',
+      'actualizarVwVuelos' => 'actualizarVwVuelos',
     ];
 
 }

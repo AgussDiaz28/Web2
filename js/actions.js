@@ -1,54 +1,53 @@
 $( document ).ready( function() {
 
+	function loadVuelos(data){
+			$( "#tvuelos" ).html( data );
+	}
+
+
 	function cargar(data){
-		$( "#main" ).html();
 		$( "#main" ).html( data );
-	}
 
-	function renderAdmin(){
-		$.ajax({
-			type:'GET',
-			url: window.location.origin + window.location.pathname + '/adminABM',//'http://localhost/git-nico/web2/adminABM',
-			success: cargar
+		$('#BVuelo').on('click',function() {
+			$.ajax({
+							data:{
+										destino: $('#CCiudades').val(),
+										aerolinea: $('#CAerolineas').val(),
+										fecha: $('#date').val()
+							},
+							type:'POST',
+							url: window.location.origin + window.location.pathname+'/actualizarVwVuelos',
+							success: loadVuelos
+			});
 		});
-		$( "li" ).removeClass( "active" );
-		$("#admin" ).addClass( "active" );
 	}
 
-	function renderHome(){
+	function render(pagina,metodo){
 		$.ajax({
 			type:'GET',
-			url: window.location.origin + window.location.pathname + '/mostrarHome', //'http://localhost/git-nico/web2/mostrarHome',
+			url: window.location.origin + window.location.pathname+metodo,
 			success: cargar
  		});
 		$( "li" ).removeClass( "active" );
-		$( "#home" ).addClass( "active" );
-	}
+		$(pagina).addClass( "active" );
 
-	function renderVuelos(){
-		$.ajax({
-			type:'GET',
-			url: window.location.origin + window.location.pathname + '/mostrarVuelos', //'http://localhost/git-nico/web2/mostrarVuelos',
-			success: cargar
- 		});
-		$( "li" ).removeClass( "active" );
-		$("#vuelos" ).addClass( "active" );
+
 	}
 
 	$( "#home" ).on( "click", function(e) {
 		e.preventDefault();
-		renderHome();
+		render('#home','/mostrarHome');
 	} );
 
 	$( "#vuelos" ).on( "click", function(e) {
 		e.preventDefault();
-		renderVuelos();
+		render("#vuelos",'/mostrarVuelos');
 
 	});
 
 	$( "#admin" ).on( "click", function(e) {
 		e.preventDefault();
-		renderAdmin();
+		render('#admin','/adminABM');
 	});
 
 });

@@ -1,7 +1,7 @@
 <?php
 include_once 'libs/Smarty.class.php';
 
-class PaginaVueloView     //PaginaVuelos
+class PaginaVueloView
 {
   private $vuelo;
 
