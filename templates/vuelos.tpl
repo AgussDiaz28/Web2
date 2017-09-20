@@ -44,6 +44,7 @@
             <th>Destino</th>
             <th>Fecha de Salida</th>
             <th>Precio</th>
+            <th class="admin">Editar/Eliminar</th>
           </tr>
         </thead>
         <tbody id="tvuelos">
@@ -56,6 +57,7 @@
                 <td>{$vuelo.CIUDAD_DESTINO }</td>
                 <td>{$vuelo.FECHA_SALIDA}</td>
                 <td>{$vuelo.PRECIO}</td>
+                <td class="admin"><span class="glyphicon glyphicon-edit" id="editRow"> &nbsp  </span><span class="glyphicon glyphicon-trash" id="deleteRow">  </span></td>
               </tr>
               {/foreach}
           {/if}

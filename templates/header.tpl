@@ -33,7 +33,8 @@
                <ul class="nav navbar-nav">
                   <li class="active" id="home"><a>Home</a></li>
                   <li id="vuelos"><a>Vuelos</a></li>
-                  <li id="admin"><a>Admin</a></li>
+                  <li id="admin" class="admin"><a>Admin</a></li>
+                  <li id="LogIn"><a>Log In</a></li>
                </ul>
             </div>
          </div>
