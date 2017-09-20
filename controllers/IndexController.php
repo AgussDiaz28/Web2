@@ -2,6 +2,7 @@
 
 include_once 'views/IndexView.php';
 include_once 'views/PaginaVueloView.php';
+include_once 'views/vuelosView.php';
 include_once 'controllers/AdminController.php';
 include_once 'controllers/AerolineaController.php';
 include_once 'controllers/CiudadController.php';
@@ -19,6 +20,7 @@ class IndexController
   private $controllerCiudad;
   private $controllerNav;
   private $controllerVuelo;
+  private $VwVuelos;
 
   function __construct()
   {
@@ -26,6 +28,7 @@ class IndexController
     $this->home = new  HomeView();
     $this->viewVuelosPage = new PaginaVueloView();
     $this->admin = new AdminView();
+    $this->VwVuelos = new vuelosView();
 
     $this->controllerNav = new NavController();
     $this->controllerPVuelos = new VueloController();
@@ -54,6 +57,13 @@ class IndexController
     $this->admin->mostrarAdmin();
   }
 
+  function actualizarVwVuelos(){
+    $destino    = filter_input(INPUT_POST, 'destino');
+    $aerolinea  = filter_input(INPUT_POST, 'aerolinea');
+    $fecha      = filter_input(INPUT_POST, 'fecha');
+    $arrVuelos = $this->controllerVuelo->actualizarVwVuelos($destino,$aerolinea,$fecha);
+    $this->VwVuelos->mostrarVuelos($arrVuelos);
+  }
 
 }
 

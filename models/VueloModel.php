@@ -9,12 +9,30 @@ class VueloModel
       $this->db = new PDO('mysql:host=localhost;dbname=db_turismo;charset=utf8', 'root', 'root');
     }
 
-    public function getVuelos(){
-      $sentencia = $this->db->prepare( "SELECT * FROM vuelos_detalle");
+    public function getVuelos($IDD='',$IDA='',$FS=''){
+      $where = " WHERE ";
+       if(!empty($IDD)) {
+           $where .= "(ID_DESTINO='{$IDD}')";
+       }
+       if(!empty($IDA)) {
+           if($where!=" WHERE "){
+             $where .= ' AND ';
+           }
+           $where .= "(ID_AEROLINEA = {$IDA}'')";
+       }
+       if(!empty($FS)) {
+           if($where!=" WHERE "){
+             $where .= ' AND ';
+           }
+           $where .= "(FECHA_SALIDA='{$FS}')";
+       }
+       if($where == " WHERE ") $where = '';
+
+      $sentencia = $this->db->prepare( "SELECT * FROM VW_VUELOS {$where} "); //WHERE {$Where}
       $sentencia->execute();
       return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     // ABM Vuelos //
 
     public function borrarVuelo($id){
