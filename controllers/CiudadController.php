@@ -14,8 +14,23 @@ class CiudadController
       $ciudades = $this->modelo->getCiudades();
       return $ciudades;
   }
+  function agregarCiudad($value='')
+  {
+    # code...
+  }
+  function borrarCiudad($value='')
+  {
+    # code...
+  }
+  function modificarCiudad(){
 
   }
+  function mostrarCiudades($value='')
+  {
+    # code...
+  }
+  
+}
 
 
  ?>

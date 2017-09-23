@@ -1,14 +1,27 @@
 $( document ).ready( function() {
-	function ajaxMethods(JSdata,metodo){
+	function ajaxMethods(JSdata,metodo,sfunction){		//Ajax POST parametrizado para hacer llamado a funciones de metodos
 		$.ajax({
 					data:JSdata,
 					datatype: JSON,
 					type:'POST',
 					url: window.location.origin + window.location.pathname+metodo,
-					success: mostrarMensaje
+					success: sfunction
 		})
 	}
-	function mostrarMensaje(){
+
+	function render(pagina,metodo){  									//Ajax para carga de Paginas
+		$.ajax({
+			type:'GET',
+			url: window.location.origin + window.location.pathname+metodo,
+			success: cargar
+		});
+		$( "li" ).removeClass( "active" );
+		$(pagina).addClass( "active" );
+
+
+	}
+
+	function mostrarMensaje() {
 		alert('mensaje')
 	}
 
@@ -20,34 +33,30 @@ $( document ).ready( function() {
 		$( "#main" ).html( data );															// <Div> donde se carga el contenido de las paginas
 		//
 		$('#BVuelo').on('click',function() {										//Ajax que llama a la funcion que refresca la tabla
-				$.ajax({
-								data:{
-											destino: $('#CCiudades').val(),
-											aerolinea: $('#CAerolineas').val(),
-											fecha: $('#date').val()
-								},
-								type:'POST',
-								url: window.location.origin + window.location.pathname+'/actualizarVwVuelos',
-								success: refreshVuelos
-				});
+				data:{
+							destino: $('#CCiudades').val(),
+							aerolinea: $('#CAerolineas').val(),
+							fecha: $('#date').val()
+				}
+				ajaxMethods(data,'/actualizarVwVuelos','refreshVuelos')
 		});
 
 		$('#AAerolinea').on('click',function() { 									//Ajax que incerta una nueva Aerolinea a la BD
 				JSdata:{
 								NAerolinea: $('#NAerolinea').val()
 				}
-				ajaxMethods(JSdata,'/CargarAerolinea');
+				ajaxMethods(JSdata,'/agregarAerolinea','mostrarMensaje');
 		})
 
 		$('#ACiudad').on('click',function() {  									//Ajax que incerta una nueva Ciudad a la BD
 			JSdata:{
-							NCiudad: $('#NAerolinea').val()
+							NCiudad: $('#CCiudades').val()
 			}
-			ajaxMethods(JSdata,'/CargarCiudad');
+			ajaxMethods(JSdata,'/agregarCiudad','mostrarMensaje');
 		})
 
 		$('#AVuelo').on('click',function() {  									//Ajax que incerta un nuevo vuelo a la BD
-			JSdata = {
+			JSdata:{
 							CVuelo: $('#CVuelo').val(),
 							SNAerolinea: $('#SNAerolinea').val(),
 							SCOrigen: $('#SCOrigen').val(),
@@ -55,39 +64,36 @@ $( document ).ready( function() {
 							FSVuelo: $('#FSV').val(),
 							PVuelo: $('#PVuelo').val(),
 			}
-			console.log(JSdata);
-			ajaxMethods(JSdata,'/CargarVuelo');
+			ajaxMethods(JSdata,'/agregarVuelo','mostrarMensaje');
 		})
-	}
 
-	function render(pagina,metodo){  									//Ajax para carga de Paginas
-		$.ajax({
-			type:'GET',
-			url: window.location.origin + window.location.pathname+metodo,
-			success: cargar
- 		});
-		$( "li" ).removeClass( "active" );
-		$(pagina).addClass( "active" );
+		$(".deleteRow").on('click',function() {
+			data = {
+					vueloABorrar: $(this).attr('id'),
+					NAerolinea: $('#NAerolinea').val(),
+					NCiudad: $('#CCiudades').val()
+			}
 
-
+			ajaxMethods(data,'/borrarVuelo','refreshVuelos')
+		})
 	}
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
 
 	$( "#home" ).on( "click", function(e) {
 		e.preventDefault();
-		render('#home','/mostrarHome');
+		render('#home','/home');
 	} );
 
 	$( "#vuelos" ).on( "click", function(e) {
 		e.preventDefault();
-		render("#vuelos",'/mostrarVuelos');
+		render("#vuelos",'/vuelos');
 
 	});
 
 	$( "#admin" ).on( "click", function(e) {
 		e.preventDefault();
-		render('#admin','/adminABM');
+		render('#admin','/admin');
 	});
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //

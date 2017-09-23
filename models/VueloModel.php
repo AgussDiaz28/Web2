@@ -18,7 +18,7 @@ class VueloModel
            if($where!=" WHERE "){
              $where .= ' AND ';
            }
-           $where .= "(ID_AEROLINEA = {$IDA}'')";
+           $where .= "(ID_AEROLINEA = '{$IDA}')";
        }
        if(!empty($FS)) {
            if($where!=" WHERE "){
@@ -36,8 +36,10 @@ class VueloModel
     // ABM Vuelos //
 
     public function borrarVuelo($id){
+      $vid = array();
+      $vid[0] = $id;
       $sentencia = $this->db->prepare( "DELETE FROM Vuelos WHERE ID_VUELO = ?");
-      $sentencia->execute($id);
+      $sentencia->execute($vid);
       return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class PaginaVueloView
+class PaginaVueloController
 {
 
   function __construct()
