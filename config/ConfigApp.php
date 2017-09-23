@@ -10,7 +10,7 @@ class ConfigApp
 
       'mostrarVuelos' => 'mostrarVuelos',
       'agregarVuelo' => 'agregarVuelo',
-      'borrarVuelo' => 'borrarVuelo'
+      'borrarVuelo' => 'borrarVuelo',
       'actualizarVwVuelos' => 'actualizarVwVuelos',
 
       'agregarCiudad' => 'agregarCiudad',
@@ -31,7 +31,7 @@ class ConfigApp
       'home'=> 'HomeController',                        //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
       ''=> 'IndexController',                           //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
 
-      'vuelos' => 'PaginaVueloController',              //CLASE VACIA
+      'vuelos' => 'VueloController',              //CLASE VACIA
 
       'admin' => 'AdminController',                     //CLASE VACIA
 
@@ -44,7 +44,7 @@ class ConfigApp
       'agregarCiudad' => 'CiudadController',
       'borrarCiudad'=> 'CiudadController',
       'modificarCiudad' => 'CiudadController',
-      'mostrarCiudades' => 'CiudadController'
+      'mostrarCiudades' => 'CiudadController',
       //------------------------------------------------------------------------------------------------------------------------
 
       'agregarAerolinea' => 'AerolineaController',

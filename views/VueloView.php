@@ -1,7 +1,7 @@
 <?php
 include_once 'libs/Smarty.class.php';
 
-class vuelosView
+class VueloView
 {
   private $vuelo;
 
@@ -12,7 +12,7 @@ class vuelosView
 
   function mostrarVuelos($Vuelos=''){
     $this->vuelo->assign('vuelos',$Vuelos);
-    $this->vuelo->display('templates/tvuelos.tpl');
+    $this->vuelo->display('templates/vuelos.tpl');
   }
 
 }
