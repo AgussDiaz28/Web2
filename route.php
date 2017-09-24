@@ -3,11 +3,14 @@
   define('ACTION', 0);
   define('VALOR1', 1);
   define('VALOR2', 2);
+  include_once 'controllers/AdminController.php';
+  include_once 'controllers/AerolineaController.php';
+  include_once 'controllers/CiudadController.php';
+  include_once 'controllers/HomeController.php';
   include_once 'controllers/IndexController.php';
+  include_once 'controllers/VueloController.php';
+  include_once 'controllers/PaginaVueloController.php';
   include_once 'config/ConfigApp.php';
-  //include_once 'index.php';
-
-  $controllerIndex = new IndexController();
 
   function parseURL($url)
   {
@@ -23,11 +26,12 @@
       if(array_key_exists($action,ConfigApp::$ACTIONS)){
           $params = $urlData[ConfigApp::$PARAMS];
           $metodo = ConfigApp::$ACTIONS[$action];
+          $controller = new ConfigApp::$CONTROLLERS[$action]();
           if(isset($params) &&  $params != null){
-              echo $controllerIndex->$metodo($params);
+              echo $controller->$metodo($params);
           }
           else{
-              echo $controllerIndex->$metodo();
+              echo $controller->$metodo();
           }
       }
   }

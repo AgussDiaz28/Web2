@@ -1,12 +1,20 @@
 <?php
+include_once 'libs/Smarty.class.php';
 
-class vuelosView 
+class VuelosView
 {
+  private $vuelo;
 
   function __construct()
   {
-    # code...
+    $this->vuelo = new Smarty();
   }
+
+  function mostrarVuelos($Vuelos=''){                         //funcion que genera tabla HTML de vuelos mediante parametros
+    $this->vuelo->assign('vuelos',$Vuelos);
+    $this->vuelo->display('templates/tvuelos.tpl');
+  }
+
 }
 
 ?>

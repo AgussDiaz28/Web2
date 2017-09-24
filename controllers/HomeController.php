@@ -2,7 +2,7 @@
 
 include_once 'views/HomeView.php';
 
-class NavController
+class HomeController
 {
   private $view;
 
@@ -11,7 +11,7 @@ class NavController
     $this->view =  new HomeView();
   }
 
-  function homeController()
+  function home()
   {
     $this->view->mostrarHome();
   }
