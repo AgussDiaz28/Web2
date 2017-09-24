@@ -1,8 +1,8 @@
 <div class="row">
   <div class="container-fluid text-center" >
     <div class="col-sm-4">
-      <label>Ciudad Destino</label>
-      <select class="" id="CCiudades" name="">
+      <select class="form-control" id="CCiudades" name="">
+        <option value="">Ciudad Destino</option>form-control
         {if isset($ciudades) }
           {foreach from=$ciudades item=ciudad}
             <option value="{$ciudad.ID_CIUDAD}">{$ciudad.NOMBRE_CIUDAD}</option>
@@ -11,9 +11,8 @@
       </select>
     </div>
     <div class="col-sm-4">
-      <label>Aerolinea</label>
-      <select class="" id="CAerolineas"name="">
-        <option></option>
+      <select class="form-control" id="CAerolineas"name="">
+        <option value="">Aerolineas</option>
         {if isset($Aerolineas) }
             {foreach from=$Aerolineas item=Aerolinea}
               <option value="{$Aerolinea.ID_AEROLINEA}">{$Aerolinea.NOMBRE_AEROLINEA}</option>
@@ -22,9 +21,14 @@
       </select>
     </div>
     <div class="col-sm-2">
-        <!--label>Fecha</label-->
-         <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+      <div class='input-group date ' id='datetimepicker1'>
+         <input type='text' class="form-control" />
+         <span class="input-group-addon">
+             <span class="glyphicon glyphicon-calendar"></span>
+         </span>
+      </div>
     </div>
+
     <div class="col-sm-1">
          <button type="button" id="BVuelo" class="btn btn-default">Buscar Vuelo</button>
     </div>
@@ -33,6 +37,7 @@
     </div>
   </div>
 </div>
+<hr>
 <div class="row">
   <div class="col-sm-12">
     <table class="table table-striped .table-responsive">

@@ -4,7 +4,7 @@
           <input type="text" class="form-control" placeholder="Nombre de la Ciudad" id="NCiudad">
       </div>
       <div class="col-sm-2">
-          <button type="button" id="ACiudad" class="btn btn-default">Agregar Ciudades</button>
+          <button type="button" id="ACiudad" class="btn btn-default">Agregar Ciudad</button>
       </div>
   </div>
   <div class="col-sm-6">
@@ -12,11 +12,9 @@
           <input type="text" class="form-control" placeholder="Nombre de la Aerolinea" id="NAerolinea">
       </div>
       <div class="col-sm-2">
-          <button type="button" id="AAerolinea" class="btn btn-default">Agregar Aerolineas</button>
+          <button type="button" id="AAerolinea" class="btn btn-default">Agregar Aerolinea</button>
       </div>
   </div>
-
-
 </div>
 <hr>
 <div class="row">
@@ -33,7 +31,7 @@
             <th>Comfirmar Nuevo Vuelo</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="tvuelos">
         <tr>
             <td><input id="CVuelo"></td>
             <td><select class="" name="" id="SNAerolinea">
@@ -62,6 +60,53 @@
         </tr>
         </tbody>
     </table>
+<hr>
+<div class="row">
+  <div class="col-sm-6">
+    <label>Nuestros Destinos</label>
+      <table class="table table-striped .table-responsive">
+        <thead>
+          <tr>
+            <td>Ciudad</td>
+            <td>Acciones</td>
+          </tr>
+        </thead>
+        <tbody>
+          {if isset($ciudades) }
+            {foreach from=$ciudades item=ciudad}
+            <tr>
+                <td value="{$ciudad.ID_CIUDAD}">{$ciudad.NOMBRE_CIUDAD}</td>
+                <td class="admin"><span class="glyphicon glyphicon-edit editCityRow" id="{$ciudad.ID_CIUDAD}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteCityRow" id="{$ciudad.ID_CIUDAD}">  </span></td>
+            </tr>
+            {/foreach}
+          {/if}
+        </tbody>
+      </table>
+  </div>
+  <div class="col-sm-6">
+    <label>Aerolienas de Viaje</label>
+      <table class="table table-striped .table-responsive">
+        <thead>
+          <tr>
+            <td>Aerolinea</td>
+            <td>Acciones</td>
+          </tr>
+        </thead>
+        <tbody>
+          {if isset($Aerolineas) }
+            {foreach from=$Aerolineas item=Aerolinea}
+            <tr>
+                <td value="{$ciudad.ID_CIUDAD}">{$Aerolinea.NOMBRE_AEROLINEA}</td>
+                <td class="admin"><span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}">  </span></td>
+            </tr>
+
+            {/foreach}
+          {/if}
+        </tbody>
+      </table>
+  </div>
+</div>
+
 
 
   </div>

@@ -9,6 +9,7 @@
   include_once 'controllers/HomeController.php';
   include_once 'controllers/IndexController.php';
   include_once 'controllers/VueloController.php';
+  include_once 'controllers/PaginaVueloController.php';
   include_once 'config/ConfigApp.php';
 
   function parseURL($url)
@@ -26,11 +27,11 @@
           $params = $urlData[ConfigApp::$PARAMS];
           $metodo = ConfigApp::$ACTIONS[$action];
           $controller = new ConfigApp::$CONTROLLERS[$action]();
-          if(isset($params) &&  $params != null){
+          if(isset($params) && $params != null){
               echo $controller->$metodo($params);
           }
           else{
-              echo $controller->$metodo();
+              echo $controller->$metodo($params);
           }
       }
   }
