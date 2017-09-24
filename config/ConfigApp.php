@@ -31,7 +31,7 @@ class ConfigApp
       'home'=> 'HomeController',                        //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
       ''=> 'IndexController',                           //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
 
-      'vuelos' => 'PaginaVueloController',              //CLASE VACIA
+      'vuelos' => 'VueloController',              //CLASE VACIA
 
       'admin' => 'AdminController',                     //CLASE VACIA
 

@@ -6,7 +6,7 @@ class VueloModel
 
     function __construct()
     {
-      $this->db = new PDO('mysql:host=localhost;dbname=db_turismo;charset=utf8', 'root', 'root');
+      $this->db = new PDO('mysql:host=localhost;dbname=db_turismo;charset=utf8', 'root', '');
     }
 
     public function getVuelos($IDD='',$IDA='',$FS=''){

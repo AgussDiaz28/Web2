@@ -32,6 +32,7 @@ $( document ).ready( function() {
 	function cargar(data){
 		$( "#main" ).html( data );															// <Div> donde se carga el contenido de las paginas
 		//
+
 		$('#BVuelo').on('click',function(){										//Ajax que llama a la funcion que refresca la tabla
 				data = {
 							destino:$('#CCiudades').val(),
@@ -87,13 +88,12 @@ $( document ).ready( function() {
 
 	$( "#vuelos" ).on( "click", function(e) {
 		e.preventDefault();
-		render("#vuelos",'/vuelos');
-
+		render("#vuelos",'/mostrarVuelos');
 	});
 
 	$( "#admin" ).on( "click", function(e) {
 		e.preventDefault();
-		render('#admin','/admin');
+		render('#admin','/mostrarVuelos'); //mostrarAdmin
 	});
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
