@@ -1,6 +1,6 @@
 <?php
 include_once 'models/VueloModel.php';
-include_once 'views/VueloView.php';
+include_once 'views/VuelosView.php';
 
 class VueloController
 {
@@ -9,20 +9,12 @@ class VueloController
 
   function __construct(){
     $this->modelo = new VueloModel();
-    $this->view = new VueloView();
-
-    //esto me parece que convendria hacerlo utilizando PaginaVueloController
-    $this->AerolineaController = new AerolineaController();
-    $this->CiudadController = new CiudadController();
+    $this->view = new VuelosView();
   }
 
   function mostrarVuelos(){
-    //----------- es de otros controladores!!
-    $ciudades = $this->CiudadController->getCiudades();
-    $aerolineas = $this->AerolineaController->getAerolineas();
-    //-----------
     $vuelos = $this->modelo->getVuelos();
-    $this->view->mostrarVuelos($ciudades,$aerolineas,$vuelos);
+    return $vuelos;
   }
 
   function actualizarVwVuelos(){

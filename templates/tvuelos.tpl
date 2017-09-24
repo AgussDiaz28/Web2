@@ -1,5 +1,5 @@
 {if isset($vuelos) }
-    {foreach from=$vuelos item=vuelo}
+    {foreach from=$vuelos  item=vuelo}
     <tr>
       <td>{$vuelo.CODIGO_VUELO}</td>
       <td>{$vuelo.NOMBRE_AEROLINEA}</td>

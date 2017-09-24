@@ -8,7 +8,7 @@ class ConfigApp
       'home'=> 'home',
       ''=> 'home',
 
-      'vuelos' => 'PaginaVuelos', //hay que eliminarlo
+      'vuelos' => 'PaginaVuelos',
 
       'admin' => 'adminABM',
 
@@ -35,7 +35,7 @@ class ConfigApp
       'home'=> 'HomeController',                        //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
       ''=> 'IndexController',                           //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
 
-      'vuelos' => 'VueloController',              //hace lo mismo que mostrarVuelos. Esta de mas
+      'vuelos' => 'PaginaVueloController',              //CLASE VACIA
 
       'admin' => 'AdminController',                     //CLASE VACIA
 

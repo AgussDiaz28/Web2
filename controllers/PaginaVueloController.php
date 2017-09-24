@@ -3,7 +3,6 @@ include_once 'controllers/AerolineaController.php';
 include_once 'controllers/CiudadController.php';
 include_once 'controllers/VueloController.php';
 include_once 'views/PaginaVueloView.php';
-include_once 'views/PaginaVueloView.php';
 
 class PaginaVueloController
 {
@@ -21,16 +20,14 @@ class PaginaVueloController
 
   function PaginaVuelos(){
 
-    $ciudades = $this->CiudadController->getCiudades();
     $aerolineas = $this->AerolineaController->getAerolineas();
+    $ciudades = $this->CiudadController->getCiudades();
     $vuelos = $this->VueloController->mostrarVuelos();
 
     return $this->PaginaVueloView->mostrarPagVuelos($ciudades,$aerolineas,$vuelos);
   }
 
 }
-
-
 
 
  ?>
