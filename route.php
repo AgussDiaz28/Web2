@@ -27,11 +27,11 @@
           $params = $urlData[ConfigApp::$PARAMS];
           $metodo = ConfigApp::$ACTIONS[$action];
           $controller = new ConfigApp::$CONTROLLERS[$action]();
-          if(isset($params) && $params != null){
+          if(isset($params) &&  $params != null){
               echo $controller->$metodo($params);
           }
           else{
-              echo $controller->$metodo(); //$params
+              echo $controller->$metodo();
           }
       }
   }

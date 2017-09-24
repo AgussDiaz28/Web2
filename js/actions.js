@@ -31,7 +31,7 @@ $( document ).ready( function() {
 	}
 
 	function refreshVuelos(data){
-		$( "#tvuelos" ).html( data ); 												// <Tbody> que contiene la tabla que muestra los vuelos
+			$( "#tvuelos" ).html( data ); 												// <Tbody> que contiene la tabla que muestra los vuelos
 	}
 
 	function cargar(data){
@@ -73,19 +73,25 @@ $( document ).ready( function() {
 		})
 
 		$(".deleteRow").on('click',function() {
-			let vueloABorrar = $(this).attr('id');
 
+
+			let vueloABorrar = $(this).attr('id');
 			$.ajax({
 						data: vueloABorrar,
 						type:'POST',
 						url: window.location.origin + window.location.pathname+'/borrarVuelo'+'/'+vueloABorrar,
-						success: blablabla
+						success: borrar
 			})
-			//ajaxMethods(vueloABorrar,'/borrarVuelo',refreshVuelos)
+
+			// data = {
+			// 		vueloABorrar: $(this).attr('id')
+			// }
+			//
+			// ajaxMethods(data,'/borrarVuelo',refreshVuelos)
 		})
 	}
-
-	function blablabla(){
+	//emprolijar esta parte junto a lo de arriba
+	function borrar(){
 		data = {
 					destino:$('#CCiudades').val(),
 					aerolinea: $('#CAerolineas').val(),
@@ -103,12 +109,13 @@ $( document ).ready( function() {
 
 	$( "#vuelos" ).on( "click", function(e) {
 		e.preventDefault();
-		render("#vuelos",'/mostrarVuelos');
+		render("#vuelos",'/vuelos');
+
 	});
 
 	$( "#admin" ).on( "click", function(e) {
 		e.preventDefault();
-		render('#admin','/mostrarVuelos'); //mostrarAdmin
+		render('#admin','/admin');
 	});
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
