@@ -8,6 +8,10 @@ class ConfigApp
       'home'=> 'home',
       ''=> 'home',
 
+      'vuelos' => 'PaginaVuelos',
+
+      'admin' => 'adminABM',
+
       'mostrarVuelos' => 'mostrarVuelos',
       'agregarVuelo' => 'agregarVuelo',
       'borrarVuelo' => 'borrarVuelo',

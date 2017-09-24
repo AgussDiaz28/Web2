@@ -9,6 +9,7 @@
   include_once 'controllers/HomeController.php';
   include_once 'controllers/IndexController.php';
   include_once 'controllers/VueloController.php';
+  include_once 'controllers/PaginaVueloController.php';
   include_once 'config/ConfigApp.php';
 
   function parseURL($url)

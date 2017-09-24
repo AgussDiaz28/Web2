@@ -21,8 +21,13 @@ $( document ).ready( function() {
 
 	}
 
-	function mostrarMensaje() {
-		alert('mensaje')
+	function mostrarMensaje(data) {
+		if (data.result === true) {
+			alert('INSERTO')
+		}else {
+			alert('NO SE PUDO INSERTAR LA TUPLA')
+		}
+
 	}
 
 	function refreshVuelos(data){
@@ -38,21 +43,21 @@ $( document ).ready( function() {
 							aerolinea: $('#CAerolineas').val(),
 							fecha:$('#date').val()
 				};
-				ajaxMethods(data,'/actualizarVwVuelos','refreshVuelos')
+				ajaxMethods(data,'/actualizarVwVuelos',refreshVuelos)
 		});
 
 		$('#AAerolinea').on('click',function() { 									//Ajax que incerta una nueva Aerolinea a la BD
 				JSdata = {
 								NAerolinea: $('#NAerolinea').val()
 				}
-				ajaxMethods(JSdata,'/agregarAerolinea','mostrarMensaje');
+				ajaxMethods(JSdata,'/agregarAerolinea',mostrarMensaje);
 		})
 
 		$('#ACiudad').on('click',function() {  									//Ajax que incerta una nueva Ciudad a la BD
 			JSdata = {
 							NCiudad: $('#CCiudades').val()
 			}
-			ajaxMethods(JSdata,'/agregarCiudad','mostrarMensaje');
+			ajaxMethods(JSdata,'/agregarCiudad',mostrarMensaje);
 		})
 
 		$('#AVuelo').on('click',function() {  									//Ajax que incerta un nuevo vuelo a la BD
@@ -64,7 +69,7 @@ $( document ).ready( function() {
 							FSVuelo: $('#FSV').val(),
 							PVuelo: $('#PVuelo').val(),
 			}
-			ajaxMethods(JSdata,'/agregarVuelo','mostrarMensaje');
+			ajaxMethods(JSdata,'/agregarVuelo',mostrarMensaje);
 		})
 
 		$(".deleteRow").on('click',function() {
@@ -74,7 +79,7 @@ $( document ).ready( function() {
 					NCiudad: $('#CCiudades').val()
 			}
 
-			ajaxMethods(data,'/borrarVuelo','refreshVuelos')
+			ajaxMethods(data,'/borrarVuelo',refreshVuelos)
 		})
 	}
 
@@ -97,5 +102,6 @@ $( document ).ready( function() {
 	});
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
+
 
 });

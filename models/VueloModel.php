@@ -40,13 +40,11 @@ class VueloModel
       $vid[0] = $id;
       $sentencia = $this->db->prepare( "DELETE FROM Vuelos WHERE ID_VUELO = ?");
       $sentencia->execute($vid);
-      return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function agregarVuelo($values){
       $sentencia = $this->db->prepare( "INSERT INTO Vuelos(ID_AEROLINEA,ID_DESTINO,ID_ORIGEN,FECHA_SALIDA,CODIGO_VUELO,PRECIO) VALUES (?,?,?,?,?,?) ");
       $sentencia->execute($values);
-      return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function updateVuelo($values){
