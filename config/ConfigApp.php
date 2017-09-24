@@ -10,7 +10,7 @@ class ConfigApp
 
       'mostrarVuelos' => 'mostrarVuelos',
       'agregarVuelo' => 'agregarVuelo',
-      'borrarVuelo' => 'borrarVuelo'
+      'borrarVuelo' => 'borrarVuelo',
       'actualizarVwVuelos' => 'actualizarVwVuelos',
 
       'agregarCiudad' => 'agregarCiudad',
@@ -44,7 +44,7 @@ class ConfigApp
       'agregarCiudad' => 'CiudadController',
       'borrarCiudad'=> 'CiudadController',
       'modificarCiudad' => 'CiudadController',
-      'mostrarCiudades' => 'CiudadController'
+      'mostrarCiudades' => 'CiudadController',
       //------------------------------------------------------------------------------------------------------------------------
 
       'agregarAerolinea' => 'AerolineaController',

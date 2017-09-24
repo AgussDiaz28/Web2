@@ -32,31 +32,31 @@ $( document ).ready( function() {
 	function cargar(data){
 		$( "#main" ).html( data );															// <Div> donde se carga el contenido de las paginas
 		//
-		$('#BVuelo').on('click',function() {										//Ajax que llama a la funcion que refresca la tabla
-				data:{
-							destino: $('#CCiudades').val(),
+		$('#BVuelo').on('click',function(){										//Ajax que llama a la funcion que refresca la tabla
+				data = {
+							destino:$('#CCiudades').val(),
 							aerolinea: $('#CAerolineas').val(),
-							fecha: $('#date').val()
-				}
+							fecha:$('#date').val()
+				};
 				ajaxMethods(data,'/actualizarVwVuelos','refreshVuelos')
 		});
 
 		$('#AAerolinea').on('click',function() { 									//Ajax que incerta una nueva Aerolinea a la BD
-				JSdata:{
+				JSdata = {
 								NAerolinea: $('#NAerolinea').val()
 				}
 				ajaxMethods(JSdata,'/agregarAerolinea','mostrarMensaje');
 		})
 
 		$('#ACiudad').on('click',function() {  									//Ajax que incerta una nueva Ciudad a la BD
-			JSdata:{
+			JSdata = {
 							NCiudad: $('#CCiudades').val()
 			}
 			ajaxMethods(JSdata,'/agregarCiudad','mostrarMensaje');
 		})
 
 		$('#AVuelo').on('click',function() {  									//Ajax que incerta un nuevo vuelo a la BD
-			JSdata:{
+			JSdata = {
 							CVuelo: $('#CVuelo').val(),
 							SNAerolinea: $('#SNAerolinea').val(),
 							SCOrigen: $('#SCOrigen').val(),
