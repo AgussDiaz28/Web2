@@ -31,7 +31,7 @@
               echo $controller->$metodo($params);
           }
           else{
-              echo $controller->$metodo($params);
+              echo $controller->$metodo(); //$params
           }
       }
   }

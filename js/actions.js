@@ -31,8 +31,7 @@ $( document ).ready( function() {
 	}
 
 	function refreshVuelos(data){
-		console.log(data);
-			$( "#tvuelos" ).html( data ); 												// <Tbody> que contiene la tabla que muestra los vuelos
+		$( "#tvuelos" ).html( data ); 												// <Tbody> que contiene la tabla que muestra los vuelos
 	}
 
 	function cargar(data){
@@ -74,13 +73,25 @@ $( document ).ready( function() {
 		})
 
 		$(".deleteRow").on('click',function() {
-			data = {
-					vueloABorrar: $(this).attr('id'),
-					NAerolinea: $('#NAerolinea').val(),
-					NCiudad: $('#CCiudades').val()
-			}
-			ajaxMethods(data,'/borrarVuelo',refreshVuelos)
+			let vueloABorrar = $(this).attr('id');
+
+			$.ajax({
+						data: vueloABorrar,
+						type:'POST',
+						url: window.location.origin + window.location.pathname+'/borrarVuelo'+'/'+vueloABorrar,
+						success: blablabla
+			})
+			//ajaxMethods(vueloABorrar,'/borrarVuelo',refreshVuelos)
 		})
+	}
+
+	function blablabla(){
+		data = {
+					destino:$('#CCiudades').val(),
+					aerolinea: $('#CAerolineas').val(),
+					fecha:$('#date').val()
+		};
+		ajaxMethods(data,'/actualizarVwVuelos',refreshVuelos)
 	}
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //

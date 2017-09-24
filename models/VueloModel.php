@@ -38,8 +38,8 @@ class VueloModel
     public function borrarVuelo($id){
       $vid = array();
       $vid[0] = $id;
-      $sentencia = $this->db->prepare( "DELETE FROM Vuelos WHERE ID_VUELO = {$id}");
-      $sentencia->execute($vid);
+      $sentencia = $this->db->prepare( "DELETE FROM Vuelos WHERE ID_VUELO = ?");
+      $sentencia->execute($id);
     }
 
     public function agregarVuelo($values){
