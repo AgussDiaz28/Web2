@@ -35,20 +35,20 @@
         <tr>
             <td><input id="CVuelo"></td>
             <td><select class="" name="" id="SNAerolinea">
-              {if isset($Aerolineas) }
+              {if !empty($Aerolineas) }
                   {foreach from=$Aerolineas item=Aerolinea}
                     <option value="{$Aerolinea.ID_AEROLINEA}">{$Aerolinea.NOMBRE_AEROLINEA}</option>
                   {/foreach}
               {/if}
             <td><select class="" name="" id="SCOrigen">
-              {if isset($ciudades) }
+              {if !empty($ciudades) }
                 {foreach from=$ciudades item=ciudad}
                   <option value="{$ciudad.ID_CIUDAD}">{$ciudad.NOMBRE_CIUDAD}</option>
                 {/foreach}
               {/if}
             </select></td>
             <td><select class="" name="" id="SCDestino">
-              {if isset($ciudades) }
+              {if !empty($ciudades) }
                 {foreach from=$ciudades item=ciudad}
                   <option value="{$ciudad.ID_CIUDAD}">{$ciudad.NOMBRE_CIUDAD}</option>
                 {/foreach}
@@ -72,7 +72,7 @@
           </tr>
         </thead>
         <tbody>
-          {if isset($ciudades) }
+          {if !empty($ciudades) }
             {foreach from=$ciudades item=ciudad}
             <tr>
                 <td value="{$ciudad.ID_CIUDAD}">{$ciudad.NOMBRE_CIUDAD}</td>
@@ -93,7 +93,7 @@
           </tr>
         </thead>
         <tbody>
-          {if isset($Aerolineas) }
+          {if !empty($Aerolineas) }
             {foreach from=$Aerolineas item=Aerolinea}
             <tr>
                 <td value="{$ciudad.ID_CIUDAD}">{$Aerolinea.NOMBRE_AEROLINEA}</td>

@@ -1,4 +1,4 @@
-{if isset($vuelos) }
+{if !empty($vuelos) }
     {foreach from=$vuelos  item=vuelo}
     <tr>
       <td>{$vuelo.CODIGO_VUELO}</td>

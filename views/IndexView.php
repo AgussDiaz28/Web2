@@ -10,7 +10,7 @@ class IndexView
     $this->smarty->assign('titulo', 'Index Turismo');
   }
 
-  function mostrarHome(){
+  function mostrarIndex(){
     $this->smarty->display('templates/index.tpl');
   }
 }

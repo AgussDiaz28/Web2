@@ -6,7 +6,7 @@ class ConfigApp
     public static $PARAMS = 'params';
     public static $ACTIONS = [
       'home'=> 'home',
-      ''=> 'home',
+      ''=> 'index',
 
       'vuelos' => 'PaginaVuelos',
 
@@ -32,12 +32,12 @@ class ConfigApp
 
     public static $CONTROLLERS = [
 
-      'home'=> 'HomeController',                        //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
-      ''=> 'IndexController',                           //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
+      'home'=> 'NavController',                        //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
+      ''=> 'NavController',                           //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
 
-      'vuelos' => 'PaginaVueloController',              //CLASE VACIA
+      'vuelos' => 'NavController',                     //CLASE VACIA
 
-      'admin' => 'AdminController',                     //CLASE VACIA
+      'admin' => 'NavController',                     //CLASE VACIA
 
       'mostrarVuelos' => 'VueloController',             //CONFIRMADO QUE EXISTE EN EL CONTROLADOR
       'agregarVuelo' => 'VueloController',              //CONFIRMADO QUE EXISTE EN EL CONTROLADOR //FALTA DESAROLLARLA, NO HACE NADA

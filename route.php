@@ -3,13 +3,10 @@
   define('ACTION', 0);
   define('VALOR1', 1);
   define('VALOR2', 2);
-  include_once 'controllers/AdminController.php';
   include_once 'controllers/AerolineaController.php';
   include_once 'controllers/CiudadController.php';
-  include_once 'controllers/HomeController.php';
-  include_once 'controllers/IndexController.php';
+  include_once 'controllers/NavController.php';
   include_once 'controllers/VueloController.php';
-  include_once 'controllers/PaginaVueloController.php';
   include_once 'config/ConfigApp.php';
 
   function parseURL($url)

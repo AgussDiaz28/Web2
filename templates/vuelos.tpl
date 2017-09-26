@@ -3,7 +3,7 @@
     <div class="col-sm-4">
       <select class="form-control" id="CCiudades" name="">
         <option value="">Ciudad Destino</option>form-control
-        {if isset($ciudades) }
+        {if !empty($ciudades) }
           {foreach from=$ciudades item=ciudad}
             <option value="{$ciudad.ID_CIUDAD}">{$ciudad.NOMBRE_CIUDAD}</option>
           {/foreach}
@@ -13,7 +13,7 @@
     <div class="col-sm-4">
       <select class="form-control" id="CAerolineas"name="">
         <option value="">Aerolineas</option>
-        {if isset($Aerolineas) }
+        {if !empty($Aerolineas) }
             {foreach from=$Aerolineas item=Aerolinea}
               <option value="{$Aerolinea.ID_AEROLINEA}">{$Aerolinea.NOMBRE_AEROLINEA}</option>
             {/foreach}
@@ -53,7 +53,7 @@
           </tr>
         </thead>
         <tbody id="tvuelos">
-          {if isset($vuelos) }
+          {if !empty($vuelos) }
               {foreach from=$vuelos  item=vuelo}
               <tr>
                 <td>{$vuelo.CODIGO_VUELO}</td>

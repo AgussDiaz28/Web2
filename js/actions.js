@@ -27,24 +27,23 @@ $( document ).ready( function() {
 		}else {
 			alert('NO SE PUDO INSERTAR LA TUPLA')
 		}
-
 	}
 
 	function refreshVuelos(data){
 			$( "#tvuelos" ).html( data ); 												// <Tbody> que contiene la tabla que muestra los vuelos
 	}
 
+	function actualizarFiltro(){											//Ajax que llama a la funcion que refresca la tabla
+			data = {
+						destino:$('#CCiudades').val(),
+						aerolinea: $('#CAerolineas').val(),
+						fecha:$('#date').val()
+			};
+			ajaxMethods(data,'/actualizarVwVuelos',refreshVuelos)
+	}
+
 	function cargar(data){
 		$( "#main" ).html( data );															// <Div> donde se carga el contenido de las paginas
-		//
-		$('#BVuelo').on('click',function(){										//Ajax que llama a la funcion que refresca la tabla
-				data = {
-							destino:$('#CCiudades').val(),
-							aerolinea: $('#CAerolineas').val(),
-							fecha:$('#date').val()
-				};
-				ajaxMethods(data,'/actualizarVwVuelos',refreshVuelos)
-		});
 
 		$('#AAerolinea').on('click',function() { 									//Ajax que incerta una nueva Aerolinea a la BD
 				JSdata = {
@@ -73,32 +72,24 @@ $( document ).ready( function() {
 		})
 
 		$(".deleteRow").on('click',function() {
-
-
 			let vueloABorrar = $(this).attr('id');
 			$.ajax({
 						data: vueloABorrar,
 						type:'POST',
 						url: window.location.origin + window.location.pathname+'/borrarVuelo'+'/'+vueloABorrar,
-						success: borrar
+						success: actualizarFiltro
 			})
-
-			// data = {
-			// 		vueloABorrar: $(this).attr('id')
-			// }
-			//
 			// ajaxMethods(data,'/borrarVuelo',refreshVuelos)
+		})
+
+		$('#CCiudades').on('change',function(){
+			actualizarFiltro();
+		})
+		$('#CAerolineas').on('change',function(){
+			actualizarFiltro();
 		})
 	}
 	//emprolijar esta parte junto a lo de arriba
-	function borrar(){
-		data = {
-					destino:$('#CCiudades').val(),
-					aerolinea: $('#CAerolineas').val(),
-					fecha:$('#date').val()
-		};
-		ajaxMethods(data,'/actualizarVwVuelos',refreshVuelos)
-	}
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
 
