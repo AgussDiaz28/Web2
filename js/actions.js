@@ -17,8 +17,6 @@ $( document ).ready( function() {
 		});
 		$( "li" ).removeClass( "active" );
 		$(pagina).addClass( "active" );
-
-
 	}
 
 	function mostrarMensaje(data) {
