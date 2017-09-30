@@ -19,9 +19,9 @@ class AerolineaController
     return $aerolineas;
   }
 
-  function mostrarAerolineas(){                           //DEVUELVE EL SELEC DE AEROLIENAS 
-    $aerolineas = $this->modelo->getAerolineas();
-    return $this->view->mostrarAerolineas($aerolineas);
+  function MostrarPaginaAerolineas(){
+    $aerolineas = $this->getAerolineas();
+    $this->view->mostrarPAerolineas($aerolineas);
   }
 
   public function agregarAerolinea($value=''){

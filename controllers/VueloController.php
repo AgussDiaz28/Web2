@@ -1,16 +1,44 @@
 <?php
-include_once 'models/VueloModel.php';
 include_once 'views/VuelosView.php';
+include_once 'views/VueloView.php';
+
+include_once 'models/CiudadModel.php';
+include_once 'models/VueloModel.php';
+include_once 'models/AerolineaModel.php';
+
 
 class VueloController
 {
+
+    private $tVuelos;
+    private $tCiudades;
+    private $tAerolienas;
+
     private $modelo;
     private $view;
+    private $vuelos;
 
   function __construct(){
-    $this->modelo = new VueloModel();
     $this->view = new VuelosView();
+    $this->vuelos = new VueloView();
+
+    $this->modelo = new VueloModel();
+    $this->mCiudades = new CiudadModel();
+    $this->mAerolineas =  new AerolineaModel();
   }
+
+
+  function MostrarPaginaVuelos(){
+    $this->getDatos();
+    $this->vuelos->mostrarVuelos($this->tCiudades,$this->tAerolienas,$this->tVuelos);
+  }
+
+  function getDatos(){
+      $this->tCiudades = $this->mCiudades->getCiudades();
+      $this->tVuelos = $this->modelo->getVuelos();
+      $this->tAerolienas = $this->mAerolineas->getAerolineas();
+  }
+
 
   function mostrarVuelos(){
     $vuelos = $this->modelo->getVuelos();
@@ -42,7 +70,7 @@ class VueloController
       $FSVuelo        = filter_input(INPUT_POST, 'FSVuelo');
       $PVuelo         = filter_input(INPUT_POST, 'PVuelo');
 
-      try {                                         //PREGUNTAR SI LA EXCEPCION TERMINA LA EJECUCION INMEDIATAMENTE MEDIANTE EL CATCH
+      try {                  //PREGUNTAR SI LA EXCEPCION TERMINA LA EJECUCION INMEDIATAMENTE MEDIANTE EL CATCH
             if (!empty($CVuelo)) {
               # code...
             }else {

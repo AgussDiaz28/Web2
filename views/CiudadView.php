@@ -11,8 +11,13 @@ class CiudadView
   }
 
   function mostrarCiudades($Ciudades=''){
-    $this->ciudades->assign('Aerolineas',$Ciudades);
+    $this->ciudades->assign('ciudades',$Ciudades);
     $this->ciudades->display('templates/cciudades.tpl');
+  }
+
+  function mostrarPCiudades($Ciudades=''){
+    $this->ciudades->assign('ciudades',$Ciudades);
+    $this->ciudades->display('templates/pCiudades.tpl');
   }
 
 }
