@@ -1,13 +1,7 @@
 <?php
-
-class AerolineaModel
+include_once 'models/dbModel.php';
+class AerolineaModel extends dbModel
 {
-  private $db;
-
-  function __construct()
-  {
-    $this->db = new PDO('mysql:host=localhost;dbname=db_turismo;charset=utf8', 'root', 'root');
-  }
 
   public function getAerolineas(){
     $sentencia = $this->db->prepare( "SELECT * FROM Aerolineas");

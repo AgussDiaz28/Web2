@@ -1,9 +1,8 @@
 <?php
-include_once('model/LoginModel.php');
-include_once('view/LoginView.php');
-
-class LoginController
-{
+include_once('models/LoginModel.php');
+include_once('views/LoginView.php');
+include_once('controllers/SecuredController.php');
+class LoginController extends SecuredController{
 
   function __construct()
   {
@@ -20,10 +19,9 @@ class LoginController
   {
       $userName = $_POST['usuario'];
       $password = $_POST['password'];
-
       if(!empty($userName) && !empty($password)){
         $user = $this->model->getUser($userName);
-        if((!empty($user)) && password_verify($password, $user[0]['password'])) {
+        if((!empty($user)) && password_verify($password, $user[0]['PASSWORD'])) {
             session_start();
             $_SESSION['USER'] = $userName;
             $_SESSION['LAST_ACTIVITY'] = time();

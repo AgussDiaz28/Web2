@@ -1,14 +1,7 @@
 <?php
-
-class VueloModel
+include_once 'models/dbModel.php';
+class VueloModel extends dbModel
 {
-    private $db;
-
-    function __construct()
-    {
-      $this->db = new PDO('mysql:host=localhost;dbname=db_turismo;charset=utf8', 'root', 'root');
-    }
-
     public function getVuelos($IDD='',$IDA='',$FS=''){
       $where = " WHERE ";
        if(!empty($IDD)) {

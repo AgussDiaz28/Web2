@@ -6,6 +6,7 @@
   include_once 'controllers/CiudadController.php';
   include_once 'controllers/NavController.php';
   include_once 'controllers/VueloController.php';
+  include_once 'controllers/LogInController.php';
   include_once 'config/ConfigApp.php';
 
 function parseURL($url)

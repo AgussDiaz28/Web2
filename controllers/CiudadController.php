@@ -1,11 +1,10 @@
 <?php
-include_once 'models/CiudadModel.php';
-include_once 'views/CiudadView.php';
+include_once('models/CiudadModel.php');
+include_once('views/CiudadView.php' );
+include_once('controllers/controller.php') ;
 
-class CiudadController
+class CiudadController extends Controller
 {
-    private $modelo;
-    private $view;
 
   function __construct()
   {

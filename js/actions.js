@@ -91,7 +91,7 @@ $(".editRow").on('click',function() {
 		destino = codigo.prevObject[3].attributes[1].value;
 		fecha = codigo.prevObject[4].attributes[1].value;
 		pbuelo = codigo.prevObject[5].attributes[1].value;
-		
+
 		$('#CVuelo').val(codigoA),
 		$('#SNAerolinea').val(aerolinea),
 		$('#SCOrigen').val(origen),
@@ -135,7 +135,6 @@ $( "#LogIn" ).on( "click", function(e) {
 e.preventDefault();
 render('#LogIn','/LogIn');
 });
-
 
 $( "#LogOut" ).on( "click", function(e) {
 e.preventDefault();

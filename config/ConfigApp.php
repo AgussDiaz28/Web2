@@ -11,7 +11,8 @@ class ConfigApp
       'pvuelos' => 'VueloController#MostrarPaginaVuelos',
 
       'LogOut' => 'LogInController#LogOut',
-      'LogIn' => 'LogInController#LogIn',
+      'LogIn' => 'LogInController#index',
+      'verificarUsuario' => 'LogInController#LogIn',
 
       'paerolineas' => 'AerolineaController#MostrarPaginaAerolineas',
       'pciudades' => 'CiudadController#MostrarPaginaCiudades',

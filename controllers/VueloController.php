@@ -1,21 +1,20 @@
 <?php
-include_once 'views/VuelosView.php';
-include_once 'views/VueloView.php';
+include_once('views/VuelosView.php');
+include_once('views/VueloView.php');
 
-include_once 'models/CiudadModel.php';
-include_once 'models/VueloModel.php';
-include_once 'models/AerolineaModel.php';
+include_once('models/CiudadModel.php');
+include_once('models/VueloModel.php');
+include_once('models/AerolineaModel.php');
 
+include_once('controllers/controller.php');
 
-class VueloController
+class VueloController extends Controller
 {
 
     private $tVuelos;
     private $tCiudades;
     private $tAerolienas;
 
-    private $modelo;
-    private $view;
     private $vuelos;
 
   function __construct(){

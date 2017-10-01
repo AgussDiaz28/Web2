@@ -1,12 +1,10 @@
 <?php
-include_once 'models/AerolineaModel.php';
-include_once 'views/AerolineaView.php';
+include_once('models/AerolineaModel.php');
+include_once('views/AerolineaView.php');
+include_once('controllers/controller.php');
 
-
-class AerolineaController
+class AerolineaController extends Controller
 {
-    private $modelo;
-    private $view;
 
   function __construct()
   {

@@ -1,11 +1,11 @@
 <?php
 
-include_once 'views/HomeView.php';
-include_once 'views/IndexView.php';
+include_once('views/HomeView.php');
+include_once('views/IndexView.php');
+include_once('controllers/controller.php');
 
-class NavController
+class NavController extends Controller
 {
-
 
   function __construct(){
     $this->view =  new HomeView();

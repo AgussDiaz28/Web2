@@ -1,14 +1,7 @@
 <?php
-
-class CiudadModel
+include_once 'models/dbModel.php';
+class CiudadModel extends dbModel
 {
-    private $db;
-
-    function __construct()
-    {
-      $this->db = new PDO('mysql:host=localhost;dbname=db_turismo;charset=utf8', 'root', 'root');
-    }
-
     public function getCiudades(){
       $sentencia = $this->db->prepare( "SELECT * FROM Ciudades");
       $sentencia->execute();
