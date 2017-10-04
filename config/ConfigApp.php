@@ -18,6 +18,7 @@ class ConfigApp
       'pciudades' => 'CiudadController#MostrarPaginaCiudades',
 
       'agregarVuelo' => 'VueloController#agregarVuelo',
+      'actualizarVuelo' => 'VueloController#actualizarVuelo',
       'borrarVuelo' => 'VueloController#borrarVuelo',
       'actualizarVwVuelos' => 'VueloController#actualizarVwVuelos',
 

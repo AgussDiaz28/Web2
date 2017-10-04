@@ -1,5 +1,6 @@
 $( document ).ready( function() {
 function ajaxMethods(JSdata,metodo,sfunction){		//Ajax POST parametrizado para hacer llamado a funciones de metodos
+	console.log(metodo);
 	$.ajax({
 		data:JSdata,
 		datatype: JSON,
@@ -20,10 +21,10 @@ function render(pagina,metodo){  	//Ajax para carga de Paginas
 }
 
 function mostrarMensaje(data) {
-	if (data.result === true) {
-		alert('INSERTO')
+	if (data.result == true) {
+		alert('INSERTO');
 	}else {
-		alert('NO SE PUDO INSERTAR LA TUPLA')
+		alert('NO SE PUDO INSERTAR LA TUPLA');
 	}
 }
 
@@ -64,7 +65,7 @@ $('#AVuelo').on('click',function() {  	//Ajax que incerta un nuevo vuelo a la BD
 		SCOrigen: $('#SCOrigen').val(),
 		SCDestino: $('#SCDestino').val(),
 		FSVuelo: $('#FSV').val(),
-		PVuelo: $('#PVuelo').val(),
+		PVuelo: $('#PVuelo').val()
 	}
 	ajaxMethods(JSdata,'/agregarVuelo',mostrarMensaje);
 })
@@ -90,14 +91,30 @@ $(".editRow").on('click',function() {
 		origen = codigo.prevObject[2].attributes[1].value;
 		destino = codigo.prevObject[3].attributes[1].value;
 		fecha = codigo.prevObject[4].attributes[1].value;
-		pbuelo = codigo.prevObject[5].attributes[1].value;
+		pvuelo = codigo.prevObject[5].attributes[1].value;
 
-		$('#CVuelo').val(codigoA),
-		$('#SNAerolinea').val(aerolinea),
-		$('#SCOrigen').val(origen),
-		$('#SCDestino').val(destino),
-		$('#FSV').val(fecha),
-		$('#PVuelo').val(pbuelo)
+		$('#CVuelo').val(codigoA);
+		$('#SNAerolinea').val(aerolinea);
+		$('#SCOrigen').val(origen);
+		$('#SCDestino').val(destino);
+		$('#FSV').val(fecha);
+		$('#PVuelo').val(pvuelo)
+
+		JSdata = {
+			CVuelo: codigoA,
+			SNAerolinea: aerolinea,
+			SCOrigen: origen,
+			SCDestino: destino,
+			FSVuelo: fecha,
+			PVuelo: pvuelo
+		}
+
+		let id_vuelo = $(this).attr("id");
+
+		$('#AVuelo').unbind('click');
+		$('#AVuelo').on('click',function() {  	//Ajax que incerta un nuevo vuelo a la BD
+			ajaxMethods(JSdata,'/actualizarVuelo/'+id_vuelo,mostrarMensaje);
+		})
 	});
 
 $('#CCiudades').on('change',function(){

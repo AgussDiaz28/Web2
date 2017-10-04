@@ -29,27 +29,30 @@ class VueloModel extends dbModel
     // ABM Vuelos //
 
     public function borrarVuelo($id){
-      $sentencia = $this->db->prepare( "DELETE FROM Vuelos WHERE ID_VUELO = ?");
+      $sentencia = $this->db->prepare( "DELETE FROM vuelos WHERE ID_VUELO = ?");
       $sentencia->execute($id);
     }
 
     public function agregarVuelo($values){
-      $sentencia = $this->db->prepare( "INSERT INTO Vuelos(ID_AEROLINEA,ID_DESTINO,ID_ORIGEN,FECHA_SALIDA,CODIGO_VUELO,PRECIO) VALUES (?,?,?,?,?,?) ");
+      $sentencia = $this->db->prepare( "INSERT INTO vuelos(CODIGO_VUELO,ID_AEROLINEA,ID_ORIGEN,ID_DESTINO,FECHA_SALIDA,PRECIO) VALUES (?,?,?,?,?,?) ");
       $sentencia->execute($values);
     }
 
-    public function updateVuelo($values){
+
+    //esto no anda y no tira error tampoco. Probe mil formas distintas, pasandole tod un arreglo, probando modificar solo una cosa, etc.. no hay caso y no se por que
+    public function actualizarVuelo($values,$id_vuelo){
       $sentencia = $this->db->prepare( "UPDATE
-                                                 Vuelos
+                                                 vuelos
                                         SET
-                                                 ID_AEROLINEA = ?
-                                                ,ID_DESTINO = ?
+                                                 CODIGO_VUELO = ?
+                                                ,ID_AEROLINEA = ?
                                                 ,ID_ORIGEN = ?
+                                                ,ID_DESTINO = ?
                                                 ,FECHA_SALIDA = ?
-                                                ,CODIGO_VUELO = ?
-                                                ,PRECIO =?
+                                                ,PRECIO = ?
                                         WHERE
-                                                 ID_VUELO = ? ");
+                                                 ID_VUELO = $id_vuelo ");
+
       $sentencia->execute($values);
       return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
