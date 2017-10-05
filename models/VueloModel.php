@@ -39,8 +39,9 @@ class VueloModel extends dbModel
     }
 
 
-    //esto no anda y no tira error tampoco. Probe mil formas distintas, pasandole tod un arreglo, probando modificar solo una cosa, etc.. no hay caso y no se por que
-    public function actualizarVuelo($values,$id_vuelo){
+    //esto no anda y no tira error tampoco. Probe mil formas distintas, pasandole tod un arreglo, probando modificar solo una cosa, etc.. no hay caso
+    public function actualizarVuelo($values){
+      var_dump($values);
       $sentencia = $this->db->prepare( "UPDATE
                                                  vuelos
                                         SET
@@ -51,7 +52,7 @@ class VueloModel extends dbModel
                                                 ,FECHA_SALIDA = ?
                                                 ,PRECIO = ?
                                         WHERE
-                                                 ID_VUELO = $id_vuelo ");
+                                                 ID_VUELO = ? ");
 
       $sentencia->execute($values);
       return $sentencia->fetchAll(PDO::FETCH_ASSOC);

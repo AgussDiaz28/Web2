@@ -1,6 +1,5 @@
 $( document ).ready( function() {
 function ajaxMethods(JSdata,metodo,sfunction){		//Ajax POST parametrizado para hacer llamado a funciones de metodos
-	console.log(metodo);
 	$.ajax({
 		data:JSdata,
 		datatype: JSON,
@@ -84,38 +83,37 @@ $(".deleteRow").on('click',function() {
 $(".editRow").on('click',function() {
 	let vueloAEditar = $(this).attr('id');
 	let codigo = $(this).closest('tr').find('.rdata').map(function () {
-				return $(this).val();
-    });
-		codigoA = codigo.prevObject[0].attributes[1].value;
-		aerolinea = codigo.prevObject[1].attributes[1].value;
-		origen = codigo.prevObject[2].attributes[1].value;
-		destino = codigo.prevObject[3].attributes[1].value;
-		fecha = codigo.prevObject[4].attributes[1].value;
-		pvuelo = codigo.prevObject[5].attributes[1].value;
+			return $(this).val();
+  });
+	codigoA = codigo.prevObject[0].attributes[1].value;
+	aerolinea = codigo.prevObject[1].attributes[1].value;
+	origen = codigo.prevObject[2].attributes[1].value;
+	destino = codigo.prevObject[3].attributes[1].value;
+	fecha = codigo.prevObject[4].attributes[1].value;
+	pvuelo = codigo.prevObject[5].attributes[1].value;
 
-		$('#CVuelo').val(codigoA);
-		$('#SNAerolinea').val(aerolinea);
-		$('#SCOrigen').val(origen);
-		$('#SCDestino').val(destino);
-		$('#FSV').val(fecha);
-		$('#PVuelo').val(pvuelo)
+	$('#CVuelo').val(codigoA);
+	$('#SNAerolinea').val(aerolinea);
+	$('#SCOrigen').val(origen);
+	$('#SCDestino').val(destino);
+	$('#FSV').val(fecha);
+	$('#PVuelo').val(pvuelo)
 
+	let id_vuelo = $(this).attr("id");
+
+	$('#AVuelo').unbind('click');
+	$('#AVuelo').on('click',function() {  	//Ajax que incerta un nuevo vuelo a la BD
 		JSdata = {
-			CVuelo: codigoA,
-			SNAerolinea: aerolinea,
-			SCOrigen: origen,
-			SCDestino: destino,
-			FSVuelo: fecha,
-			PVuelo: pvuelo
+			CVuelo: $('#CVuelo').val(),
+			SNAerolinea: $('#SNAerolinea').val(),
+			SCOrigen: $('#SCOrigen').val(),
+			SCDestino: $('#SCDestino').val(),
+			FSVuelo: $('#FSV').val(),
+			PVuelo: $('#PVuelo').val()
 		}
-
-		let id_vuelo = $(this).attr("id");
-
-		$('#AVuelo').unbind('click');
-		$('#AVuelo').on('click',function() {  	//Ajax que incerta un nuevo vuelo a la BD
-			ajaxMethods(JSdata,'/actualizarVuelo/'+id_vuelo,mostrarMensaje);
-		})
-	});
+		ajaxMethods(JSdata,'/actualizarVuelo/'+id_vuelo,mostrarMensaje);
+	})
+});
 
 $('#CCiudades').on('change',function(){
 	actualizarFiltro();

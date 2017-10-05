@@ -152,9 +152,8 @@ class VueloController extends Controller
           }else {
             throw new Exception("No ingreso el precio del vuelo");
           }
-          $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo);
-          $id_vuelo = $params[0]; //recibe como params el id del vuelo (en forma de string.. aunque castees en (int) no funca)
-          $this->modelo->actualizarVuelo($values,$id_vuelo);
+          $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo,(int)$params[0]); //params contiene el id del vuelo a modificar
+          $this->modelo->actualizarVuelo($values);
           $result = true;
           $error = false;
     } catch (Exception $e) {
