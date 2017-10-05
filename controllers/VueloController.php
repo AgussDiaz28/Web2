@@ -114,7 +114,7 @@ class VueloController extends Controller
       die();
   }
 
-  function actualizarVuelo($params){
+  function actualizarVuelo($id_vuelo){
 
     $CVuelo         = filter_input(INPUT_POST, 'CVuelo');
     $SNAerolinea    = filter_input(INPUT_POST, 'SNAerolinea');
@@ -152,7 +152,7 @@ class VueloController extends Controller
           }else {
             throw new Exception("No ingreso el precio del vuelo");
           }
-          $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo,(int)$params[0]); //params contiene el id del vuelo a modificar
+          $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo,(int)$id_vuelo[0]); //params contiene el id del vuelo a modificar
           $this->modelo->actualizarVuelo($values);
           $result = true;
           $error = false;
@@ -168,8 +168,8 @@ class VueloController extends Controller
       die();
   }
 
-  function borrarVuelo($id){
-    return  $this->modelo->borrarVuelo($id);
+  function borrarVuelo($id_vuelo){
+    return  $this->modelo->borrarVuelo($id_vuelo);
   }
 
   function cargarVuelo($value=''){

@@ -57,7 +57,11 @@ $('#ACiudad').on('click',function() {  			//Ajax que incerta una nueva Ciudad a 
 	ajaxMethods(JSdata,'/agregarCiudad',mostrarMensaje);
 })
 
-$('#AVuelo').on('click',function() {  	//Ajax que incerta un nuevo vuelo a la BD
+$('#AVuelo').on('click',function(){
+	add();
+})  	//Ajax que incerta un nuevo vuelo a la BD
+
+function add(){
 	JSdata = {
 		CVuelo: $('#CVuelo').val(),
 		SNAerolinea: $('#SNAerolinea').val(),
@@ -66,8 +70,8 @@ $('#AVuelo').on('click',function() {  	//Ajax que incerta un nuevo vuelo a la BD
 		FSVuelo: $('#FSV').val(),
 		PVuelo: $('#PVuelo').val()
 	}
-	ajaxMethods(JSdata,'/agregarVuelo',mostrarMensaje);
-})
+	ajaxMethods(JSdata,'/agregarVuelo',actualizarFiltro);
+}
 
 $(".deleteRow").on('click',function() {
 	let vueloABorrar = $(this).attr('id');
@@ -101,8 +105,8 @@ $(".editRow").on('click',function() {
 
 	let id_vuelo = $(this).attr("id");
 
-	$('#AVuelo').unbind('click');
-	$('#AVuelo').on('click',function() {  	//Ajax que incerta un nuevo vuelo a la BD
+	$('#AVuelo').unbind('click'); //desbindeo el evento de add
+	$('#AVuelo').on('click',function() { //bindeo evento de modificar
 		JSdata = {
 			CVuelo: $('#CVuelo').val(),
 			SNAerolinea: $('#SNAerolinea').val(),
@@ -111,8 +115,14 @@ $(".editRow").on('click',function() {
 			FSVuelo: $('#FSV').val(),
 			PVuelo: $('#PVuelo').val()
 		}
-		ajaxMethods(JSdata,'/actualizarVuelo/'+id_vuelo,mostrarMensaje);
+		ajaxMethods(JSdata,'/actualizarVuelo/'+id_vuelo,actualizarFiltro);
+
+		$('#AVuelo').unbind('click'); //desbindeo evento modificar
+		$('#AVuelo').bind('click',function(){
+			add();
+		}) //vuelvo a bindear evento add
 	})
+
 });
 
 $('#CCiudades').on('change',function(){

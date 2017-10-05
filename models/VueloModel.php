@@ -38,10 +38,7 @@ class VueloModel extends dbModel
       $sentencia->execute($values);
     }
 
-
-    //esto no anda y no tira error tampoco. Probe mil formas distintas, pasandole tod un arreglo, probando modificar solo una cosa, etc.. no hay caso
     public function actualizarVuelo($values){
-      var_dump($values);
       $sentencia = $this->db->prepare( "UPDATE
                                                  vuelos
                                         SET
