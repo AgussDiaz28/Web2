@@ -4,7 +4,7 @@ class LoginModel extends dbModel
 {
 
   function getUser($userName){
-    $sentencia = $this->db->prepare( "select * from usuario where username = ? limit 1");
+    $sentencia = $this->db->prepare( "SELECT * FROM usuario WHERE username = ? LIMIT 1");
     $sentencia->execute([$userName]);
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }

@@ -1,5 +1,5 @@
 <?php
-include_once('controllers/controller.php') ;
+include_once('controllers/Controller.php') ;
 class SecuredController extends Controller
 {
 
