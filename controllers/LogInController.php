@@ -8,6 +8,7 @@ class LoginController extends SecuredController{
   {
     $this->view = new LoginView();
     $this->model = new LoginModel();
+    $this->viewH = new IndexView();
   }
 
   public function index()
@@ -25,11 +26,12 @@ class LoginController extends SecuredController{
             session_start();
             $_SESSION['USER'] = $userName;
             $_SESSION['LAST_ACTIVITY'] = time();
-            header('Location: '.HOME);
         }
         else{
             $this->view->mostrarLogin('Usuario o Password incorrectos');
         }
+        $this->viewH->mostrarIndex(TRUE);
+        header('Location: '.HOME);
       }
   }
 
@@ -37,7 +39,8 @@ class LoginController extends SecuredController{
   {
     session_start();
     session_destroy();
-    header('Location: '.LOGIN);
+    $this->viewH->mostrarIndex(FALSE);
+    header('Location: '.HOME);
   }
 }
 

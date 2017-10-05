@@ -31,6 +31,8 @@ class ConfigApp
       'deteleAerolinea' => 'AerolineaController#deteleAerolinea',
       'mostrarAerolineas' => 'AerolineaController#mostrarAerolineas',
       'modificarAerolinea' => 'AerolineaController#AerolineaController',
+
+      'newDB' => 'dbModel#newDB', // Esta bien llamar al modelo de aca ?
     ];
 }
 

@@ -10,7 +10,8 @@ class VuelosView
     $this->vuelo = new Smarty();
   }
 
-  function mostrarVuelos($Vuelos=''){                         //funcion que genera tabla HTML de vuelos mediante parametros
+  function mostrarVuelos($Vuelos=''){       //funcion que genera tabla HTML de vuelos mediante parametros
+    $this->vuelo->assign('Admin',TRUE);
     $this->vuelo->assign('vuelos',$Vuelos);
     $this->vuelo->display('templates/tvuelos.tpl');
   }

@@ -61,6 +61,31 @@ $('#AVuelo').on('click',function(){
 	add();
 })  	//Ajax que incerta un nuevo vuelo a la BD
 
+function limpiarFormulario(){
+	$('#CVuelo').val('');
+	$('#SNAerolinea').val('');
+	$('#SCOrigen').val('');
+	$('#SCDestino').val('');
+	$('#FSV').val('');
+	$('#PVuelo').val('');
+}
+
+function llenarFormulario(codigo){
+	codigoA = codigo.prevObject[0].attributes[1].value;
+	aerolinea = codigo.prevObject[1].attributes[1].value;
+	origen = codigo.prevObject[2].attributes[1].value;
+	destino = codigo.prevObject[3].attributes[1].value;
+	fecha = codigo.prevObject[4].attributes[1].value;
+	pvuelo = codigo.prevObject[5].attributes[1].value;
+
+	$('#CVuelo').val(codigoA);
+	$('#SNAerolinea').val(aerolinea);
+	$('#SCOrigen').val(origen);
+	$('#SCDestino').val(destino);
+	$('#FSV').val(fecha);
+	$('#PVuelo').val(pvuelo)
+}
+
 function add(){
 	JSdata = {
 		CVuelo: $('#CVuelo').val(),
@@ -86,24 +111,11 @@ $(".deleteRow").on('click',function() {
 
 $(".editRow").on('click',function() {
 	let vueloAEditar = $(this).attr('id');
+	let id_vuelo = $(this).attr("id");
 	let codigo = $(this).closest('tr').find('.rdata').map(function () {
 			return $(this).val();
-  });
-	codigoA = codigo.prevObject[0].attributes[1].value;
-	aerolinea = codigo.prevObject[1].attributes[1].value;
-	origen = codigo.prevObject[2].attributes[1].value;
-	destino = codigo.prevObject[3].attributes[1].value;
-	fecha = codigo.prevObject[4].attributes[1].value;
-	pvuelo = codigo.prevObject[5].attributes[1].value;
-
-	$('#CVuelo').val(codigoA);
-	$('#SNAerolinea').val(aerolinea);
-	$('#SCOrigen').val(origen);
-	$('#SCDestino').val(destino);
-	$('#FSV').val(fecha);
-	$('#PVuelo').val(pvuelo)
-
-	let id_vuelo = $(this).attr("id");
+  	});
+  	llenarFormulario(codigo);
 
 	$('#AVuelo').unbind('click'); //desbindeo el evento de add
 	$('#AVuelo').on('click',function() { //bindeo evento de modificar
@@ -115,12 +127,14 @@ $(".editRow").on('click',function() {
 			FSVuelo: $('#FSV').val(),
 			PVuelo: $('#PVuelo').val()
 		}
-		ajaxMethods(JSdata,'/actualizarVuelo/'+id_vuelo,actualizarFiltro);
+		ajaxMethods(JSdata, '/actualizarVuelo/' + id_vuelo, actualizarFiltro);
 
 		$('#AVuelo').unbind('click'); //desbindeo evento modificar
 		$('#AVuelo').bind('click',function(){
 			add();
 		}) //vuelvo a bindear evento add
+
+		limpiarFormulario();
 	})
 
 });

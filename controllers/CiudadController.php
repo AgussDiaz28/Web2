@@ -1,7 +1,7 @@
 <?php
 include_once('models/CiudadModel.php');
 include_once('views/CiudadView.php' );
-include_once('controllers/controller.php') ;
+include_once('controllers/Controller.php') ;
 
 class CiudadController extends Controller
 {

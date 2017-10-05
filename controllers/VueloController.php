@@ -6,7 +6,7 @@ include_once('models/CiudadModel.php');
 include_once('models/VueloModel.php');
 include_once('models/AerolineaModel.php');
 
-include_once('controllers/controller.php');
+include_once('controllers/Controller.php');
 
 class VueloController extends Controller
 {

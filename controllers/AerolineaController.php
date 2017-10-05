@@ -1,7 +1,7 @@
 <?php
 include_once('models/AerolineaModel.php');
 include_once('views/AerolineaView.php');
-include_once('controllers/controller.php');
+include_once('controllers/Controller.php');
 
 class AerolineaController extends Controller
 {
