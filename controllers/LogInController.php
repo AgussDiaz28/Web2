@@ -26,12 +26,13 @@ class LoginController extends SecuredController{
             session_start();
             $_SESSION['USER'] = $userName;
             $_SESSION['LAST_ACTIVITY'] = time();
+            $_SESSION['LOGGED'] = TRUE;
+            header('Location: '.HOME);
         }
         else{
             $this->view->mostrarLogin('Usuario o Password incorrectos');
         }
-        $this->viewH->mostrarIndex(TRUE);
-        header('Location: '.HOME);
+        //$this->viewH->mostrarIndex(TRUE);
       }
   }
 
@@ -39,7 +40,6 @@ class LoginController extends SecuredController{
   {
     session_start();
     session_destroy();
-    $this->viewH->mostrarIndex(FALSE);
     header('Location: '.HOME);
   }
 }
