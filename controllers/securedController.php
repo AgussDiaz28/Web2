@@ -7,7 +7,7 @@ class SecuredController extends Controller
   {
     session_start();
     if(isset($_SESSION['USER'])){
-      if (time() - $_SESSION['LAST_ACTIVITY'] > 15) { //15 segundos
+      if (time() - $_SESSION['LAST_ACTIVITY'] > 10) { //15 segundos
         header('Location: '.LOGOUT);
         die();
       }

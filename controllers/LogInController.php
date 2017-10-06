@@ -32,7 +32,6 @@ class LoginController extends SecuredController{
         else{
             $this->view->mostrarLogin('Usuario o Password incorrectos');
         }
-        //$this->viewH->mostrarIndex(TRUE);
       }
   }
 
