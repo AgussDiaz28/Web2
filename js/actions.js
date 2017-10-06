@@ -174,11 +174,11 @@ $( "#LogIn" ).on( "click", function(e) {
 e.preventDefault();
 render('#LogIn','/LogIn');
 });
-
+/*
 $( "#LogOut" ).on( "click", function(e) {
 e.preventDefault();
 render('#LogOut','/LogOut');
-});
+});*/
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
 
