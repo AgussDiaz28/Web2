@@ -59,6 +59,31 @@ function decidir(data) {
 function cargar(data){
 $( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
 
+$( "#home" ).on( "click", function(e) {
+	e.preventDefault();
+	render('#home','/home');
+} );
+
+$( "#vuelos" ).on( "click", function(e) {
+e.preventDefault();
+render("#vuelos",'/pvuelos');
+});
+
+$( "#ciudades" ).on( "click", function(e) {
+e.preventDefault();
+render("#ciudades",'/pciudades');
+});
+
+$( "#aerolineas" ).on( "click", function(e) {
+e.preventDefault();
+render("#aerolineas",'/paerolineas');
+});
+
+$( "#LogIn" ).on( "click", function(e) {
+e.preventDefault();
+render('#LogIn','/LogIn');
+}); 
+
 $('#loginf').submit(function( event ) {
   event.preventDefault();
 	data = {
@@ -172,7 +197,7 @@ $('#CAerolineas').on('change',function(){
 	actualizarFiltro();
 })
 }
-//emprolijar esta parte junto a lo de arriba
+
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
 
@@ -200,6 +225,7 @@ $( "#LogIn" ).on( "click", function(e) {
 e.preventDefault();
 render('#LogIn','/LogIn');
 });
+
 /*
 $( "#LogOut" ).on( "click", function(e) {
 e.preventDefault();
