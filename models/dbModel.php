@@ -23,7 +23,11 @@ class dbModel{
     $dbn = substr($credenciales[0], 0, -1); //Elimino un espacio al final del strign, verificar por que pasa lo del espacio al final
     $host = substr($credenciales[1], 0, -1);
     $username =  substr($credenciales[2], 0, -1);
-    $password =  substr($credenciales[3], 0, -1);
+    if(isset($credenciales[3])){
+      $password =  substr($credenciales[3], 0, -1);
+    }else{
+      $password = "";
+    }
 
     $config = "mysql:host=$host;dbname=$dbn;charset=utf8";
     $this->db = new PDO($config, $username, $password);

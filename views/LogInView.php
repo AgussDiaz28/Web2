@@ -12,7 +12,6 @@ class LoginView
     $this->smarty->Assign('error', $error);
     $this->smarty->display('templates/LogIn.tpl');
   }
-
 }
 
  ?>

@@ -20,15 +20,55 @@ function render(pagina,metodo){  	//Ajax para carga de Paginas
 }
 
 function mostrarMensaje(data) {
-
-}
-function cargarNav(data){
-$( "#myNavbar" ).html( data );
-render('#home','/home');
+	if (data.result == true) {
+		alert('INSERTO');
+	}else {
+		alert('NO SE PUDO INSERTAR LA TUPLA');
+	}
 }
 
 function refreshVuelos(data){
-$( "#tvuelos" ).html( data );		// <Tbody> que contiene la tabla que muestra los vuelos
+	$( "#tvuelos" ).html( data );		// <Tbody> que contiene la tabla que muestra los vuelos
+	$(".deleteRow").on('click',function() {
+		let vueloABorrar = $(this).attr('id');
+		$.ajax({
+					data: vueloABorrar,
+					type:'POST',
+					url: window.location.origin + window.location.pathname+'/borrarVuelo'+'/'+vueloABorrar,
+					success: actualizarFiltro
+		})
+		// ajaxMethods(data,'/borrarVuelo',refreshVuelos)
+	})
+
+	$(".editRow").on('click',function() {
+		let vueloAEditar = $(this).attr('id');
+		let id_vuelo = $(this).attr("id");
+		let codigo = $(this).closest('tr').find('.rdata').map(function () {
+				return $(this).val();
+	  	});
+	  	llenarFormulario(codigo);
+
+		$('#AVuelo').unbind('click'); //desbindeo el evento de add
+		$('#AVuelo').on('click',function() { //bindeo evento de modificar
+			JSdata = {
+				CVuelo: $('#CVuelo').val(),
+				SNAerolinea: $('#SNAerolinea').val(),
+				SCOrigen: $('#SCOrigen').val(),
+				SCDestino: $('#SCDestino').val(),
+				FSVuelo: $('#FSV').val(),
+				PVuelo: $('#PVuelo').val()
+			}
+			ajaxMethods(JSdata, '/actualizarVuelo/' + id_vuelo, actualizarFiltro);
+
+			$('#AVuelo').unbind('click'); //desbindeo evento modificar
+			$('#AVuelo').bind('click',function(){
+				add();
+			}) //vuelvo a bindear evento add
+
+			limpiarFormulario();
+		})
+
+	});
 }
 
 function actualizarFiltro(){		//Ajax que llama a la funcion que refresca la tabla
@@ -39,78 +79,6 @@ function actualizarFiltro(){		//Ajax que llama a la funcion que refresca la tabl
 	};
 	ajaxMethods(data,'/actualizarVwVuelos',refreshVuelos)
 }
-
-function decidir(data) {
-	if (data){
-			$.ajax({
-				type:'POST',
-				url: window.location.origin + window.location.pathname+'navBar',
-				success: cargarNav
-			})
-	}else {
-		data = {
-			error: 'Usuario o Password incorrectos'
-		}
-		ajaxMethods(data,'/LogIn',cargar)
-	}
-
-}
-
-function cargar(data){
-$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
-
-$( "#home" ).on( "click", function(e) {
-	e.preventDefault();
-	render('#home','/home');
-} );
-
-$( "#vuelos" ).on( "click", function(e) {
-e.preventDefault();
-render("#vuelos",'/pvuelos');
-});
-
-$( "#ciudades" ).on( "click", function(e) {
-e.preventDefault();
-render("#ciudades",'/pciudades');
-});
-
-$( "#aerolineas" ).on( "click", function(e) {
-e.preventDefault();
-render("#aerolineas",'/paerolineas');
-});
-
-$( "#LogIn" ).on( "click", function(e) {
-e.preventDefault();
-render('#LogIn','/LogIn');
-}); 
-
-$('#loginf').submit(function( event ) {
-  event.preventDefault();
-	data = {
-		usuario : $('#usuario').val(),
-		password : $('#password').val()
-	}
-	ajaxMethods(data,'/verificarUsuario',decidir);
-});
-
-
-$('#AAerolinea').on('click',function() { 		//Ajax que incerta una nueva Aerolinea a la BD
-	JSdata = {
-					NAerolinea: $('#NAerolinea').val()
-	}
-	ajaxMethods(JSdata,'/agregarAerolinea',mostrarMensaje);
-})
-
-$('#ACiudad').on('click',function() {  			//Ajax que incerta una nueva Ciudad a la BD
-	JSdata = {
-					NCiudad: $('#CCiudades').val()
-	}
-	ajaxMethods(JSdata,'/agregarCiudad',mostrarMensaje);
-})
-
-$('#AVuelo').on('click',function(){
-	add();
-})  	//Ajax que incerta un nuevo vuelo a la BD
 
 function limpiarFormulario(){
 	$('#CVuelo').val('');
@@ -148,6 +116,27 @@ function add(){
 	}
 	ajaxMethods(JSdata,'/agregarVuelo',actualizarFiltro);
 }
+
+function cargar(data){
+$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
+
+$('#AAerolinea').on('click',function() { 		//Ajax que incerta una nueva Aerolinea a la BD
+	JSdata = {
+					NAerolinea: $('#NAerolinea').val()
+	}
+	ajaxMethods(JSdata,'/agregarAerolinea',mostrarMensaje);
+})
+
+$('#ACiudad').on('click',function() {  			//Ajax que incerta una nueva Ciudad a la BD
+	JSdata = {
+					NCiudad: $('#CCiudades').val()
+	}
+	ajaxMethods(JSdata,'/agregarCiudad',mostrarMensaje);
+})
+
+$('#AVuelo').on('click',function(){
+	add();
+})  	//Ajax que incerta un nuevo vuelo a la BD
 
 $(".deleteRow").on('click',function() {
 	let vueloABorrar = $(this).attr('id');
@@ -197,7 +186,7 @@ $('#CAerolineas').on('change',function(){
 	actualizarFiltro();
 })
 }
-
+//emprolijar esta parte junto a lo de arriba
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
 
@@ -225,12 +214,6 @@ $( "#LogIn" ).on( "click", function(e) {
 e.preventDefault();
 render('#LogIn','/LogIn');
 });
-
-/*
-$( "#LogOut" ).on( "click", function(e) {
-e.preventDefault();
-render('#LogOut','/LogOut');
-});*/
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
 

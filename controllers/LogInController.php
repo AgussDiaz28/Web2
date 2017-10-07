@@ -1,7 +1,7 @@
 <?php
 include_once('models/LoginModel.php');
 include_once('views/LoginView.php');
-include_once('views/IndexView.php');
+//include_once('views/IndexView.php');
 include_once('controllers/SecuredController.php');
 class LoginController extends SecuredController{
 
@@ -9,12 +9,12 @@ class LoginController extends SecuredController{
   {
     $this->view = new LoginView();
     $this->model = new LoginModel();
-    $this->hview = new IndexView();
+    //$this->hview = new IndexView();
   }
 
   public function index()
   {
-    if (!empty($_POST['error'])){
+    if(!empty($_POST['error'])){
       $error = $_POST['error'];
       $this->view->mostrarLogin($error);
     }else {
@@ -34,11 +34,10 @@ class LoginController extends SecuredController{
             $_SESSION['USER'] = $userName;
             $_SESSION['LAST_ACTIVITY'] = time();
             $_SESSION['LOGGED'] = TRUE;
-            return TRUE;
-          //  header('Location: '.HOME);
+            header('Location: '.HOME);
         }
         else{
-            return FALSE;
+          $this->view->mostrarLogin("Usuario y/o contraseña incorrectos");
         }
       }
   }
