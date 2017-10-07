@@ -20,7 +20,10 @@
         {/if}
       </select>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-1">
+
+    </div>
+    <div class="col-sm-3">
       <div class='input-group date ' id='datetimepicker1'>
          <input type='text' class="form-control" />
          <span class="input-group-addon">
@@ -29,12 +32,6 @@
       </div>
     </div>
 
-    <div class="col-sm-1">
-         <button type="button" id="BVuelo" class="btn btn-default">Buscar Vuelo</button>
-    </div>
-    <div class="col-sm-1">
-
-    </div>
   </div>
 </div>
 <hr>

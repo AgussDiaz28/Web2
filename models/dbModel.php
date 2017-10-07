@@ -55,10 +55,10 @@ class dbModel{
           {
             $credenciales = $this->readFiledb();
 
-            $HOST = substr($credenciales[],0,-1);
-            $USERNAME = substr($credenciales[],0,-1);
-            $PASSWORD = substr($credenciales[],0,-1);
-            $DB = substr($credenciales[],0,-1);
+            $HOST = substr($credenciales[0],0,-1);
+            $USERNAME = substr($credenciales[1],0,-1);
+            $PASSWORD = substr($credenciales[2],0,-1);
+            $DB = substr($credenciales[3],0,-1);
 
             $mysqlImportFilename ='db.sql';
             $command='mysql -h'. $HOST .' -u'. $USERNAME .' -p'. $PASSWORD .' '. $DB .' < ' .$mysqlImportFilename;
