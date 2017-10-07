@@ -7,5 +7,4 @@
 <script type="text/javascript" src="js/actions.js"></script>
 
 </body>
-
 </html>

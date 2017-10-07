@@ -19,6 +19,10 @@ class NavController extends Controller
   function index(){
       $this->index->mostrarIndex();
   }
+
+  function navBar(){
+    $this->index->navBar();
+  }
 }
 
 

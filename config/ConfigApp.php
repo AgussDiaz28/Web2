@@ -7,6 +7,7 @@ class ConfigApp
     public static $ACTIONS = [
       'home'=> 'NavController#home',
       ''=> 'NavController#index',
+      'navBar' => 'NavController#navBar',
 
       'pvuelos' => 'VueloController#MostrarPaginaVuelos',
 

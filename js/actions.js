@@ -20,11 +20,11 @@ function render(pagina,metodo){  	//Ajax para carga de Paginas
 }
 
 function mostrarMensaje(data) {
-	if (data.result == true) {
-		alert('INSERTO');
-	}else {
-		alert('NO SE PUDO INSERTAR LA TUPLA');
-	}
+
+}
+function cargarNav(data){
+$( "#myNavbar" ).html( data );
+render('#home','/home');
 }
 
 function refreshVuelos(data){
@@ -40,8 +40,34 @@ function actualizarFiltro(){		//Ajax que llama a la funcion que refresca la tabl
 	ajaxMethods(data,'/actualizarVwVuelos',refreshVuelos)
 }
 
+function decidir(data) {
+	if (data){
+			$.ajax({
+				type:'POST',
+				url: window.location.origin + window.location.pathname+'navBar',
+				success: cargarNav
+			})
+	}else {
+		data = {
+			error: 'Usuario o Password incorrectos'
+		}
+		ajaxMethods(data,'/LogIn',cargar)
+	}
+
+}
+
 function cargar(data){
 $( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
+
+$('#loginf').submit(function( event ) {
+  event.preventDefault();
+	data = {
+		usuario : $('#usuario').val(),
+		password : $('#password').val()
+	}
+	ajaxMethods(data,'/verificarUsuario',decidir);
+});
+
 
 $('#AAerolinea').on('click',function() { 		//Ajax que incerta una nueva Aerolinea a la BD
 	JSdata = {

@@ -2,7 +2,7 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
 
-          <form action="verificarUsuario" method="post">
+          <form id="loginf">
             <div class="form-group">
               <label for="usuario">Usuario</label>
               <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre de Usuario" required>
