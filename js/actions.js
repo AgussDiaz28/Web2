@@ -19,6 +19,10 @@ function render(pagina,metodo){  	//Ajax para carga de Paginas
 	$(pagina).addClass( "active" );
 }
 
+function refreshAerolineas(){
+	
+}
+
 function mostrarMensaje(data) {
 	if (data.result == true) {
 		alert('INSERTO');
@@ -122,9 +126,11 @@ $( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
 
 $('#AAerolinea').on('click',function() { 		//Ajax que incerta una nueva Aerolinea a la BD
 	JSdata = {
-					NAerolinea: $('#NAerolinea').val()
+					NAerolinea: $('#NAerolinea').val(),
+					PAerolinea: $('#PAerolinea').val(),
+					CAerolinea: $('#CAerolinea').val(),
 	}
-	ajaxMethods(JSdata,'/agregarAerolinea',mostrarMensaje);
+	ajaxMethods(JSdata,'/agregarAerolinea',refreshAerolineas);
 })
 
 $('#ACiudad').on('click',function() {  			//Ajax que incerta una nueva Ciudad a la BD

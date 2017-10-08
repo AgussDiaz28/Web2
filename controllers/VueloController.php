@@ -123,7 +123,7 @@ class VueloController extends Controller
     $FSVuelo        = filter_input(INPUT_POST, 'FSVuelo');
     $PVuelo         = filter_input(INPUT_POST, 'PVuelo');
 
-    try {                  //PREGUNTAR SI LA EXCEPCION TERMINA LA EJECUCION INMEDIATAMENTE MEDIANTE EL CATCH
+    try {                  
           if (!empty($CVuelo)) {
             # code...
           }else {

@@ -15,6 +15,11 @@ class AerolineaView
     $this->aerolinea->display('templates/ccaerolineas.tpl');
   }
 
+  function mostrarTablaAerolineas($Aerolineas=''){
+    $this->aerolinea->assign('Aerolineas',$Aerolineas);
+    $this->aerolinea->display('templates/tAerolinea.tpl');
+  }
+
   function mostrarPAerolineas($Aerolineas=''){
     $this->aerolinea->assign('Aerolineas',$Aerolineas);
     $this->aerolinea->display('templates/pAerolinea.tpl');

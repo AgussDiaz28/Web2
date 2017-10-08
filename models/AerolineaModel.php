@@ -17,15 +17,15 @@ class AerolineaModel extends dbModel
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function agregarAerolinea($nombre){
-    $sentencia = $this->db->prepare( "INSERT INTO Aerolineas(NOMBRE_AEROLINEA) VALUES (?) ");
-    $sentencia->execute($nombre);
+  public function agregarAerolinea($datos){
+    $sentencia = $this->db->prepare( "INSERT INTO Aerolineas(NOMBRE_AEROLINEA,PAIS_ORIGEN,CANT_AVIONES) VALUES (?,?,?) ");
+    $sentencia->execute([$datos]);
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function updateAerolinea($id,$nnuevo){
-    $sentencia = $this->db->prepare( "UPDATE Ciudades SET NOMBRE_AEROLINEA = ? WHERE ID_AEROLINEA = ? ");
-    $sentencia->execute(array($nnuevo,$id));
+  public function updateAerolinea($datos){
+    $sentencia = $this->db->prepare( "UPDATE Aerolineas SET NOMBRE_AEROLINEA = ? , PAIS_ORIGEN = ? , CANT_AVIONES =? WHERE ID_AEROLINEA = ? ");
+    $sentencia->execute([$datos]);
     return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
 

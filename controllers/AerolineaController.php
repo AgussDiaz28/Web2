@@ -22,14 +22,29 @@ class AerolineaController extends Controller
     $this->view->mostrarPAerolineas($aerolineas);
   }
 
-  public function agregarAerolinea($value=''){
-    # code...
+  public function agregarAerolinea(){
+    $NAerolinea   = filter_input(INPUT_POST, 'NAerolinea');
+    $PAerolinea   = filter_input(INPUT_POST, 'PAerolinea');
+    $CAerolinea   = filter_input(INPUT_POST, 'CAerolinea');
+
+
+    $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea);
+    $aerolineas = $this->modelo->agregarAerolinea($values);
+    $this->view->mostrarTablaAerolineas($aerolineas);
+
   }
   function deteleAerolinea($value=''){
-    # code...
+    return  $this->modelo->borrarAerolinea($id_vuelo);
   }
   function modificarAerolinea($value=''){
-    # code...
+    $NAerolinea  = filter_input(INPUT_POST, 'NAerolinea');
+    $PAerolinea  = filter_input(INPUT_POST, 'PAerolinea');
+    $CAerolinea  = filter_input(INPUT_POST, 'CAerolinea');
+    $IDAerolinea = filter_input(INPUT_POST, 'IDAerolinea');
+
+    $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea);
+    $this->modelo->agregarAerolinea($values);
+
   }
 
 }
