@@ -26,7 +26,8 @@ class ConfigApp
       'agregarCiudad' => 'CiudadController#agregarCiudad',
       'borrarCiudad'=> 'CiudadController#borrarCiudad',
       'mostrarCiudades' => 'CiudadController#mostrarCiudades',
-      'modificarCiudad' => 'CiudadController#',
+      'actualizarCiudades' => 'CiudadController#actualizarCiudades',
+      'modificarCiudad' => 'CiudadController#modificarCiudad',
 
       'agregarAerolinea' => 'AerolineaController#agregarAerolinea',
       'deteleAerolinea' => 'AerolineaController#deteleAerolinea',

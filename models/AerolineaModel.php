@@ -17,7 +17,6 @@ class AerolineaModel extends dbModel
   }
 
   public function agregarAerolinea($datos){
-    var_dump($datos);
     $sentencia = $this->db->prepare( "INSERT INTO Aerolineas(NOMBRE_AEROLINEA,PAIS_ORIGEN,CANT_AVIONES) VALUES (?,?,?) ");
     $sentencia->execute($datos);
   }

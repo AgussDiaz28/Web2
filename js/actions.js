@@ -121,7 +121,7 @@ function refreshVuelos(data){ //Refresa la tabla de vuelos y blinde de nuevo los
 
 			$('#AVuelo').unbind('click'); //desbindeo evento modificar
 			$('#AVuelo').bind('click',function(){
-				add();
+				addVuelo();
 			}) //vuelvo a bindear evento add
 
 			limpiarFormulario();
@@ -164,7 +164,7 @@ function llenarFormulario(codigo){ //LLENA FORMULARIO DE VUELOS PARA EDITARLO
 	$('#PVuelo').val(pvuelo)
 }
 
-function add(){
+function addVuelo(){
 	JSdata = {
 		CVuelo: $('#CVuelo').val(),
 		SNAerolinea: $('#SNAerolinea').val(),
@@ -176,100 +176,152 @@ function add(){
 	ajaxMethods(JSdata,'/agregarVuelo',actualizarFiltro);
 }	// AGREGA VUELOS
 
-function cargar(data){
-$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
 
-// -------------------------------------------------- AEROLINEAS ----------------------------------------------
-
-$('#AAerolinea').on('click',function(){ 		//Ajax que incerta una nueva Aerolinea a la BD
-	data = llenarJSA();
-	ajaxMethods(data,'/agregarAerolinea',refreshAerolineas);
-	limpiarFormularioAerolineas();
-});
-
-$('.deleteAerolineaRow').on('click',function(){
-		data = {
-			aerolineaABorrar : $(this).attr('id')
+	function addCiudad(){
+		JSdata = {
+			NCiudad: $('#NCiudad').val()
 		}
-		ajaxMethods(data,'/deteleAerolinea',refreshAerolineas);
-});
+		ajaxMethods(JSdata,'/agregarCiudad',actualizarTablaCiudades);
+	}
 
-$('.editAerolienaRow').on('click',function(){
-	let AerolineaAEditar = $(this).attr('id');
-	let codigo = $(this).closest('tr').find('.rdata')
-	llenarFormularioAerolinea(codigo);
-	$('#AAerolinea').unbind('click');
-	$('#AAerolinea').on('click',function() {
-		data = llenarJSA();	//LLENA EL JSON CON LOS VALORS DEL FORMULARIO DE AEROLINEA
-		data.IDAerolinea=AerolineaAEditar;
-		console.log(data);
-		ajaxMethods(data,'/modificarAerolinea',refreshAerolineas);
+	function editarCiudad(thisElement){
+		let ciudadAEditar = $(thisElement).attr('id');
+		let nombreCiudad = $(thisElement).closest('tr').find('.ciudad').text();
+		$('#NCiudad').val(nombreCiudad); //cargo formulario con el nombre de la ciudad a modificar
+		$('#ACiudad').unbind('click');
+		$('#ACiudad').on('click',function() {
+			alert("aca no entro");
+			JSdata = {
+				NCiudad: $('#NCiudad').val()
+			}
+			ajaxMethods(JSdata,'/modificarCiudad/'+ciudadAEditar,actualizarTablaCiudades);
+			$('#NCiudad').val(""); //limpio el formulario de ciudad
+		});
+		$('#ACiudad').unbind('click');
+		$('#ACiudad').on('click',function(){
+			addCiudad();
+		});
+	}
+
+	function borrarCiudad(thisElement){
+		data = {
+			ciudadABorrar : $(thisElement).attr('id')
+		}
+		ajaxMethods(data,'/borrarCiudad',actualizarTablaCiudades);
+	}
+
+	function actualizarTablaCiudades(data){		//Ajax que llama a la funcion que refresca la tabla
+		$("#tciudades").html(data);
+
+		$('.editCityRow').on('click',function() {  			//Ajax que edita una Ciudad de la BD
+			editarCiudad(this);
+		})
+
+		$('.deleteCityRow').on('click',function() {  			//Ajax que elimina una Ciudad de la BD
+			borrarCiudad(this);
+		})
+	}
+
+
+// ----------------- CARGAR PAGINA ---------------------
+function cargar(data){
+	$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
+
+	// -------------------------------------------------- AEROLINEAS ----------------------------------------------
+
+	$('#AAerolinea').on('click',function(){ 		//Ajax que incerta una nueva Aerolinea a la BD
+		data = llenarJSA();
+		ajaxMethods(data,'/agregarAerolinea',refreshAerolineas);
 		limpiarFormularioAerolineas();
 	});
-})
 
-// ----------------------------------------------------------- CIUDADES ------------------------------------------------------
+	$('.deleteAerolineaRow').on('click',function(){
+			data = {
+				aerolineaABorrar : $(this).attr('id')
+			}
+			ajaxMethods(data,'/deteleAerolinea',refreshAerolineas);
+	});
 
-$('#ACiudad').on('click',function() {  			//Ajax que incerta una nueva Ciudad a la BD
-	JSdata = {
-					NCiudad: $('#CCiudades').val()
-	}
-	ajaxMethods(JSdata,'/agregarCiudad',mostrarMensaje);
-})
-
-// ---------------------------------------------------------- VUELOS ------------------------------------------------------
-$('#AVuelo').on('click',function(){
-	add();
-})  	//Ajax que incerta un nuevo vuelo a la BD
-
-$(".deleteRow").on('click',function() {
-	let vueloABorrar = $(this).attr('id');
-	$.ajax({
-				data: vueloABorrar,
-				type:'POST',
-				url: window.location.origin + window.location.pathname+'/borrarVuelo'+'/'+vueloABorrar,
-				success: actualizarFiltro
-	})
-	// ajaxMethods(data,'/borrarVuelo',refreshVuelos)
-})
-
-$(".editRow").on('click',function() {
-	let vueloAEditar = $(this).attr('id');
-	let codigo = $(this).closest('tr').find('.rdata').map(function () {
-			return $(this).val();
-  	});
-  	llenarFormulario(codigo);
-
-	$('#AVuelo').unbind('click'); //desbindeo el evento de add
-	$('#AVuelo').on('click',function() { //bindeo evento de modificar
-		JSdata = {
-			CVuelo: $('#CVuelo').val(),
-			SNAerolinea: $('#SNAerolinea').val(),
-			SCOrigen: $('#SCOrigen').val(),
-			SCDestino: $('#SCDestino').val(),
-			FSVuelo: $('#FSV').val(),
-			PVuelo: $('#PVuelo').val()
-		}
-		ajaxMethods(JSdata, '/actualizarVuelo/' + id_vuelo, actualizarFiltro);
-
-		$('#AVuelo').unbind('click'); //desbindeo evento modificar
-		$('#AVuelo').bind('click',function(){
-			add();
-		}) //vuelvo a bindear evento add
-
-		limpiarFormulario();
+	$('.editAerolienaRow').on('click',function(){
+		let AerolineaAEditar = $(this).attr('id');
+		let codigo = $(this).closest('tr').find('.rdata')
+		llenarFormularioAerolinea(codigo);
+		$('#AAerolinea').unbind('click');
+		$('#AAerolinea').on('click',function() {
+			data = llenarJSA();	//LLENA EL JSON CON LOS VALORS DEL FORMULARIO DE AEROLINEA
+			data.IDAerolinea=AerolineaAEditar;
+			console.log(data);
+			ajaxMethods(data,'/modificarAerolinea',refreshAerolineas);
+			limpiarFormularioAerolineas();
+		});
 	})
 
-});
+	// ----------------------------------------------------------- CIUDADES ------------------------------------------------------
+	$('#ACiudad').on('click',function() {  			//Ajax que incerta una nueva Ciudad a la BD
+		addCiudad();
+	})
 
-// ---------------------------------------------------------- FILTRO DE VUELOS ------------------------------------------------------
+	$('.editCityRow').on('click',function() {  			//Ajax que edita una Ciudad de la BD
+		editarCiudad(this);
+	})
 
-$('#CCiudades').on('change',function(){
-	actualizarFiltro();
-});
-$('#CAerolineas').on('change',function(){
-	actualizarFiltro();
-});
+	$('.deleteCityRow').on('click',function() {  			//Ajax que elimina una Ciudad de la BD
+		borrarCiudad(this);
+	})
+
+	// ---------------------------------------------------------- VUELOS ------------------------------------------------------
+	$('#AVuelo').on('click',function(){
+		addVuelo();
+	})  	//Ajax que incerta un nuevo vuelo a la BD
+
+	$(".deleteRow").on('click',function() {
+		let vueloABorrar = $(this).attr('id');
+		$.ajax({
+					data: vueloABorrar,
+					type:'POST',
+					url: window.location.origin + window.location.pathname+'/borrarVuelo'+'/'+vueloABorrar,
+					success: actualizarFiltro
+		})
+		// ajaxMethods(data,'/borrarVuelo',refreshVuelos)
+	})
+
+	$(".editRow").on('click',function() {
+		let vueloAEditar = $(this).attr('id');
+		let codigo = $(this).closest('tr').find('.rdata').map(function () {
+				return $(this).val();
+	  	});
+	  	llenarFormulario(codigo);
+
+		$('#AVuelo').unbind('click'); //desbindeo el evento de add
+		$('#AVuelo').on('click',function() { //bindeo evento de modificar
+			JSdata = {
+				CVuelo: $('#CVuelo').val(),
+				SNAerolinea: $('#SNAerolinea').val(),
+				SCOrigen: $('#SCOrigen').val(),
+				SCDestino: $('#SCDestino').val(),
+				FSVuelo: $('#FSV').val(),
+				PVuelo: $('#PVuelo').val()
+			}
+			ajaxMethods(JSdata, '/actualizarVuelo/' + id_vuelo, actualizarFiltro);
+
+			$('#AVuelo').unbind('click'); //desbindeo evento modificar
+			$('#AVuelo').on('click',function(){
+				addVuelo();
+			}) //vuelvo a bindear evento add
+
+			limpiarFormulario();
+		})
+
+	});
+
+	// ---------------------------------------------------------- FILTRO DE VUELOS ------------------------------------------------------
+
+	$('#CCiudades').on('change',function(){
+		actualizarFiltro();
+	});
+	$('#CAerolineas').on('change',function(){
+		actualizarFiltro();
+	});
 
 } // FINALIZA LA FUNCION CARGAR
 

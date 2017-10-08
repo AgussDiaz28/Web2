@@ -52,7 +52,7 @@ class VueloController extends Controller
 
     /* Conversion a Integer para la comparacion*/
     $destino = (int) $destino;
-    $aerolinea= (int) $aerolinea;
+    $aerolinea = (int) $aerolinea;
     /* Conversion a Integer para la comparacion*/
     //FALTA AGREGAR LA FECHA PARA QUE TAMBIEN SE USE PARA FILTRAR
 
@@ -123,7 +123,7 @@ class VueloController extends Controller
     $FSVuelo        = filter_input(INPUT_POST, 'FSVuelo');
     $PVuelo         = filter_input(INPUT_POST, 'PVuelo');
 
-    try {                  
+    try {
           if (!empty($CVuelo)) {
             # code...
           }else {

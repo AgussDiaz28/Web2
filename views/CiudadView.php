@@ -10,9 +10,9 @@ class CiudadView
     $this->ciudades = new Smarty();
   }
 
-  function mostrarCiudades($Ciudades=''){
+  function mostrarTablaCiudades($Ciudades=''){
     $this->ciudades->assign('ciudades',$Ciudades);
-    $this->ciudades->display('templates/cciudades.tpl');
+    $this->ciudades->display('templates/tciudades.tpl');
   }
 
   function mostrarPCiudades($Ciudades=''){
