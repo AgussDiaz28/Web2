@@ -24,7 +24,7 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="tAerolinea">
           {if !empty($Aerolineas) }
             {foreach from=$Aerolineas item=Aerolinea}
             <tr>

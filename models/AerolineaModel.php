@@ -14,19 +14,17 @@ class AerolineaModel extends dbModel
   public function borrarAerolinea($id){
     $sentencia = $this->db->prepare( "DELETE FROM Aerolineas WHERE ID_AEROLINEA = ?");
     $sentencia->execute($id);
-    return $sentencia->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function agregarAerolinea($datos){
+    var_dump($datos);
     $sentencia = $this->db->prepare( "INSERT INTO Aerolineas(NOMBRE_AEROLINEA,PAIS_ORIGEN,CANT_AVIONES) VALUES (?,?,?) ");
-    $sentencia->execute([$datos]);
-    return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $sentencia->execute($datos);
   }
 
   public function updateAerolinea($datos){
     $sentencia = $this->db->prepare( "UPDATE Aerolineas SET NOMBRE_AEROLINEA = ? , PAIS_ORIGEN = ? , CANT_AVIONES =? WHERE ID_AEROLINEA = ? ");
-    $sentencia->execute([$datos]);
-    return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    $sentencia->execute($datos);
   }
 
   // ABM Aerolineas //

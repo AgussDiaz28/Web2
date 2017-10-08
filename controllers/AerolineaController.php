@@ -27,23 +27,28 @@ class AerolineaController extends Controller
     $PAerolinea   = filter_input(INPUT_POST, 'PAerolinea');
     $CAerolinea   = filter_input(INPUT_POST, 'CAerolinea');
 
-
     $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea);
-    $aerolineas = $this->modelo->agregarAerolinea($values);
+    $this->modelo->agregarAerolinea($values);
+    $aerolineas =  $this->modelo->getAerolineas();
     $this->view->mostrarTablaAerolineas($aerolineas);
 
   }
-  function deteleAerolinea($value=''){
-    return  $this->modelo->borrarAerolinea($id_vuelo);
+  function deteleAerolinea(){
+    $id_vuelo   = filter_input(INPUT_POST, 'aerolineaABorrar');
+    $this->modelo->borrarAerolinea([$id_vuelo]);
+    $aerolineas =  $this->modelo->getAerolineas();
+    $this->view->mostrarTablaAerolineas($aerolineas);
   }
-  function modificarAerolinea($value=''){
+
+  function modificarAerolinea(){
     $NAerolinea  = filter_input(INPUT_POST, 'NAerolinea');
     $PAerolinea  = filter_input(INPUT_POST, 'PAerolinea');
     $CAerolinea  = filter_input(INPUT_POST, 'CAerolinea');
     $IDAerolinea = filter_input(INPUT_POST, 'IDAerolinea');
-
-    $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea);
-    $this->modelo->agregarAerolinea($values);
+    $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea,(int)$IDAerolinea);
+    $this->modelo->updateAerolinea($values);
+    $aerolineas =  $this->modelo->getAerolineas();
+    $this->view->mostrarTablaAerolineas($aerolineas);
 
   }
 

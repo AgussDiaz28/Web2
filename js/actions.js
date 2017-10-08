@@ -19,9 +19,63 @@ function render(pagina,metodo){  	//Ajax para carga de Paginas
 	$(pagina).addClass( "active" );
 }
 
-function refreshAerolineas(){
-	
+function llenarFormularioAerolinea(codigo){
+		$('#NAerolinea').val(codigo.prevObject[0].cells[0].innerHTML);
+	  $('#PAerolinea').val(codigo.prevObject[0].cells[1].innerHTML);
+ 		$('#CAerolinea').val(codigo.prevObject[0].cells[2].innerHTML);
 }
+
+function refreshAerolineas(data){ //Refresh de la tabla Aerolineas
+	$('#tAerolinea').html(data);
+
+	$('#AAerolinea').on('click',function(){ 		//Ajax que incerta una nueva Aerolinea a la BD
+		data = llenarJSA();
+		ajaxMethods(data,'/agregarAerolinea',refreshAerolineas);
+		limpiarFormularioAerolineas();
+	});
+
+	$('.deleteAerolineaRow').on('click',function(){
+			data = {
+				aerolineaABorrar : $(this).attr('id')
+			}
+			ajaxMethods(data,'/deteleAerolinea',refreshAerolineas);
+	});
+
+	$('.editAerolienaRow').on('click',function(){
+		let AerolineaAEditar = $(this).attr('id');
+		let codigo = $(this).closest('tr').find('.rdata')
+		llenarFormularioAerolinea(codigo);
+		$('#AAerolinea').unbind('click');
+		$('#AAerolinea').on('click',function() {
+			data = llenarJSA();	//LLENA EL JSON CON LOS VALORS DEL FORMULARIO DE AEROLINEA
+			data.IDAerolinea=AerolineaAEditar;
+			ajaxMethods(data,'/modificarAerolinea',refreshAerolineas);
+			limpiarFormularioAerolineas();
+		});
+		$('#AAerolinea').unbind('click'); //desbindeo evento modificar
+		$('#AAerolinea').bind('click',function(){
+			data = llenarJSA(); 	//LLENA EL JSON CON LOS VALORS DEL FORMULARIO DE AEROLINEA
+			ajaxMethods(data,'/modificarAerolinea',refreshAerolineas);
+			limpiarFormularioAerolineas();
+		})
+	})
+
+}
+
+function limpiarFormularioAerolineas(){ //Limpia el formulario de Aerolinas despues de Agregar o modificar una tupla
+	$('#NAerolinea').val('');
+	$('#PAerolinea').val('');
+	$('#CAerolinea').val('');
+}
+
+function llenarJSA(){
+	data = {
+					NAerolinea: $('#NAerolinea').val(),
+					PAerolinea: $('#PAerolinea').val(),
+					CAerolinea: $('#CAerolinea').val(),
+	}
+	return data;
+}; //Crea JSON con los datos de Aerolineas
 
 function mostrarMensaje(data) {
 	if (data.result == true) {
@@ -31,8 +85,10 @@ function mostrarMensaje(data) {
 	}
 }
 
-function refreshVuelos(data){
+function refreshVuelos(data){ //Refresa la tabla de vuelos y blinde de nuevo los eventos
+
 	$( "#tvuelos" ).html( data );		// <Tbody> que contiene la tabla que muestra los vuelos
+
 	$(".deleteRow").on('click',function() {
 		let vueloABorrar = $(this).attr('id');
 		$.ajax({
@@ -41,7 +97,6 @@ function refreshVuelos(data){
 					url: window.location.origin + window.location.pathname+'/borrarVuelo'+'/'+vueloABorrar,
 					success: actualizarFiltro
 		})
-		// ajaxMethods(data,'/borrarVuelo',refreshVuelos)
 	})
 
 	$(".editRow").on('click',function() {
@@ -75,7 +130,7 @@ function refreshVuelos(data){
 	});
 }
 
-function actualizarFiltro(){		//Ajax que llama a la funcion que refresca la tabla
+function actualizarFiltro(){		//Ajax que llama a la funcion que refresca la tabla de los VUELOS
 	data = {
 		destino:$('#CCiudades').val(),
 		aerolinea: $('#CAerolineas').val(),
@@ -93,7 +148,7 @@ function limpiarFormulario(){
 	$('#PVuelo').val('');
 }
 
-function llenarFormulario(codigo){
+function llenarFormulario(codigo){ //LLENA FORMULARIO DE VUELOS PARA EDITARLO
 	codigoA = codigo.prevObject[0].attributes[1].value;
 	aerolinea = codigo.prevObject[1].attributes[1].value;
 	origen = codigo.prevObject[2].attributes[1].value;
@@ -119,19 +174,41 @@ function add(){
 		PVuelo: $('#PVuelo').val()
 	}
 	ajaxMethods(JSdata,'/agregarVuelo',actualizarFiltro);
-}
+}	// AGREGA VUELOS
 
 function cargar(data){
 $( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
 
-$('#AAerolinea').on('click',function() { 		//Ajax que incerta una nueva Aerolinea a la BD
-	JSdata = {
-					NAerolinea: $('#NAerolinea').val(),
-					PAerolinea: $('#PAerolinea').val(),
-					CAerolinea: $('#CAerolinea').val(),
-	}
-	ajaxMethods(JSdata,'/agregarAerolinea',refreshAerolineas);
+// -------------------------------------------------- AEROLINEAS ----------------------------------------------
+
+$('#AAerolinea').on('click',function(){ 		//Ajax que incerta una nueva Aerolinea a la BD
+	data = llenarJSA();
+	ajaxMethods(data,'/agregarAerolinea',refreshAerolineas);
+	limpiarFormularioAerolineas();
+});
+
+$('.deleteAerolineaRow').on('click',function(){
+		data = {
+			aerolineaABorrar : $(this).attr('id')
+		}
+		ajaxMethods(data,'/deteleAerolinea',refreshAerolineas);
+});
+
+$('.editAerolienaRow').on('click',function(){
+	let AerolineaAEditar = $(this).attr('id');
+	let codigo = $(this).closest('tr').find('.rdata')
+	llenarFormularioAerolinea(codigo);
+	$('#AAerolinea').unbind('click');
+	$('#AAerolinea').on('click',function() {
+		data = llenarJSA();	//LLENA EL JSON CON LOS VALORS DEL FORMULARIO DE AEROLINEA
+		data.IDAerolinea=AerolineaAEditar;
+		console.log(data);
+		ajaxMethods(data,'/modificarAerolinea',refreshAerolineas);
+		limpiarFormularioAerolineas();
+	});
 })
+
+// ----------------------------------------------------------- CIUDADES ------------------------------------------------------
 
 $('#ACiudad').on('click',function() {  			//Ajax que incerta una nueva Ciudad a la BD
 	JSdata = {
@@ -140,6 +217,7 @@ $('#ACiudad').on('click',function() {  			//Ajax que incerta una nueva Ciudad a 
 	ajaxMethods(JSdata,'/agregarCiudad',mostrarMensaje);
 })
 
+// ---------------------------------------------------------- VUELOS ------------------------------------------------------
 $('#AVuelo').on('click',function(){
 	add();
 })  	//Ajax que incerta un nuevo vuelo a la BD
@@ -157,7 +235,6 @@ $(".deleteRow").on('click',function() {
 
 $(".editRow").on('click',function() {
 	let vueloAEditar = $(this).attr('id');
-	let id_vuelo = $(this).attr("id");
 	let codigo = $(this).closest('tr').find('.rdata').map(function () {
 			return $(this).val();
   	});
@@ -185,14 +262,17 @@ $(".editRow").on('click',function() {
 
 });
 
+// ---------------------------------------------------------- FILTRO DE VUELOS ------------------------------------------------------
+
 $('#CCiudades').on('change',function(){
 	actualizarFiltro();
-})
+});
 $('#CAerolineas').on('change',function(){
 	actualizarFiltro();
-})
-}
-//emprolijar esta parte junto a lo de arriba
+});
+
+} // FINALIZA LA FUNCION CARGAR
+
 
 // ------------------- EVENTOS DE CARGA DE PAGINAS --------------------------- //
 
