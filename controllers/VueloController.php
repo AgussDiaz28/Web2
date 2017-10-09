@@ -56,7 +56,6 @@ class VueloController extends Controller
 
     $vuelos = $this->modelo->getVuelos($destino,$aerolinea,$fecha);
     return $this->vuelos->actualizarTablaVuelos($vuelos);
-
   }
 
   function agregarVuelo(){
@@ -68,32 +67,19 @@ class VueloController extends Controller
     $PVuelo         = filter_input(INPUT_POST, 'PVuelo');
 
     try {                  //PREGUNTAR SI LA EXCEPCION TERMINA LA EJECUCION INMEDIATAMENTE MEDIANTE EL CATCH
-          if (!empty($CVuelo)) {
-            # code...
-          }else {
+          if (empty($CVuelo)) {
             throw new Exception("No ingreso el codigo del Vuelo");
           }
-          if (!empty($SNAerolinea)) {
-            # code...
-          }else {
+          if (empty($SNAerolinea)) {
             throw new Exception("No selecciono Aerolinea");
           }
-          if (!empty($SCOrigen)) {
-            # code...
-          }else {
+          if (empty($SCOrigen)) {
             throw new Exception("No selecciono una Ciudad de Origen");
           }
-          if (!empty($SCDestino)) {
-            # code...
-          }else {
+          if (empty($SCDestino)) {
             throw new Exception("No se selecciono una ciudad de Destino");
           }
-          if (!empty($FSVuelo)) {
-            # code...
-          }
-          if (!empty($PVuelo)) {
-            # code...
-          }else {
+          if (empty($PVuelo)) {
             throw new Exception("No ingreso el precio del vuelo");
           }
           $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo);
@@ -109,7 +95,7 @@ class VueloController extends Controller
         'result'=> $result,
         'error'=>$error,
     ]);
-      die();
+    die();
   }
 
   function actualizarVuelo($id_vuelo){
@@ -122,32 +108,19 @@ class VueloController extends Controller
     $PVuelo         = filter_input(INPUT_POST, 'PVuelo');
 
     try {
-      if (!empty($CVuelo)) {
-        # code...
-      }else {
+      if (empty($CVuelo)) {
         throw new Exception("No ingreso el codigo del Vuelo");
       }
-      if (!empty($SNAerolinea)) {
-        # code...
-      }else {
+      if (empty($SNAerolinea)) {
         throw new Exception("No selecciono Aerolinea");
       }
-      if (!empty($SCOrigen)) {
-        # code...
-      }else {
+      if (empty($SCOrigen)) {
         throw new Exception("No selecciono una Ciudad de Origen");
       }
-      if (!empty($SCDestino)) {
-        # code...
-      }else {
+      if (empty($SCDestino)) {
         throw new Exception("No se selecciono una ciudad de Destino");
       }
-      if (!empty($FSVuelo)) {
-        # code...
-      }
-      if (!empty($PVuelo)) {
-        # code...
-      }else {
+      if (empty($PVuelo)) {
         throw new Exception("No ingreso el precio del vuelo");
       }
       $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo,(int)$id_vuelo[0]); //params contiene el id del vuelo a modificar
@@ -163,7 +136,7 @@ class VueloController extends Controller
         'result'=> $result,
         'error'=>$error,
     ]);
-      die();
+    die();
   }
 
   function borrarVuelo($id_vuelo){

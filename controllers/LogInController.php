@@ -37,7 +37,7 @@ class LoginController extends SecuredController{
             header('Location: '.HOME);
         }
         else{
-          $this->view->mostrarLogin("Usuario y/o contraseña incorrectos");
+            header('Location: '.HOME);
         }
       }
   }

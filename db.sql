@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Oct 08, 2017 at 06:13 PM
+-- Generation Time: Oct 09, 2017 at 10:28 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.6
 
@@ -32,10 +32,11 @@ CREATE TABLE `Aerolineas` (
 --
 
 INSERT INTO `Aerolineas` (`ID_AEROLINEA`, `NOMBRE_AEROLINEA`, `PAIS_ORIGEN`, `CANT_AVIONES`) VALUES
-(1, 'LATAM', 'CHILE', 340),
+(1, 'LATAM', 'CHILE', 431),
 (2, 'GOL', 'BRASIL', 230),
 (3, 'EMIRATES', 'EMIRATOS ARABES', 460),
-(4, 'AIR CANADA', 'CANADA', 370);
+(4, 'AIR CANADA', 'CANADA', 370),
+(45, 'AEROLINEAS ARGENTINA', 'ARGENTINA', 420);
 
 -- --------------------------------------------------------
 
@@ -58,7 +59,8 @@ INSERT INTO `Ciudades` (`ID_CIUDAD`, `NOMBRE_CIUDAD`) VALUES
 (3, 'Las Vegas'),
 (4, 'Miami'),
 (5, 'Sydney'),
-(6, 'Dubai');
+(6, 'Dubai'),
+(7, 'Tandil2');
 
 -- --------------------------------------------------------
 
@@ -175,12 +177,12 @@ ALTER TABLE `Vuelos`
 -- AUTO_INCREMENT for table `Aerolineas`
 --
 ALTER TABLE `Aerolineas`
-  MODIFY `ID_AEROLINEA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_AEROLINEA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `Ciudades`
 --
 ALTER TABLE `Ciudades`
-  MODIFY `ID_CIUDAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_CIUDAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
@@ -190,7 +192,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `Vuelos`
 --
 ALTER TABLE `Vuelos`
-  MODIFY `ID_VUELO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_VUELO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Constraints for dumped tables
 --
