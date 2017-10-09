@@ -9,7 +9,7 @@ class VueloView
     $this->vuelo = new Smarty();
   }
 
-  function mostrarVuelos($Ciudades='',$Aerolineas='',$Vuelos=''){    //funcion que genera tabla HTML de vuelos mediante parametros
+  function mostrarVuelos($Ciudades='',$Aerolineas='',$Vuelos=''){    //muestra pagina vuelos
     $status = FALSE;
     session_start();
     if(isset($_SESSION['LOGGED']) && $_SESSION['LOGGED']){
@@ -20,6 +20,17 @@ class VueloView
     $this->vuelo->assign('Aerolineas',$Aerolineas);
     $this->vuelo->assign('vuelos',$Vuelos);
     $this->vuelo->display('templates/vuelos.tpl');
+  }
+
+  function actualizarTablaVuelos($Vuelos=''){       //actualiza la tabla de vuelos
+    $status = FALSE;
+    session_start();
+    if(isset($_SESSION['LOGGED']) && $_SESSION['LOGGED']){
+      $status = $_SESSION['LOGGED'];
+    }
+    $this->vuelo->assign('Admin',$status);
+    $this->vuelo->assign('vuelos',$Vuelos);
+    $this->vuelo->display('templates/tvuelos.tpl');
   }
 
 }

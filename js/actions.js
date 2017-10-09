@@ -48,7 +48,6 @@ $( document ).ready( function() {
 		$('#AAerolinea').on('click',function() {
 			data = llenarJSA();	//LLENA EL JSON CON LOS VALORS DEL FORMULARIO DE AEROLINEA
 			data.IDAerolinea=AerolineaAEditar;
-			console.log(data);
 			ajaxMethods(data,'/modificarAerolinea',refreshAerolineas);
 			limpiarFormularioAerolineas();
 			$('#AAerolinea').off('click');
@@ -68,10 +67,6 @@ $( document ).ready( function() {
 
 	function refreshAerolineas(data){ //Refresh de la tabla Aerolineas
 		$('#tAerolinea').html(data);
-
-		$('#AAerolinea').on('click',function(){ 		//Ajax que incerta una nueva Aerolinea a la BD
-			addAerolinea();
-		});
 
 		$('.deleteAerolineaRow').on('click',function(){
 			deleteAerolinea(this);
@@ -106,6 +101,7 @@ $( document ).ready( function() {
 			NCiudad: $('#NCiudad').val()
 		}
 		ajaxMethods(JSdata,'/agregarCiudad',actualizarTablaCiudades);
+		NCiudad: $('#NCiudad').val(""); //limpio el input
 	}
 
 	function borrarCiudad(thisElement){
@@ -125,6 +121,7 @@ $( document ).ready( function() {
 				NCiudad: $('#NCiudad').val()
 			}
 			ajaxMethods(JSdata,'/modificarCiudad/'+ciudadAEditar,actualizarTablaCiudades);
+			NCiudad: $('#NCiudad').val(""); //limpio el input
 			$('#NCiudad').val(""); //limpio el formulario de ciudad
 			$('#ACiudad').off('click');
 			$('#ACiudad').on('click',function(){
@@ -161,6 +158,7 @@ $( document ).ready( function() {
 			PVuelo: $('#PVuelo').val()
 		}
 		ajaxMethods(JSdata,'/agregarVuelo',actualizarFiltro);
+		limpiarFormulario();
 	}	// AGREGA VUELOS
 
 	function eliminarVuelo(thisElement){
@@ -192,13 +190,11 @@ $( document ).ready( function() {
 				PVuelo: $('#PVuelo').val()
 			}
 			ajaxMethods(JSdata, '/actualizarVuelo/' + id_vuelo, actualizarFiltro);
-
+			limpiarFormulario();
 			$('#AVuelo').off('click'); //desbindeo evento modificar
 			$('#AVuelo').on('click',function(){
 				addVuelo();
 			}) //vuelvo a bindear evento add
-
-			limpiarFormulario();
 		})
 	}
 
@@ -270,7 +266,7 @@ $( document ).ready( function() {
 		});
 
 		$('.deleteAerolineaRow').on('click',function(){
-				deleteAerolinea(this);
+			deleteAerolinea(this);
 		});
 
 		$('.editAerolienaRow').on('click',function(){
