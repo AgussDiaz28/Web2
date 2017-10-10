@@ -247,14 +247,6 @@ $( document ).ready( function() {
 		$('#PVuelo').val(pvuelo)
 	}
 
-	// function mostrarMensaje(data) {
-	// 	if (data.result == true) {
-	// 		alert('INSERTO');
-	// 	}else {
-	// 		alert('NO SE PUDO INSERTAR LA TUPLA');
-	// 	}
-	// }
-
 	// ----------------- CARGAR PAGINA / ******* EVENTOS ********* ---------------------
 	function cargar(data){
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas

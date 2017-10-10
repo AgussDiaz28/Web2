@@ -1,19 +1,15 @@
 <?php
 include_once('models/LoginModel.php');
 include_once('views/LoginView.php');
-//include_once('views/IndexView.php');
 include_once('controllers/SecuredController.php');
 class LoginController extends SecuredController{
 
-  function __construct()
-  {
+  function __construct(){
     $this->view = new LoginView();
     $this->model = new LoginModel();
-    //$this->hview = new IndexView();
   }
 
-  public function index()
-  {
+  public function index(){
     if(!empty($_POST['error'])){
       $error = $_POST['error'];
       $this->view->mostrarLogin($error);
