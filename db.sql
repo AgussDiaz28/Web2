@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Oct 09, 2017 at 10:28 PM
+-- Generation Time: Oct 12, 2017 at 12:32 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.6
 
@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `db_turismo`
+-- Database: `turismo`
 --
 
 -- --------------------------------------------------------
@@ -36,7 +36,8 @@ INSERT INTO `Aerolineas` (`ID_AEROLINEA`, `NOMBRE_AEROLINEA`, `PAIS_ORIGEN`, `CA
 (2, 'GOL', 'BRASIL', 230),
 (3, 'EMIRATES', 'EMIRATOS ARABES', 460),
 (4, 'AIR CANADA', 'CANADA', 370),
-(5, 'AEROLINEAS ARGENTINA', 'ARGENTINA', 420);
+(5, 'AEROLINEAS ARGENTINA', 'ARGENTINA', 420),
+(6, 'QATAR', 'QATAR', 313);
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,8 @@ INSERT INTO `Ciudades` (`ID_CIUDAD`, `NOMBRE_CIUDAD`) VALUES
 (4, 'Miami'),
 (5, 'Sydney'),
 (6, 'Dubai'),
-(7, 'Tandil2');
+(7, 'Tandil2'),
+(8, 'tandil3');
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`ID_USUARIO`, `USERNAME`, `PASSWORD`, `EMAIL`) VALUES
-(1, 'AgussDiaz28', '$2y$10$A8k4TsiHgQc6cD/hrS3hleYZQFQMH/Gbdh4Vpfk7lRYadsowP9nJC', 'agussdiaz28@gmail.com');
+(1, 'AgussDiaz28', '$2y$10$A8k4TsiHgQc6cD/hrS3hleYZQFQMH/Gbdh4Vpfk7lRYadsowP9nJC', 'agussdiaz28@gmail.com'),
+(2, 'admin', '$2y$10$ab6yhEPtujOZ9AHQVVUZ8u1y2aCCBuxN98lCDt0ZkBLedj8rrwLIe', '');
 
 -- --------------------------------------------------------
 
@@ -108,7 +111,8 @@ INSERT INTO `Vuelos` (`ID_VUELO`, `ID_AEROLINEA`, `ID_DESTINO`, `ID_ORIGEN`, `FE
 (8, 1, 6, 5, '2017-09-22', 'LT653', 323),
 (9, 4, 2, 3, '2017-09-22', 'LA9542', 23214),
 (10, 1, 4, 2, '2017-09-21', 'LA431', 13980),
-(11, 3, 5, 2, '2017-08-21', 'gw314', 25984);
+(11, 3, 5, 2, '2017-08-21', 'gw314', 25984),
+(12, 6, 3, 6, '2017-09-08', 'Q984', 4213);
 
 -- --------------------------------------------------------
 
@@ -177,22 +181,22 @@ ALTER TABLE `Vuelos`
 -- AUTO_INCREMENT for table `Aerolineas`
 --
 ALTER TABLE `Aerolineas`
-  MODIFY `ID_AEROLINEA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_AEROLINEA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `Ciudades`
 --
 ALTER TABLE `Ciudades`
-  MODIFY `ID_CIUDAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID_CIUDAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `Vuelos`
 --
 ALTER TABLE `Vuelos`
-  MODIFY `ID_VUELO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID_VUELO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Constraints for dumped tables
 --

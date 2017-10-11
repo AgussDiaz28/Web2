@@ -24,12 +24,12 @@
 
     </div>
     <div class="col-sm-3">
-      <div class='input-group date ' id='datetimepicker1'>
+      <!-- <div class='input-group date ' id='datetimepicker1'> IMPLEMENTACION A FUTURO
          <input type='text' class="form-control" />
          <span class="input-group-addon">
              <span class="glyphicon glyphicon-calendar"></span>
          </span>
-      </div>
+      </div> -->
     </div>
 
   </div>

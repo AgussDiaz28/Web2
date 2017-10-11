@@ -1,5 +1,5 @@
 <?php
-include_once('DBCONFIG.PHP');
+include_once('dbconfig.php');
 class dbModel{
 
   protected $db;
@@ -8,22 +8,31 @@ class dbModel{
   function __construct(){
     try{
 
-      $this->db = new PDO($config, USERNAME, PASSWORD);
-
-    }catch (Exception $e) {
-
       $host = HOST;
       $dbn = DB;
 
-      $this->db->exec('CREATE DATABASE IF NOT EXISTS '.$dbn);
-      $this->db->exec('USE '. $dbn);
-      $sql = file_get_contents('db.sql');
-      $this->db->exec($sql);
-
-      $config = "mysql:host=$host;dbname=$dbn;charset=utf8";
+      $config = "mysql:host=$host;charset=utf8";
       $this->db = new PDO($config, USERNAME, PASSWORD);
 
+      $this->db->exec('CREATE DATABASE IF NOT EXISTS '.$dbn);
+      $this->db->exec('USE '. $dbn);
+
+      $query = $this->db->exec( "SELECT * FROM usuario");
+
+      $sql = file_get_contents('db.sql');
+
+      // $this->db->exec($sql);
+
+      if (!$query){
+          $this->db->exec($sql);
+          $config = "mysql:host=$host;dbname=$dbn;charset=utf8";
+          $this->db = new PDO($config, USERNAME, PASSWORD);
+      }
+
+    }catch (Exception $e) {
+
     }
+
   }
 
 }
