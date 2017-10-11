@@ -7,44 +7,25 @@ class dbModel{
 
   function __construct(){
     try{
-      if (!$this->setConnection()){
-        throw new Exception('No se pudo conectar con la Base de Datos');
-      }
+
+      $this->db = new PDO($config, USERNAME, PASSWORD);
+
     }catch (Exception $e) {
-         $error = $e->getMessage();
-        //  $this->newDB();
+
+      $host = HOST;
+      $dbn = DB;
+
+      $this->db->exec('CREATE DATABASE IF NOT EXISTS '.$dbn);
+      $this->db->exec('USE '. $dbn);
+      $sql = file_get_contents('db.sql');
+      $this->db->exec($sql);
+
+      $config = "mysql:host=$host;dbname=$dbn;charset=utf8";
+      $this->db = new PDO($config, USERNAME, PASSWORD);
+
     }
   }
 
-  protected function setConnection(){
-    $host = HOST;
-    $dbn = DB;
-
-    $config = "mysql:host=$host;dbname=$dbn;charset=utf8";
-    $this->db = new PDO($config, USERNAME, PASSWORD);
-
-
-    $sql = file_get_contents('db.sql');
-
-    $this->db->exec($sql);
-
-      return $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  }
-
-  public function newDB(){
-
-            $HOST = HOST;
-            $USERNAME = USERNAME;
-            $PASSWORD = PASSWORD;
-            $DB = DB;
-
-            $config = "mysql:host=$host;dbname=$dbn;charset=utf8";
-            $this->db = new PDO($config, USERNAME, PASSWORD);
-
-            $sql = file_get_contents('db.sql');
-
-            $this->db->exec($sql);
-  }
 }
 
 
