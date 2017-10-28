@@ -7,6 +7,8 @@ include_once('models/AerolineaModel.php');
 
 include_once('controllers/Controller.php');
 
+require_once('utilities/criterio_ordenamiento.php');
+
 class VueloController extends Controller
 {
 
@@ -55,6 +57,7 @@ class VueloController extends Controller
     //FALTA AGREGAR LA FECHA PARA QUE TAMBIEN SE USE PARA FILTRAR
 
     $vuelos = $this->modelo->getVuelos($destino,$aerolinea,$fecha);
+    uasort($vuelos, 'criterio_ordenamiento');
     return $this->vuelos->actualizarTablaVuelos($vuelos);
   }
 
