@@ -332,6 +332,11 @@ $( document ).ready( function() {
 	render('#LogIn','/LogIn');
 	});
 
+	$( "#SignUp" ).on( "click", function(e) {
+	e.preventDefault();
+	render('#SignUp','/SignUp');
+	});
+
 	// ------------------- /FIN EVENTOS DE CARGA DE PAGINAS --------------------------- //
 
 
