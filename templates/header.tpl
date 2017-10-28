@@ -38,6 +38,7 @@
                           <li><a href="LogOut">Log Out</a></li>
                       {else}
                         <li id="LogIn"><a>Log In</a></li>
+                        <li id="SignUp"><a>Sign Up</a></li>
                       {/if}
                </ul>
             </div>

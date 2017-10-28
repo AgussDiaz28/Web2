@@ -13,7 +13,9 @@ class ConfigApp
 
       'LogOut' => 'LogInController#LogOut',
       'LogIn' => 'LogInController#index',
+      'SignUp' => 'LogInController#indexSignUp',
       'verificarUsuario' => 'LogInController#LogIn',
+      'registrarUsuario' => 'LogInController#SignUp',
 
       'paerolineas' => 'AerolineaController#MostrarPaginaAerolineas',
       'pciudades' => 'CiudadController#MostrarPaginaCiudades',
