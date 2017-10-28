@@ -1,15 +1,13 @@
 <?php
-include_once('views/VueloView.php');
+require_once('views/VueloView.php');
 
-include_once('models/CiudadModel.php');
-include_once('models/VueloModel.php');
-include_once('models/AerolineaModel.php');
+require_once('models/CiudadModel.php');
+require_once('models/VueloModel.php');
+require_once('models/AerolineaModel.php');
 
-include_once('controllers/Controller.php');
+require_once('controllers/SecuredController.php');
 
-require_once('utilities/criterio_ordenamiento.php');
-
-class VueloController extends Controller
+class VueloController extends SecuredController
 {
 
     private $tVuelos;
@@ -57,7 +55,6 @@ class VueloController extends Controller
     //FALTA AGREGAR LA FECHA PARA QUE TAMBIEN SE USE PARA FILTRAR
 
     $vuelos = $this->modelo->getVuelos($destino,$aerolinea,$fecha);
-    uasort($vuelos, 'criterio_ordenamiento');
     return $this->vuelos->actualizarTablaVuelos($vuelos);
   }
 
@@ -86,7 +83,14 @@ class VueloController extends Controller
             throw new Exception("No ingreso el precio del vuelo");
           }
           $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo);
-          $this->modelo->agregarVuelo($values); //ESTRE PROCESO NO ESTA INCERTANDO CORRECTAMENTE, VERIFICAR PROBLEMA
+
+          if ($this->SessionActive())
+          {
+            $this->modelo->agregarVuelo($values);   # code...
+          }else {
+            throw new Exception("No tiene permiso para agregar vuelos");
+          }
+
           $result = true;
           $error = false;
     } catch (Exception $e) {
@@ -127,7 +131,13 @@ class VueloController extends Controller
         throw new Exception("No ingreso el precio del vuelo");
       }
       $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo,(int)$id_vuelo[0]); //params contiene el id del vuelo a modificar
-      $this->modelo->actualizarVuelo($values);
+      if ($this->SessionActive())
+      {
+        $this->modelo->actualizarVuelo($values);
+      }else {
+        throw new Exception("No tiene permiso para modificar vuelos");
+      }
+
       $result = true;
       $error = false;
     } catch (Exception $e) {
@@ -143,7 +153,12 @@ class VueloController extends Controller
   }
 
   function borrarVuelo($id_vuelo){
-    return  $this->modelo->borrarVuelo($id_vuelo);
+    if ($this->SessionActive())
+    {
+      return  $this->modelo->borrarVuelo($id_vuelo);
+    }else {
+      throw new Exception("No tiene permiso para borrar vuelos");
+    }
   }
 }
  ?>

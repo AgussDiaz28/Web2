@@ -1,9 +1,9 @@
 <?php
 include_once('models/AerolineaModel.php');
 include_once('views/AerolineaView.php');
-include_once('controllers/Controller.php');
+include_once('controllers/SecuredController.php');
 
-class AerolineaController extends Controller
+class AerolineaController extends SecuredController
 {
 
   function __construct()
@@ -36,7 +36,13 @@ class AerolineaController extends Controller
         throw new Exception("No ingreso cantidad de aviones");
       }
       $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea);
-      $this->modelo->agregarAerolinea($values);
+
+      if ($this->SessionActive()){
+        $this->modelo->agregarAerolinea($values);
+      }else {
+        throw new Exception("No tiene permiso para agregar Aerolineas");
+      }
+
       $result = true;
       $error = false;
     } catch (Exception $e) {
@@ -47,7 +53,13 @@ class AerolineaController extends Controller
   }
   function deteleAerolinea(){
     $id_vuelo   = filter_input(INPUT_POST, 'aerolineaABorrar');
-    $this->modelo->borrarAerolinea([$id_vuelo]);
+
+    if ($this->SessionActive()){
+      $this->modelo->borrarAerolinea([$id_vuelo]);
+    }else {
+      throw new Exception("No tiene permiso para borrar Aerolineas");
+    }
+
     $this->actualizarAerolinea();
   }
 
@@ -57,7 +69,13 @@ class AerolineaController extends Controller
     $CAerolinea  = filter_input(INPUT_POST, 'CAerolinea');
     $IDAerolinea = filter_input(INPUT_POST, 'IDAerolinea');
     $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea,(int)$IDAerolinea);
-    $this->modelo->updateAerolinea($values);
+    
+    if ($this->SessionActive()){
+      $this->modelo->updateAerolinea($values);
+    }else {
+      throw new Exception("No tiene permiso para modificar datos de una Aerolineas");
+    }
+
     $this->actualizarAerolinea();
   }
 

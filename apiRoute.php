@@ -3,8 +3,8 @@
 define('RESOURCE', 0);
 define('PARAMS', 1);
 
-include_once 'api/config/Router.php';
-include_once 'api/controller/ComentariosController.php';
+require_once('api/config/Router.php');
+require_once('api/controller/ComentariosController.php');
 
 
 $router = new Router();

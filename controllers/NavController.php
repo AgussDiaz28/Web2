@@ -1,8 +1,8 @@
 <?php
 
-include_once('views/HomeView.php');
-include_once('views/IndexView.php');
-include_once('controllers/Controller.php');
+require_once('views/HomeView.php');
+require_once('views/IndexView.php');
+require_once('controllers/Controller.php');
 
 class NavController extends Controller
 {
