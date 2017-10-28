@@ -1,14 +1,38 @@
 
-  <div class="col-sm-6">
-      <div class="col-sm-8">
-          <input type="text" class="form-control" placeholder="Nombre de la Aerolinea" id="NAerolinea">
-          <input type="text" class="form-control" placeholder="Pais de Aerolinea" id="PAerolinea">
-          <input type="text" class="form-control" placeholder="Cantidad de Aviones" id="CAerolinea">
-      </div>
-      <div class="col-sm-2">
-          <button type="button" id="AAerolinea" class="btn btn-default">Agregar Aerolinea</button>
-      </div>
-  </div>
+<div class="col-sm-6">
+    <div class="row">
+        <div class="col-sm-8">
+            <input type="text" class="form-control" placeholder="Nombre de la Aerolinea" id="NAerolinea">
+            <input type="text" class="form-control" placeholder="Pais de Aerolinea" id="PAerolinea">
+            <input type="text" class="form-control" placeholder="Cantidad de Aviones" id="CAerolinea">
+        </div>
+        <div class="col-sm-2">
+            <button type="button" id="AAerolinea" class="btn btn-default">Agregar Aerolinea</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-8" >
+            <div class="media">
+                <div class="media-body">
+                  <input type="text" class="form-control" placeholder='Agregar Comentario' name="Comentario" id="comentario" value="">
+                </div>
+            </div>
+            <ul class="list-unstyled" id="comentarios">
+                <li class="media">
+                    <img class="align-self-center mr-3" src="..." alt="Generic placeholder image">
+                    <div class="media-body">
+                      <p>Comentario de usuarios x</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" id="AComentario" class="btn btn-default">Agregar Comentario</button>
+        </div>
+    </div>
+</div>
+
 
 
 <div class="row">

@@ -1,0 +1,6 @@
+/* Formato a usar para el envio de JSON mediante POST*/
+
+		{
+			"id_aerolinea" : 3,
+			"descripcion" : "No pudo ser mejor"
+		}

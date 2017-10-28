@@ -1,5 +1,5 @@
 <?php
-include_once('dbconfig.php');
+require_once('dbconfig.php');
 class dbModel{
 
   protected $db;
@@ -20,8 +20,6 @@ class dbModel{
       $query = $this->db->exec( "SELECT * FROM usuario");
 
       $sql = file_get_contents('db.sql');
-
-      // $this->db->exec($sql);
 
       if (!$query){
           $this->db->exec($sql);
