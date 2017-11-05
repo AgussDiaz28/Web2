@@ -44,8 +44,20 @@ class LoginController extends SecuredController{
         $value = array($userName,$password,$email);
         $this->modelSignUp->registrarUsuario($value);
 
+        $user = $this->model->getUser($userName);
+        $esAdmin = (int) $user[0]['ADMIN'];
+
         session_start();
+
         $_SESSION['USER'] = $userName;
+        $_SESSION['USER_ID'] = $user[0]['ID_USUARIO'];
+
+        if($esAdmin == 1){
+          $_SESSION['ADMIN'] = TRUE;
+        }else{
+          $_SESSION['ADMIN'] = FALSE;
+        }
+
         $_SESSION['LAST_ACTIVITY'] = time();
         $_SESSION['LOGGED'] = TRUE;
         header('Location: '.HOME);
@@ -58,9 +70,19 @@ class LoginController extends SecuredController{
       $password = $_POST['password'];
       if(!empty($userName) && !empty($password)){
         $user = $this->model->getUser($userName);
+        $esAdmin = (int) $user[0]['ADMIN'];
         if((!empty($user)) && password_verify($password, $user[0]['PASSWORD'])) {
             session_start();
+
             $_SESSION['USER'] = $userName;
+            $_SESSION['USER_ID'] = $user[0]['ID_USUARIO'];
+
+            if($esAdmin == 1){
+              $_SESSION['ADMIN'] = TRUE;
+            }else{
+              $_SESSION['ADMIN'] = FALSE;
+            }
+
             $_SESSION['LAST_ACTIVITY'] = time();
             $_SESSION['LOGGED'] = TRUE;
             header('Location: '.HOME);

@@ -47,7 +47,7 @@
             <th>Fecha de Salida</th>
             <th>Precio</th>
             {if !empty($Admin)}
-                {if $Admin == true}
+                {if $Admin ==s true}
             <th class="admin">Editar/Eliminar</th>
                 {/if}
             {/if}

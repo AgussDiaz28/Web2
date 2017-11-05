@@ -9,26 +9,16 @@ class VueloView
     $this->vuelo = new Smarty();
   }
 
-  function mostrarVuelos($Ciudades='',$Aerolineas='',$Vuelos=''){    //muestra pagina vuelos
-    $status = FALSE;
-    session_start();
-    if(isset($_SESSION['LOGGED']) && $_SESSION['LOGGED']){
-      $status = $_SESSION['LOGGED'];
-    }
-    $this->vuelo->assign('Admin',$status);
+  function mostrarVuelos($logStatus,$Ciudades='',$Aerolineas='',$Vuelos=''){    //muestra pagina vuelos
+    $this->vuelo->assign('Admin',$logStatus["ADMIN"]);
     $this->vuelo->assign('ciudades',$Ciudades);
     $this->vuelo->assign('Aerolineas',$Aerolineas);
     $this->vuelo->assign('vuelos',$Vuelos);
     $this->vuelo->display('templates/vuelos.tpl');
   }
 
-  function actualizarTablaVuelos($Vuelos=''){       //actualiza la tabla de vuelos
-    $status = FALSE;
-    session_start();
-    if(isset($_SESSION['LOGGED']) && $_SESSION['LOGGED']){
-      $status = $_SESSION['LOGGED'];
-    }
-    $this->vuelo->assign('Admin',$status);
+  function actualizarTablaVuelos($logStatus,$Vuelos=''){       //actualiza la tabla de vuelos
+    $this->vuelo->assign('Admin',$logStatus["ADMIN"]);
     $this->vuelo->assign('vuelos',$Vuelos);
     $this->vuelo->display('templates/tvuelos.tpl');
   }
