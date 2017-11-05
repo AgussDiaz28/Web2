@@ -8,8 +8,7 @@ require_once('api/controller/ComentariosController.php');
 
 
 $router = new Router();
-//url, verb, controller, method
-$router->AddRoute("comentario/:id", "GET", "ComentariosController", "getComentarios");
+$router->AddRoute("comentario/:id", "GET", "ComentariosController", "getComentario");
 $router->AddRoute("comentario", "POST", "ComentariosController", "agregarComentarioAerolinea");
 $router->AddRoute("comentario/:id", "DELETE", "ComentariosController", "borrarComentario");
 

@@ -9,7 +9,7 @@ $( document ).ready( function() {
 			data:JSdata,
 			datatype: JSON,
 			type:'POST',
-			url: window.location.origin + window.location.pathname+metodo,
+			url: window.location.origin + window.location.pathname + metodo,
 			success: sfunction
 		})
 	}
@@ -247,9 +247,37 @@ $( document ).ready( function() {
 		$('#PVuelo').val(pvuelo)
 	}
 
+	function actualizarComentarios(){
+		$.ajax({
+			type:'GET',
+			url: window.location.origin + window.location.pathname+comentarios,
+			success: cargarC
+		});
+	}
+
+	function cargarC(data){
+		$('#Comentario').append(data);
+	}
+
 	// ----------------- CARGAR PAGINA / ******* EVENTOS ********* ---------------------
 	function cargar(data){
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
+
+		$('#comentariosHolder').hide();
+
+		$('.comentAerolinea').on('click',function(){
+			$('#comentariosHolder').show();
+		});
+
+		// $('#ANComentario').on('click',function(){
+		// 	JSdata = {
+		// 		Comentario = ('#Comentario').val(),
+		// 		Aerolinea = ('#AComentario').val(),
+		// 	}
+		// 	ajaxMethods(JSdata,'/api/comentario',actualizarComentarios);
+		// })
+
+
 
 		// -------------------------------------------------- AEROLINEAS ----------------------------------------------
 

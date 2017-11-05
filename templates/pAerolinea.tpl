@@ -1,35 +1,47 @@
 
 <div class="col-sm-6">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="Nombre de la Aerolinea" id="NAerolinea">
             <input type="text" class="form-control" placeholder="Pais de Aerolinea" id="PAerolinea">
             <input type="text" class="form-control" placeholder="Cantidad de Aviones" id="CAerolinea">
-        </div>
-        <div class="col-sm-2">
+            <hr>
             <button type="button" id="AAerolinea" class="btn btn-default">Agregar Aerolinea</button>
         </div>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-sm-8" >
-            <div class="media">
-                <div class="media-body">
-                  <input type="text" class="form-control" placeholder='Agregar Comentario' name="Comentario" id="comentario" value="">
+    <div class="row" id="comentariosHolder">
+      <div class="detailBox" style="width: inherit;margin: 7%;">
+    <div class="titleBox">
+      <label id="AerolineaLabel"> Comentarios De la Aerolinea </label>
+    </div>
+    <div class="actionBox" style="padding-top: 0px;">
+        <ul class="commentList">
+            <li>
+                <button type="button" class="close" >&times;</button>
+                <p>User Name</p>
+                <div class="commentText">
+                    <p class="">Hello this is a test comment.</p>
                 </div>
+            </li>
+            <div class="actionBox" style="padding:0%;"></div>
+            <li>
+                <button type="button" class="close" >&times;</button>
+                <p>User Name</p>
+                <div class="commentText">
+                    <p class="">Hello this is a test2 comment.</p>
+                </div>
+            </li>
+            <div class="actionBox" style="padding:0%;"></div>
+        </ul>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <input class="form-control" type="text" id="NComentario" placeholder="Agrega Tu Comentario" />
+                <button class="btn btn-default" id="ANComentario">Agregar</button>
             </div>
-            <ul class="list-unstyled" id="comentarios">
-                <li class="media">
-                    <img class="align-self-center mr-3" src="..." alt="Generic placeholder image">
-                    <div class="media-body">
-                      <p>Comentario de usuarios x</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-sm-2">
-            <button type="button" id="AComentario" class="btn btn-default">Agregar Comentario</button>
-        </div>
+        </form>
+    </div>
+</div>
     </div>
 </div>
 
@@ -55,7 +67,7 @@
                 <td>{$Aerolinea.NOMBRE_AEROLINEA}</td>
                 <td>{$Aerolinea.PAIS_ORIGEN}</td>
                 <td>{$Aerolinea.CANT_AVIONES}</td>
-                <td class="admin"><span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}">  </span></td>
+              <td class="admin"><span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp</span> <span class="glyphicon glyphicon-comment comentAerolinea" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp</span></td>
             </tr>
             {/foreach}
           {/if}

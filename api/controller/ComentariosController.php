@@ -11,7 +11,8 @@ class ComentariosController extends Api
     $this->model = new ComentarioModel();
   }
 
-  function getComentarios($url_params = []){
+  function getComentario($url_params = []){ //Comentarios por Aerolinea
+    echo "hola";
     $id = $url_params[":id"];
     $comentarios = $this->model->getComentarios($id);
     foreach ($comentarios as $comentario ) {
