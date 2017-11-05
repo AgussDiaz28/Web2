@@ -16,24 +16,9 @@
       <label id="AerolineaLabel"> Comentarios De la Aerolinea </label>
     </div>
     <div class="actionBox" style="padding-top: 0px;">
-        <ul class="commentList">
-            <li>
-                <button type="button" class="close" >&times;</button>
-                <p>User Name</p>
-                <div class="commentText">
-                    <p class="">Hello this is a test comment.</p>
-                </div>
-            </li>
-            <div class="actionBox" style="padding:0%;"></div>
-            <li>
-                <button type="button" class="close" >&times;</button>
-                <p>User Name</p>
-                <div class="commentText">
-                    <p class="">Hello this is a test2 comment.</p>
-                </div>
-            </li>
-            <div class="actionBox" style="padding:0%;"></div>
-        </ul>
+      <div class="commentList">
+
+      </div>
         <form class="form-inline" role="form">
             <div class="form-group">
                 <input class="form-control" type="text" id="NComentario" placeholder="Agrega Tu Comentario" />

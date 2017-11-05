@@ -1,4 +1,8 @@
 $( document ).ready( function() {
+	// **************MUSTACHE*****************
+
+	let templateComentarios;
+	$.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComentarios = template);
 
 	//***************FUNCIONES****************
 
@@ -247,16 +251,21 @@ $( document ).ready( function() {
 		$('#PVuelo').val(pvuelo)
 	}
 
-	function actualizarComentarios(){
+	function actualizarComentarios(thisElement){ //Trae todos los comentarios de la aerolinea correspondiente
+		$('#comentariosHolder').show();
+		let IDAerolinea = $(thisElement).attr('id');
+		$('#ANComentario').val(IDAerolinea);
 		$.ajax({
 			type:'GET',
-			url: window.location.origin + window.location.pathname+comentarios,
-			success: cargarC
+			url: window.location.origin + window.location.pathname+"/api/comentario/"+IDAerolinea,
+			success: cargarComentarios
 		});
 	}
 
-	function cargarC(data){
-		$('#Comentario').append(data);
+	function cargarComentarios(data){
+		console.log(data);
+		let rendered = Mustache.render(templateComentarios , data);
+		$('.commentList').html(rendered);
 	}
 
 	// ----------------- CARGAR PAGINA / ******* EVENTOS ********* ---------------------
@@ -266,7 +275,7 @@ $( document ).ready( function() {
 		$('#comentariosHolder').hide();
 
 		$('.comentAerolinea').on('click',function(){
-			$('#comentariosHolder').show();
+			actualizarComentarios(this);
 		});
 
 		// $('#ANComentario').on('click',function(){

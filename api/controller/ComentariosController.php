@@ -12,12 +12,12 @@ class ComentariosController extends Api
   }
 
   function getComentario($url_params = []){ //Comentarios por Aerolinea
-    echo "hola";
     $id = $url_params[":id"];
     $comentarios = $this->model->getComentarios($id);
-    foreach ($comentarios as $comentario ) {
-      echo $comentario['DETALLE'];
-    }
+    $response = new stdClass();
+    $response->comentarios = $comentarios;
+    $response->status = 200;
+    return $this->json_response($response, 200);
   }
 
   public function borrarComentario($url_params = [])
@@ -31,7 +31,8 @@ class ComentariosController extends Api
     $body = json_decode($this->raw_data);
     $id_aerolinea = $body->id_aerolinea;
     $descripcion = $body->descripcion;
-    $this->model->agregarComentarioAerolinea($id_aerolinea,$descripcion);
+    $id_usuario = $_SESSION['ID']; //FALTA IMPLEMENTAR ESTO
+    $this->model->agregarComentarioAerolinea($id_aerolinea,$descripcion,$id_usuario);
   }
 
 }

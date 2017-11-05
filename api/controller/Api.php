@@ -1,6 +1,6 @@
 <?php
 
-Abstract class Api{
+abstract class Api{
   protected $model;
   protected $raw_data;
 
