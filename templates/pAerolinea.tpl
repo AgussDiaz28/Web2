@@ -1,5 +1,6 @@
 
 <div class="col-sm-6">
+    {if $Admin == TRUE}
     <div class="row">
         <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="Nombre de la Aerolinea" id="NAerolinea">
@@ -9,6 +10,7 @@
             <button type="button" id="AAerolinea" class="btn btn-default">Agregar Aerolinea</button>
         </div>
     </div>
+    {/if}
     <hr>
     <div class="row" id="comentariosHolder">
     </div>
@@ -17,7 +19,6 @@
 
 
 <div class="row">
-
   <div class="col-sm-6">
     <label>Aerolienas de Viaje</label>
       <table class="table table-striped .table-responsive">
@@ -36,7 +37,11 @@
                 <td>{$Aerolinea.NOMBRE_AEROLINEA}</td>
                 <td>{$Aerolinea.PAIS_ORIGEN}</td>
                 <td>{$Aerolinea.CANT_AVIONES}</td>
-              <td class="admin"><span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp</span> <span class="glyphicon glyphicon-comment comentAerolinea" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp</span></td>
+                <td><span class="glyphicon glyphicon-comment comentAerolinea" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp</span></td>
+              {if $Admin == TRUE}
+                <td class="admin"><span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp</span></td>
+              {/if}
+
             </tr>
             {/foreach}
           {/if}

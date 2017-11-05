@@ -4,7 +4,7 @@ require_once('views/HomeView.php');
 require_once('views/IndexView.php');
 require_once('controllers/Controller.php');
 
-class NavController extends Controller
+class NavController extends SecuredController
 {
 
   function __construct(){
@@ -17,11 +17,13 @@ class NavController extends Controller
   }
 
   function index(){
-      $this->index->mostrarIndex();
+    $logStatus = $this->SessionActive();
+    $this->index->mostrarIndex($logStatus);
   }
 
   function navBar(){
-    $this->index->navBar();
+    $logStatus = $this->SessionActive();
+    $this->index->navBar($logStatus);
   }
 }
 

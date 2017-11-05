@@ -24,10 +24,10 @@ class VueloController extends SecuredController
     $this->mAerolineas =  new AerolineaModel();
   }
 
-
   function MostrarPaginaVuelos(){
     $this->getDatos();
-    $this->vuelos->mostrarVuelos($this->tCiudades,$this->tAerolienas,$this->tVuelos);
+    $logStatus = $this->SessionActive();
+    $this->vuelos->mostrarVuelos($logStatus,$this->tCiudades,$this->tAerolienas,$this->tVuelos);
   }
 
   function getDatos(){
@@ -55,7 +55,8 @@ class VueloController extends SecuredController
     //FALTA AGREGAR LA FECHA PARA QUE TAMBIEN SE USE PARA FILTRAR
 
     $vuelos = $this->modelo->getVuelos($destino,$aerolinea,$fecha);
-    return $this->vuelos->actualizarTablaVuelos($vuelos);
+    $logStatus = $this->SessionActive();
+    return $this->vuelos->actualizarTablaVuelos($logStatus,$vuelos);
   }
 
   function agregarVuelo(){

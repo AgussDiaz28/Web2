@@ -19,7 +19,8 @@ class AerolineaController extends SecuredController
 
   function MostrarPaginaAerolineas(){
     $aerolineas = $this->getAerolineas();
-    $this->view->mostrarPAerolineas($aerolineas);
+    $logStatus = $this->SessionActive();
+    $this->view->mostrarPAerolineas($logStatus,$aerolineas);
   }
 
   public function agregarAerolinea(){
@@ -69,7 +70,7 @@ class AerolineaController extends SecuredController
     $CAerolinea  = filter_input(INPUT_POST, 'CAerolinea');
     $IDAerolinea = filter_input(INPUT_POST, 'IDAerolinea');
     $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea,(int)$IDAerolinea);
-    
+
     if ($this->SessionActive()){
       $this->modelo->updateAerolinea($values);
     }else {
@@ -81,7 +82,8 @@ class AerolineaController extends SecuredController
 
   function actualizarAerolinea(){
     $aerolineas =  $this->modelo->getAerolineas();
-    $this->view->mostrarTablaAerolineas($aerolineas);
+    $logStatus = $this->SessionActive();
+    $this->view->mostrarTablaAerolineas($logStatus,$aerolineas);
   }
 
 }

@@ -46,11 +46,9 @@
             <th>Destino</th>
             <th>Fecha de Salida</th>
             <th>Precio</th>
-            {if !empty($Admin)}
                 {if $Admin == true}
             <th class="admin">Editar/Eliminar</th>
                 {/if}
-            {/if}
           </tr>
         </thead>
         <tbody id="tvuelos">
@@ -63,10 +61,8 @@
                 <td class="rdata" value="{$vuelo.ID_DESTINO}">{$vuelo.CIUDAD_DESTINO }</td>
                 <td class="rdata" value="{$vuelo.FECHA_SALIDA}">{$vuelo.FECHA_SALIDA}</td>
                 <td class="rdata" value="{$vuelo.PRECIO}">{$vuelo.PRECIO}</td>
-                {if !empty($Admin)}
-                    {if $Admin == true}
+                {if $Admin == true}
                     <td class="admin"><span class="glyphicon glyphicon-edit editRow" id="{$vuelo.ID_VUELO}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteRow" id="{$vuelo.ID_VUELO}">  </span></td>
-                    {/if}
                 {/if}
               </tr>
               {/foreach}
@@ -76,8 +72,7 @@
   </div>
 </div>
 <hr>
-{if !empty($Admin)}
-  {if $Admin == true}
+{if $Admin == true}
 <div class="row">
   <div class="col-sm-12">
     <table class="table table-striped .table-responsive">
@@ -124,5 +119,4 @@
 
   </div>
 </div>
-{/if}
 {/if}

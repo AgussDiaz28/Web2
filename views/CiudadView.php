@@ -10,12 +10,14 @@ class CiudadView
     $this->ciudades = new Smarty();
   }
 
-  function mostrarTablaCiudades($Ciudades=''){
+  function mostrarTablaCiudades($logStatus,$Ciudades=''){
+    $this->ciudades->assign('Admin',$logStatus["ADMIN"]);
     $this->ciudades->assign('ciudades',$Ciudades);
     $this->ciudades->display('templates/tciudades.tpl');
   }
 
-  function mostrarPCiudades($Ciudades=''){
+  function mostrarPCiudades($logStatus,$Ciudades=''){
+    $this->ciudades->assign('Admin',$logStatus["ADMIN"]);
     $this->ciudades->assign('ciudades',$Ciudades);
     $this->ciudades->display('templates/pCiudades.tpl');
   }
