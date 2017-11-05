@@ -15,12 +15,14 @@ class AerolineaView
     $this->aerolinea->display('templates/ccaerolineas.tpl');
   }
 
-  function mostrarTablaAerolineas($Aerolineas=''){
+  function mostrarTablaAerolineas($logStatus,$Aerolineas=''){
+    $this->aerolinea->assign('Admin',$logStatus["ADMIN"]);
     $this->aerolinea->assign('Aerolineas',$Aerolineas);
     $this->aerolinea->display('templates/tAerolinea.tpl');
   }
 
-  function mostrarPAerolineas($Aerolineas=''){
+  function mostrarPAerolineas($logStatus,$Aerolineas=''){
+    $this->aerolinea->assign('Admin',$logStatus["ADMIN"]);
     $this->aerolinea->assign('Aerolineas',$Aerolineas);
     $this->aerolinea->display('templates/pAerolinea.tpl');
   }

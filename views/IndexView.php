@@ -10,7 +10,8 @@ class IndexView
     $this->smarty->assign('titulo', 'Index Turismo');
   }
 
-  function mostrarIndex(){
+  function mostrarIndex($logStatus){
+    $this->smarty->assign('Usser',$logStatus["USSER"]);
     $this->smarty->display('templates/index.tpl');
   }
 

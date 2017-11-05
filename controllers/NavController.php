@@ -17,7 +17,8 @@ class NavController extends SecuredController
   }
 
   function index(){
-    $this->index->mostrarIndex();
+    $logStatus = $this->SessionActive();
+    $this->index->mostrarIndex($logStatus);
   }
 
   function navBar(){

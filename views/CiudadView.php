@@ -11,13 +11,13 @@ class CiudadView
   }
 
   function mostrarTablaCiudades($logStatus,$Ciudades=''){
-    $this->vuelo->assign('Admin',$logStatus["ADMIN"]);
+    $this->ciudades->assign('Admin',$logStatus["ADMIN"]);
     $this->ciudades->assign('ciudades',$Ciudades);
     $this->ciudades->display('templates/tciudades.tpl');
   }
 
   function mostrarPCiudades($logStatus,$Ciudades=''){
-    $this->vuelo->assign('Admin',$logStatus["ADMIN"]);
+    $this->ciudades->assign('Admin',$logStatus["ADMIN"]);
     $this->ciudades->assign('ciudades',$Ciudades);
     $this->ciudades->display('templates/pCiudades.tpl');
   }

@@ -19,7 +19,8 @@ class CiudadController extends SecuredController
 
   function MostrarPaginaCiudades(){
     $ciudades = $this->getCiudades();
-    $this->view->mostrarPCiudades($ciudades);
+    $logStatus = $this->SessionActive();
+    $this->view->mostrarPCiudades($logStatus,$ciudades);
   }
 
   function agregarCiudad(){
@@ -86,7 +87,8 @@ class CiudadController extends SecuredController
 
   function actualizarCiudades(){
     $ciudades = $this->getCiudades();
-    $this->view->mostrarTablaCiudades($ciudades);
+    $logStatus = $this->SessionActive();
+    $this->view->mostrarTablaCiudades($logStatus,$ciudades);
   }
 
 }
