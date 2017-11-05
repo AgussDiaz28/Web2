@@ -10,8 +10,7 @@ $( document ).ready( function() {
 
 	function ajaxMethods(JSdata,metodo,sfunction){		//Ajax POST parametrizado para hacer llamado a funciones de metodos
 		$.ajax({
-			data:JSdata,
-			datatype: JSON,
+			data:JSON.stringify(JSdata),
 			type:'POST',
 			url: window.location.origin + window.location.pathname + metodo,
 			success: sfunction
@@ -251,10 +250,7 @@ $( document ).ready( function() {
 		$('#PVuelo').val(pvuelo)
 	}
 
-	function actualizarComentarios(thisElement){ //Trae todos los comentarios de la aerolinea correspondiente
-		$('#comentariosHolder').show();
-		let IDAerolinea = $(thisElement).attr('id');
-		$('#ANComentario').val(IDAerolinea);
+	function actualizarComentarios(IDAerolinea){ //Trae todos los comentarios de la aerolinea correspondiente
 		$.ajax({
 			type:'GET',
 			url: window.location.origin + window.location.pathname+"/api/comentario/"+IDAerolinea,
@@ -263,11 +259,35 @@ $( document ).ready( function() {
 	}
 
 	function cargarComentarios(data){
-		console.log(data);
 		let rendered = Mustache.render(templateComentarios , data);
-		$('.commentList').html(rendered);
+		$('#comentariosHolder').html(rendered);
+
+		let IDAerolinea = $('#ANComentario').attr('dvalue');
+
+		$('#ANComentario').on('click',function(e){
+			e.preventDefault();
+			JSdata = {
+				descripcion : $('#NComentario').val(),
+				id_aerolinea : IDAerolinea,
+			}
+			console.log(JSdata);
+			ajaxMethods(JSdata,'/api/comentario');
+			actualizarComentarios(IDAerolinea);
+		})
+
+		$('#deleteComentario').on('click',function() {
+			$.ajax({
+				type:'DELETE',
+				url: window.location.origin + window.location.pathname + "/api/comentario/" + IDAerolinea,
+			})
+			actualizarComentarios(IDAerolinea);
+		})
 	}
 
+	function autoRefresh(){
+		let IDAerolinea = $('.comentAerolinea').attr('id');
+		actualizarComentarios(IDAerolinea);
+	}
 	// ----------------- CARGAR PAGINA / ******* EVENTOS ********* ---------------------
 	function cargar(data){
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
@@ -275,18 +295,12 @@ $( document ).ready( function() {
 		$('#comentariosHolder').hide();
 
 		$('.comentAerolinea').on('click',function(){
-			actualizarComentarios(this);
+			$('#comentariosHolder').show();
+			let IDAerolinea = $(this).attr('id');
+			$('#ANComentario').attr('dvalue',IDAerolinea);
+			actualizarComentarios(IDAerolinea)
+			// setInterval(autoRefresh,2000); // No puedo hacer que refresque correctamente con el id correspondiente
 		});
-
-		// $('#ANComentario').on('click',function(){
-		// 	JSdata = {
-		// 		Comentario = ('#Comentario').val(),
-		// 		Aerolinea = ('#AComentario').val(),
-		// 	}
-		// 	ajaxMethods(JSdata,'/api/comentario',actualizarComentarios);
-		// })
-
-
 
 		// -------------------------------------------------- AEROLINEAS ----------------------------------------------
 

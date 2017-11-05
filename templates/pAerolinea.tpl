@@ -11,22 +11,6 @@
     </div>
     <hr>
     <div class="row" id="comentariosHolder">
-      <div class="detailBox" style="width: inherit;margin: 7%;">
-    <div class="titleBox">
-      <label id="AerolineaLabel"> Comentarios De la Aerolinea </label>
-    </div>
-    <div class="actionBox" style="padding-top: 0px;">
-      <div class="commentList">
-
-      </div>
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <input class="form-control" type="text" id="NComentario" placeholder="Agrega Tu Comentario" />
-                <button class="btn btn-default" id="ANComentario">Agregar</button>
-            </div>
-        </form>
-    </div>
-</div>
     </div>
 </div>
 
