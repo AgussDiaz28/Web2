@@ -13,6 +13,20 @@
     {/if}
     <hr>
     <div class="row" id="comentariosHolder">
+      <div class="detailBox" style="width: inherit;margin: 7%;">
+          <div class="titleBox">
+              <label id="AerolineaLabel"> Comentarios De la Aerolinea </label>
+          </div>
+          <div class="commentList">
+
+          </div>
+          <div class="actionBox" style="padding:0%;"></div>
+          <div class="form-group">
+              <input class="form-control" type="text" id="NComentario" placeholder="Agrega Tu Comentario" />
+              <button class="btn btn-default" id="ANComentario" dvalue="" >Agregar</button>
+          </div>
+      </div>
+
     </div>
 </div>
 

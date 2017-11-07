@@ -259,12 +259,12 @@ $( document ).ready( function() {
 	}
 
 	function cargarComentarios(data){
+		IDAerolinea = $('#ANComentario').attr('dvalue');
 		let rendered = Mustache.render(templateComentarios , data);
-		$('#comentariosHolder').html(rendered);
-
-		let IDAerolinea = $('#ANComentario').attr('dvalue');
+		$('.commentList').html(rendered);
 
 		$('#ANComentario').on('click',function(e){
+
 			e.preventDefault();
 			JSdata = {
 				descripcion : $('#NComentario').val(),
@@ -276,9 +276,11 @@ $( document ).ready( function() {
 		})
 
 		$('#deleteComentario').on('click',function() {
+			let IDComentario = $(this).val();
+			console.log(IDComentario);
 			$.ajax({
 				type:'DELETE',
-				url: window.location.origin + window.location.pathname + "/api/comentario/" + IDAerolinea,
+				url: window.location.origin + window.location.pathname + "/api/comentario/" +  IDComentario, //
 			})
 			actualizarComentarios(IDAerolinea);
 		})
