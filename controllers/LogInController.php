@@ -47,21 +47,25 @@ class LoginController extends SecuredController{
         $user = $this->model->getUser($userName);
         $esAdmin = (int) $user[0]['ADMIN'];
 
-        session_start();
-
-        $_SESSION['USER'] = $userName;
-        $_SESSION['USER_ID'] = $user[0]['ID_USUARIO'];
-
-        if($esAdmin == 1){
-          $_SESSION['ADMIN'] = TRUE;
-        }else{
-          $_SESSION['ADMIN'] = FALSE;
-        }
-
-        $_SESSION['LAST_ACTIVITY'] = time();
-        $_SESSION['LOGGED'] = TRUE;
-        header('Location: '.HOME);
+        $this->loguearse();
       }
+  }
+
+  private function loguearse(){
+    session_start();
+
+    $_SESSION['USER'] = $userName;
+    $_SESSION['USER_ID'] = $user[0]['ID_USUARIO'];
+
+    if($esAdmin == 1){
+      $_SESSION['ADMIN'] = TRUE;
+    }else{
+      $_SESSION['ADMIN'] = FALSE;
+    }
+
+    $_SESSION['LAST_ACTIVITY'] = time();
+    $_SESSION['LOGGED'] = TRUE;
+    header('Location: '.HOME);
   }
 
   public function LogIn()
@@ -72,23 +76,10 @@ class LoginController extends SecuredController{
         $user = $this->model->getUser($userName);
         $esAdmin = (int) $user[0]['ADMIN'];
         if((!empty($user)) && password_verify($password, $user[0]['PASSWORD'])) {
-            session_start();
-
-            $_SESSION['USER'] = $userName;
-            $_SESSION['USER_ID'] = $user[0]['ID_USUARIO'];
-
-            if($esAdmin == 1){
-              $_SESSION['ADMIN'] = TRUE;
-            }else{
-              $_SESSION['ADMIN'] = FALSE;
-            }
-
-            $_SESSION['LAST_ACTIVITY'] = time();
-            $_SESSION['LOGGED'] = TRUE;
-            header('Location: '.HOME);
+          $this->loguearse();
         }
         else{
-            header('Location: '.HOME);
+          header('Location: '.HOME);
         }
       }
   }

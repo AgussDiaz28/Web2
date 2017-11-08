@@ -280,7 +280,7 @@ $( document ).ready( function() {
 	}
 
 	function addComentario(){
-		
+
 		JSdata = {
 			descripcion : $('#NComentario').val(),
 			id_aerolinea : IDAerolinea,
@@ -308,9 +308,27 @@ $( document ).ready( function() {
 		function actualizarTablaPermisos(data){
 			$("#tpermisos").html(data);
 
-			$('.deleteUsserRow').on('click',function() {  			//Ajax que elimina una Ciudad de la BD
+			$('.deleteUsserRow').on('click',function() {
 				borrarUsuario(this);
 			})
+
+			$('.permisoAdmin').on('change',function() {
+				editarUsuario(this);
+			})
+		}
+
+		function editarUsuario(thisUsser){
+			let esAdmin = 0;
+
+			if ($(thisUsser).is(':checked')){
+				esAdmin = 1;
+			}
+
+			data = {
+				usuarioAEditar : $(thisUsser).attr('id'),
+				permisoAdmin : esAdmin
+			}
+			ajaxMethods(data,'/actualizarUsuario',actualizarTablaPermisos);
 		}
 
 		function borrarUsuario(thisUsser){
@@ -382,6 +400,10 @@ $( document ).ready( function() {
 		// ---------------------------------------------------------- PANEL DE CONTROL ------------------------------------------------------
 		$(".deleteUsserRow").on('click',function() {
 			borrarUsuario(this);
+		})
+
+		$('.permisoAdmin').on('change',function() {
+			editarUsuario(this);
 		})
 
 

@@ -85,7 +85,7 @@ class VueloController extends SecuredController
           }
           $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo);
 
-          if ($this->SessionActive())
+          if(!$this->SessionActive()['ADMIN'])
           {
             $this->modelo->agregarVuelo($values);   # code...
           }else {
@@ -132,7 +132,7 @@ class VueloController extends SecuredController
         throw new Exception("No ingreso el precio del vuelo");
       }
       $values = array($CVuelo,(int)$SNAerolinea,(int)$SCOrigen,(int)$SCDestino,$FSVuelo,(int)$PVuelo,(int)$id_vuelo[0]); //params contiene el id del vuelo a modificar
-      if ($this->SessionActive())
+      if(!$this->SessionActive()['ADMIN'])
       {
         $this->modelo->actualizarVuelo($values);
       }else {
@@ -154,7 +154,7 @@ class VueloController extends SecuredController
   }
 
   function borrarVuelo($id_vuelo){
-    if ($this->SessionActive())
+    if(!$this->SessionActive()['ADMIN'])
     {
       return  $this->modelo->borrarVuelo($id_vuelo);
     }else {

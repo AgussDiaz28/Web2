@@ -33,7 +33,7 @@ class CiudadController extends SecuredController
 
       $value = array($NCiudad);
 
-      if ($this->SessionActive())
+      if(!$this->SessionActive()['ADMIN'])
       {
         $this->modelo->agregarCiudad($value);
       }else {
@@ -52,7 +52,7 @@ class CiudadController extends SecuredController
   {
     $id_ciudad = filter_input(INPUT_POST, 'ciudadABorrar');
 
-    if ($this->SessionActive())
+    if(!$this->SessionActive()['ADMIN'])
     {
       $this->modelo->borrarCiudad([$id_ciudad]);
     }else {
@@ -69,7 +69,7 @@ class CiudadController extends SecuredController
       }
       $values = array($NCiudad,(int)$id_ciudad[0]);
 
-      if ($this->SessionActive())
+      if(!$this->SessionActive()['ADMIN'])
       {
         $this->modelo->actualizarCiudad($values);
       }else {
