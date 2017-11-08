@@ -259,31 +259,33 @@ $( document ).ready( function() {
 	}
 
 	function cargarComentarios(data){
+		console.log(data);
 		IDAerolinea = $('#ANComentario').attr('dvalue');
-		let rendered = Mustache.render(templateComentarios , data);
+		let rendered = Mustache.render(templateComentarios, data);
 		$('.commentList').html(rendered);
-
-		$('#ANComentario').on('click',function(e){
-
-			e.preventDefault();
-			JSdata = {
-				descripcion : $('#NComentario').val(),
-				id_aerolinea : IDAerolinea,
-			}
-			console.log(JSdata);
-			ajaxMethods(JSdata,'/api/comentario');
-			actualizarComentarios(IDAerolinea);
+		
+		$('.deleteComentario').on('click',function() {
+			deleteComentario(this);
 		})
+	}
 
-		$('#deleteComentario').on('click',function() {
-			let IDComentario = $(this).val();
-			console.log(IDComentario);
-			$.ajax({
-				type:'DELETE',
-				url: window.location.origin + window.location.pathname + "/api/comentario/" +  IDComentario, //
-			})
-			actualizarComentarios(IDAerolinea);
+	function deleteComentario(thisElement){
+		let IDComentario = $(thisElement).val();
+		let IDAerolinea = $(thisElement).attr("data-aerolineaID");
+		$.ajax({
+			type:'DELETE',
+			url: window.location.origin + window.location.pathname + "/api/comentario/"+IDComentario,
+			success: function(){actualizarComentarios(IDAerolinea);}
 		})
+	}
+
+	function addComentario(){
+		JSdata = {
+			descripcion : $('#NComentario').val(),
+			id_aerolinea : IDAerolinea,
+		}
+		console.log(JSdata);
+		ajaxMethods(JSdata,'/api/comentario',actualizarComentarios(JSdata.id_aerolinea));
 	}
 
 	function autoRefresh(){
@@ -300,7 +302,11 @@ $( document ).ready( function() {
 			$('#comentariosHolder').show();
 			let IDAerolinea = $(this).attr('id');
 			$('#ANComentario').attr('dvalue',IDAerolinea);
-			actualizarComentarios(IDAerolinea)
+			actualizarComentarios(IDAerolinea);
+
+			$('#ANComentario').on('click',function(){
+				addComentario();
+			})
 			// setInterval(autoRefresh,2000); // No puedo hacer que refresque correctamente con el id correspondiente
 		});
 

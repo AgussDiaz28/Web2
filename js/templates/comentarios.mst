@@ -1,7 +1,7 @@
 <ul>
   {{#comentarios}}
   <li>
-      <button type="button" class="close" id="deleteComentario" value="{{ComentarioID}}">&times;</button>
+      <button type="button" class="close deleteComentario" value="{{ComentarioID}}" data-aerolineaID="{{ID_AEROLINEA}}">&times;</button>
       <p>{{ComentarioUsuario}}</p>
       <div class="commentText">
           <p class="">{{DetalleComentario}}</p>
