@@ -51,9 +51,9 @@
                 <td>{$Aerolinea.NOMBRE_AEROLINEA}</td>
                 <td>{$Aerolinea.PAIS_ORIGEN}</td>
                 <td>{$Aerolinea.CANT_AVIONES}</td>
-                <td><span class="glyphicon glyphicon-comment comentAerolinea" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp</span></td>
+                <td><span class="glyphicon glyphicon-comment comentAerolinea" id="{$Aerolinea.ID_AEROLINEA}"></span></td>
               {if $Admin == TRUE}
-                <td class="admin"><span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}"> &nbsp</span></td>
+                <td class="admin"><span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"></span><span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}"></span></td>
               {/if}
 
             </tr>

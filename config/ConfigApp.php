@@ -17,6 +17,10 @@ class ConfigApp
       'verificarUsuario' => 'LogInController#LogIn',
       'registrarUsuario' => 'LogInController#SignUp',
 
+      'ControlPanel' => 'ControlPanelController#MostrarPaginaPermisos',
+      'borrarUsuario' => 'ControlPanelController#borrarUsuario',
+      'actualizarUsuario' => 'ControlPanelController#otorgarPermisoAdmin',
+
       'paerolineas' => 'AerolineaController#MostrarPaginaAerolineas',
       'pciudades' => 'CiudadController#MostrarPaginaCiudades',
 

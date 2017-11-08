@@ -35,6 +35,9 @@
                       {if ( isset($Usser)) && ($Usser != false)}
                           <li id="ciudades" class="admin"><a>Ciudades</a></li>
                           <li id="aerolineas" class="admin"><a>Aerolineas</a></li>
+                          {if ( isset($Admin)) && ($Admin != false)}
+                            <li id="permisos" class="admin"><a>Panel de Control</a></li>
+                          {/if}
                           <li><a href="LogOut">Log Out</a></li>
                       {else}
                         <li id="LogIn"><a>Log In</a></li>

@@ -263,7 +263,7 @@ $( document ).ready( function() {
 		IDAerolinea = $('#ANComentario').attr('dvalue');
 		let rendered = Mustache.render(templateComentarios, data);
 		$('.commentList').html(rendered);
-		
+
 		$('.deleteComentario').on('click',function() {
 			deleteComentario(this);
 		})
@@ -292,6 +292,26 @@ $( document ).ready( function() {
 		let IDAerolinea = $('.comentAerolinea').attr('id');
 		actualizarComentarios(IDAerolinea);
 	}
+
+	//----------- ABM USUARIO -----------
+
+		function actualizarTablaPermisos(data){
+
+			$("#tpermisos").html(data);
+
+			$('.deleteUsserRow').on('click',function() {  			//Ajax que elimina una Ciudad de la BD
+				borrarUsuario(this);
+			})
+		}
+
+		function borrarUsuario(thisUsser){
+			data = {
+				usuarioABorrar : $(thisUsser).attr('id')
+			}
+			ajaxMethods(data,'/borrarUsuario',actualizarTablaPermisos);
+		}
+
+	//----------- /FIN ABM USUARIO ---------
 	// ----------------- CARGAR PAGINA / ******* EVENTOS ********* ---------------------
 	function cargar(data){
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
@@ -350,6 +370,10 @@ $( document ).ready( function() {
 			editarVuelo(this);
 		});
 
+		// ---------------------------------------------------------- PANEL DE CONTROL ------------------------------------------------------
+		$(".deleteUsserRow").on('click',function() {
+			borrarUsuario(this);
+		})
 
 
 		// ---------------------------------------------------------- FILTRO DE VUELOS ------------------------------------------------------
@@ -384,6 +408,11 @@ $( document ).ready( function() {
 	$( "#aerolineas" ).on( "click", function(e) {
 	e.preventDefault();
 	render("#aerolineas",'/paerolineas');
+	});
+
+	$( "#permisos" ).on( "click", function(e) {
+	e.preventDefault();
+	render('#permisos','/ControlPanel');
 	});
 
 	$( "#LogIn" ).on( "click", function(e) {
