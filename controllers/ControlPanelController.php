@@ -25,7 +25,7 @@ class ControlPanelController extends SecuredController
   function borrarUsuario()
   {
     $id_usuario = filter_input(INPUT_POST, 'usuarioABorrar');
-
+    var_dump($id_usuario);
     if ($this->SessionActive())
     {
       $this->modelo->borrarUsser([$id_usuario]);

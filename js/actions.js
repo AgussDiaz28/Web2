@@ -296,7 +296,6 @@ $( document ).ready( function() {
 	//----------- ABM USUARIO -----------
 
 		function actualizarTablaPermisos(data){
-
 			$("#tpermisos").html(data);
 
 			$('.deleteUsserRow').on('click',function() {  			//Ajax que elimina una Ciudad de la BD
