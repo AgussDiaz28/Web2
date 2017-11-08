@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Nov 05, 2017 at 05:56 PM
+-- Generation Time: Nov 07, 2017 at 02:47 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.6
 
@@ -73,17 +73,20 @@ CREATE TABLE `Comentario` (
   `ID_COMENTARIO` int(11) NOT NULL,
   `DETALLE` text NOT NULL,
   `ID_AEROLINEA` int(11) NOT NULL,
-  `ID_USUARIO` int(11) NOT NULL
+  `ID_USUARIO` int(11) NOT NULL,
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Comentario`
 --
 
-INSERT INTO `Comentario` (`ID_COMENTARIO`, `DETALLE`, `ID_AEROLINEA`, `ID_USUARIO`) VALUES
-(1, 'CON ESTA AEROLINEA TUVE EL MEJOR VIAJE DE MI VIDA', 2, 2),
-(3, 'No hay vuelta atras luego de viajar con Emirates', 6, 1),
-(4, 'No pudo ser mejor', 3, 3);
+INSERT INTO `Comentario` (`ID_COMENTARIO`, `DETALLE`, `ID_AEROLINEA`, `ID_USUARIO`, `Fecha`) VALUES
+(3, 'No hay vuelta atras luego de viajar con Emirates', 6, 1, '2017-11-02 01:23:13'),
+(4, 'No pudo ser mejor', 3, 3, '2017-11-05 15:33:43'),
+(40, 'Horrendo', 3, 2, '2017-11-07 01:47:11'),
+(41, 'Horrendo', 3, 2, '2017-11-07 01:47:11'),
+(42, 'Horrendo', 3, 2, '2017-11-07 01:47:11');
 
 -- --------------------------------------------------------
 
@@ -131,8 +134,7 @@ CREATE TABLE `Vuelos` (
 INSERT INTO `Vuelos` (`ID_VUELO`, `ID_AEROLINEA`, `ID_DESTINO`, `ID_ORIGEN`, `FECHA_SALIDA`, `CODIGO_VUELO`, `PRECIO`) VALUES
 (7, 2, 3, 4, '2017-09-28', 'GL764', 4234),
 (9, 4, 2, 3, '2017-09-22', 'LA9542', 23214),
-(11, 3, 5, 2, '2017-08-21', 'gw314', 25984),
-(12, 6, 3, 6, '2017-09-08', 'Q984', 4213);
+(11, 3, 5, 2, '2017-08-21', 'gw314', 25984);
 
 -- --------------------------------------------------------
 
@@ -174,7 +176,7 @@ CREATE TABLE `vw_vuelos` (
 --
 DROP TABLE IF EXISTS `vw_comentarios`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`Comentario`@`%` SQL SECURITY INVOKER VIEW `vw_comentarios`  AS  select `comentario`.`ID_COMENTARIO` AS `ComentarioID`,`comentario`.`DETALLE` AS `DetalleComentario`,`comentario`.`ID_AEROLINEA` AS `ID_AEROLINEA`,`comentario`.`ID_USUARIO` AS `ID_USUARIO`,`usuario`.`USERNAME` AS `ComentarioUsuario` from (`comentario` join `usuario`) where (`usuario`.`ID_USUARIO` = `comentario`.`ID_USUARIO`) WITH LOCAL CHECK OPTION ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`Comentario`@`%` SQL SECURITY INVOKER VIEW `vw_comentarios`  AS  select `comentario`.`ID_COMENTARIO` AS `ComentarioID`,`comentario`.`DETALLE` AS `DetalleComentario`,`comentario`.`ID_AEROLINEA` AS `ID_AEROLINEA`,`comentario`.`ID_USUARIO` AS `ID_USUARIO`,`usuario`.`USERNAME` AS `ComentarioUsuario` from (`comentario` join `usuario`) where (`usuario`.`ID_USUARIO` = `comentario`.`ID_USUARIO`) order by `comentario`.`Fecha` desc WITH LOCAL CHECK OPTION ;
 
 -- --------------------------------------------------------
 
@@ -242,7 +244,7 @@ ALTER TABLE `Ciudades`
 -- AUTO_INCREMENT for table `Comentario`
 --
 ALTER TABLE `Comentario`
-  MODIFY `ID_COMENTARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_COMENTARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
@@ -252,7 +254,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `Vuelos`
 --
 ALTER TABLE `Vuelos`
-  MODIFY `ID_VUELO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID_VUELO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Constraints for dumped tables
 --

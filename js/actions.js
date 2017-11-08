@@ -10,11 +10,12 @@ $( document ).ready( function() {
 
 	function ajaxMethods(JSdata,metodo,sfunction){		//Ajax POST parametrizado para hacer llamado a funciones de metodos
 		$.ajax({
-			data:JSON.stringify(JSdata),
-			type:'POST',
-			url: window.location.origin + window.location.pathname + metodo,
-			success: sfunction
-		})
+		data:JSdata,
+		datatype: JSON,
+		type:'POST',
+		url: window.location.origin + window.location.pathname+metodo,
+		success: sfunction
+	})
 	}
 
 	function render(pagina,metodo){  	//Ajax para carga de Paginas
@@ -259,7 +260,6 @@ $( document ).ready( function() {
 	}
 
 	function cargarComentarios(data){
-		console.log(data);
 		IDAerolinea = $('#ANComentario').attr('dvalue');
 		let rendered = Mustache.render(templateComentarios, data);
 		$('.commentList').html(rendered);
@@ -280,12 +280,22 @@ $( document ).ready( function() {
 	}
 
 	function addComentario(){
+		
 		JSdata = {
 			descripcion : $('#NComentario').val(),
 			id_aerolinea : IDAerolinea,
 		}
-		console.log(JSdata);
-		ajaxMethods(JSdata,'/api/comentario',actualizarComentarios(JSdata.id_aerolinea));
+
+		let metodo = "/api/comentario";
+
+		$.ajax({
+			data:JSON.stringify(JSdata),
+			type:'POST',
+			url: window.location.origin + window.location.pathname + metodo,
+			success: sfunction
+		})
+
+		actualizarComentarios(JSdata.id_aerolinea)
 	}
 
 	function autoRefresh(){
