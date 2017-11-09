@@ -38,7 +38,7 @@ class AerolineaController extends SecuredController
       }
       $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea);
 
-      if(!$this->SessionActive()['ADMIN']){
+      if($this->SessionActive()['ADMIN']){
         $this->modelo->agregarAerolinea($values);
       }else {
         throw new Exception("No tiene permiso para agregar Aerolineas");
@@ -55,7 +55,7 @@ class AerolineaController extends SecuredController
   function deteleAerolinea(){
     $id_vuelo   = filter_input(INPUT_POST, 'aerolineaABorrar');
 
-    if(!$this->SessionActive()['ADMIN']){
+    if($this->SessionActive()['ADMIN']){
       $this->modelo->borrarAerolinea([$id_vuelo]);
     }else {
       throw new Exception("No tiene permiso para borrar Aerolineas");
@@ -71,7 +71,7 @@ class AerolineaController extends SecuredController
     $IDAerolinea = filter_input(INPUT_POST, 'IDAerolinea');
     $values = array($NAerolinea,$PAerolinea,(int)$CAerolinea,(int)$IDAerolinea);
 
-    if(!$this->SessionActive()['ADMIN']){
+    if($this->SessionActive()['ADMIN']){
       $this->modelo->updateAerolinea($values);
 
     }else {
