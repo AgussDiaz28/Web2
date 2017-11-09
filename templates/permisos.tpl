@@ -19,9 +19,9 @@
                 <div class="checkbox">
                   <label>
                     {if $usser.ADMIN == 1}
-                      <input type="checkbox" class="permiso" checked>
+                      <input type="checkbox" class="permisoAdmin" id="{$usser.ID_USUARIO}" checked>
                     {else}
-                      <input type="checkbox" class="permiso">
+                      <input type="checkbox" class="permisoAdmin" id="{$usser.ID_USUARIO}">
                     {/if}
                   </label>
                 </div>

@@ -13,8 +13,8 @@
         <div class="row">
           <div class="col-sm-10">
             <div id="myCarousel" class="carousel slide centered" data-ride="carousel">
-                {if !empty($images) }
-                  {foreach from=$images item=image}
+                <!-- {if !empty($images) }
+                  {foreach from=$images item=image} -->
                       <ol class="carousel-indicators">
                          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                          <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -30,8 +30,8 @@
                               <img src="images/la.jpg" alt="Las Vegas">
                           </div>
                       </div>
-                    {/foreach}
-                  {/if}
+                    <!-- {/foreach}
+                  {/if} -->
                   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                     <span class="sr-only">Previous</span>
@@ -62,16 +62,34 @@
             <tr>
                 <td value="{$ciudad.ID_CIUDAD}" class="ciudad">{$ciudad.NOMBRE_CIUDAD}</td>
                   {if $Admin == TRUE}
-                  <td class="admin"><span class="glyphicon glyphicon-edit editCityRow" id="{$ciudad.ID_CIUDAD}">&nbsp</span><span class="glyphicon glyphicon-cloud-upload" id="{$ciudad.ID_CIUDAD}">&nbsp</span><span class="glyphicon glyphicon-trash deleteCityRow" id="{$ciudad.ID_CIUDAD}"></span></td>
+                  <td class="admin col-sm-2">
+                      <div class="col-sm-3">
+                        <span class="glyphicon glyphicon-edit editCityRow" id="{$ciudad.ID_CIUDAD}"></span>
+                      </div>
+                      <div class="col-sm-3">
+                        <span class="glyphicon glyphicon-trash deleteCityRow" id="{$ciudad.ID_CIUDAD}"></span>
+                      </div>
+                      <div class="col-sm-3">
+                        <span class="glyphicon glyphicon-cloud-upload uploadImage" id="{$ciudad.ID_CIUDAD}"></span>
+                      </div>
+                      <div class="col-sm-3">
+                        <span class="glyphicon glyphicon-eye viewPhotos" id="{$ciudad.ID_CIUDAD}"></span>
+                      </div>
+                  </td>
                   {/if}
             </tr>
             {/foreach}
           {/if}
         </tbody>
       </table>
+      <div class="row uploadForm">
+        <form class="" action="uploadImage" method="post" enctype="multipart/form-data">
+            <input type="file" name="imagenes[]"  multiple>
+            <input type="hidden" id="hiddenInput" name="id_ciudad" value="">
+            <button class="btn btn-default" type="submit" name="button" id="uploadButton" > Subir</button>
+        </form>
+      </div>
     </div>
-    <div class="row">
-          <input type="file" name="file" value="file">
-    </div>
+
   </div>
 </div>

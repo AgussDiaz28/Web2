@@ -23,7 +23,10 @@ class SecuredController extends Controller
   {
     $usserStatus = FALSE;
     $adminStatus = FALSE;
-    session_start();
+    if(!isset($_SESSION))
+    {
+        session_start();
+    }
     if(isset($_SESSION['LOGGED']) && $_SESSION['LOGGED']){
       $usserStatus = $_SESSION['LOGGED'];
     }

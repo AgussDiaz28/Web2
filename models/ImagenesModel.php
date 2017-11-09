@@ -14,26 +14,25 @@ class ImagenesModel extends dbModel
         return $rutas;
     }
 
-    public function agregarImagenes($imagenes,$id_ciudad)
+    public function agregarImagenes($imagenes, $id_ciudad)
     {
-      $rutas = $this->uploadImages($imagenes);
-      $sentencia_imagenes = $this->db->prepare('INSERT INTO imagen(id_ciudad,path) VALUES(?,?)');
-      foreach ($rutas as $ruta) {
-        $sentencia_imagenes->execute([$id_ciudad,$ruta]);
-      }
+        $rutas = $this->uploadImages($imagenes);
+        $sentencia_imagenes = $this->db->prepare('INSERT INTO imagen(id_ciudad,path) VALUES(?,?)');
+        foreach ($rutas as $ruta) {
+            $sentencia_imagenes->execute([$id_ciudad,$ruta]);
+        }
     }
 
     public function getImages($id)
     {
-      $sentencia = $this->db->prepare("SELECT * FROM vw_comentarios WHERE ID_AEROLINEA = ?");
-      $sentencia->execute([$id]);
-      return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        $sentencia = $this->db->prepare("SELECT * FROM vw_comentarios WHERE ID_AEROLINEA = ?");
+        $sentencia->execute([$id]);
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function deleteImages($id)
     {
-      $sentencia = $this->db->prepare( "DELETE FROM Comentario WHERE ID_COMENTARIO= ?");
-      $sentencia->execute([$id]);
+        $sentencia = $this->db->prepare( "DELETE FROM Comentario WHERE ID_COMENTARIO= ?");
+        $sentencia->execute([$id]);
     }
-
 }

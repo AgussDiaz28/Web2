@@ -280,7 +280,7 @@ $( document ).ready( function() {
 	}
 
 	function addComentario(){
-		
+
 		JSdata = {
 			descripcion : $('#NComentario').val(),
 			id_aerolinea : IDAerolinea,
@@ -292,10 +292,10 @@ $( document ).ready( function() {
 			data:JSON.stringify(JSdata),
 			type:'POST',
 			url: window.location.origin + window.location.pathname + metodo,
-			success: sfunction
+			success: function(){
+				actualizarComentarios(JSdata.id_aerolinea);
+			}
 		})
-
-		actualizarComentarios(JSdata.id_aerolinea)
 	}
 
 	function autoRefresh(){
@@ -308,9 +308,27 @@ $( document ).ready( function() {
 		function actualizarTablaPermisos(data){
 			$("#tpermisos").html(data);
 
-			$('.deleteUsserRow').on('click',function() {  			//Ajax que elimina una Ciudad de la BD
+			$('.deleteUsserRow').on('click',function() {
 				borrarUsuario(this);
 			})
+
+			$('.permisoAdmin').on('change',function() {
+				editarUsuario(this);
+			})
+		}
+
+		function editarUsuario(thisUsser){
+			let esAdmin = 0;
+
+			if ($(thisUsser).is(':checked')){
+				esAdmin = 1;
+			}
+
+			data = {
+				usuarioAEditar : $(thisUsser).attr('id'),
+				permisoAdmin : esAdmin
+			}
+			ajaxMethods(data,'/actualizarUsuario',actualizarTablaPermisos);
 		}
 
 		function borrarUsuario(thisUsser){
@@ -326,12 +344,20 @@ $( document ).ready( function() {
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
 
 		$('#comentariosHolder').hide();
+		$('.uploadForm').hide();
+
+		$('.uploadImage').on('click',function() {
+			$('.uploadForm').show();
+			let IDCiudad= $(this).attr('id');
+			$('#hiddenInput').val(IDCiudad);
+		})
 
 		$('.comentAerolinea').on('click',function(){
 			$('#comentariosHolder').show();
 			let IDAerolinea = $(this).attr('id');
 			$('#ANComentario').attr('dvalue',IDAerolinea);
 			actualizarComentarios(IDAerolinea);
+
 
 			$('#ANComentario').on('click',function(){
 				addComentario();
@@ -382,6 +408,10 @@ $( document ).ready( function() {
 		// ---------------------------------------------------------- PANEL DE CONTROL ------------------------------------------------------
 		$(".deleteUsserRow").on('click',function() {
 			borrarUsuario(this);
+		})
+
+		$('.permisoAdmin').on('change',function() {
+			editarUsuario(this);
 		})
 
 

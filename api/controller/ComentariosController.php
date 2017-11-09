@@ -25,7 +25,6 @@ class ComentariosController extends Api
     public function borrarComentario($url_params = [])
     {
         $id_comentario = $url_params[":id"];
-        var_dump($id_comentario);
         $this->model->borrarComentario($id_comentario);
     }
 
@@ -34,7 +33,10 @@ class ComentariosController extends Api
         $body = json_decode($this->raw_data);
         $id_aerolinea = $body->id_aerolinea;
         $descripcion = $body->descripcion;
-        session_start();
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
         $id_usuario = $_SESSION['USER_ID'];
         $this->model->agregarComentarioAerolinea($id_aerolinea, $descripcion, $id_usuario);
     }

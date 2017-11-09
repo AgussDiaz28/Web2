@@ -25,8 +25,7 @@ class ControlPanelController extends SecuredController
   function borrarUsuario()
   {
     $id_usuario = filter_input(INPUT_POST, 'usuarioABorrar');
-    var_dump($id_usuario);
-    if ($this->SessionActive())
+    if($this->SessionActive()['ADMIN'])
     {
       $this->modelo->borrarUsser([$id_usuario]);
     }else {
@@ -36,15 +35,14 @@ class ControlPanelController extends SecuredController
     $this->actualizarUsuarios();
   }
 
-  function otorgarPermisoAdmin($id_usuario){
-    $permiso = filter_input(INPUT_POST, 'permiso');
-    try {                  //PREGUNTAR SI LA EXCEPCION TERMINA LA EJECUCION INMEDIATAMENTE MEDIANTE EL CATCH
-      if (empty($permiso)) {
-        throw new Exception("No modifico nada");
-      }
-      $values = array((int)$permiso,(int)$id_usuario[0]);
+  function otorgarPermisoAdmin(){
+    $id_usuario = filter_input(INPUT_POST, 'usuarioAEditar');
+    $esAdmin = filter_input(INPUT_POST, 'permisoAdmin');
 
-      if ($this->SessionActive())
+    try {
+      $values = array((int)$esAdmin,(int)$id_usuario);
+
+      if($this->SessionActive()['ADMIN'])
       {
         $this->modelo->actualizarUssers($values);
       }else {

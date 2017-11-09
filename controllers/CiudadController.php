@@ -37,12 +37,9 @@ class CiudadController extends SecuredController
                 throw new Exception("No ingreso ninguna ciudad");
             }
 
-            if ($this->SessionActive()) {
+            if ($this->SessionActive()['ADMIN']) {
                 $value = array($NCiudad);
                 $this->modelo->agregarCiudad($value);
-                if ($this->sonJPG($_FILES['imagenes']['type'])) {
-                    $this->images->agregarImagenes($id_ciudad, $rutaTempImagenes);
-                }
             } else {
                 throw new Exception("No tiene permiso para agregar ciudades");
             }
@@ -56,21 +53,11 @@ class CiudadController extends SecuredController
         $this->actualizarCiudades();
     }
 
-    private function sonJPG($imagenesTipos)
-    {
-        foreach ($imagenesTipos as $tipo) {
-            if ($tipo != 'image/jpeg') {
-                return false;
-            }
-        }
-        return true;
-    }
-
     function borrarCiudad()
     {
         $id_ciudad = filter_input(INPUT_POST, 'ciudadABorrar');
 
-        if ($this->SessionActive()) {
+        if ($this->SessionActive()['ADMIN']) {
             $this->modelo->borrarCiudad([$id_ciudad]);
         } else {
             throw new Exception("No tiene permiso para borar ciudades");
@@ -87,7 +74,7 @@ class CiudadController extends SecuredController
             }
             $values = array($NCiudad,(int)$id_ciudad[0]);
 
-            if ($this->SessionActive()) {
+            if ($this->SessionActive()['ADMIN']) {
                 $this->modelo->actualizarCiudad($values);
             } else {
                 throw new Exception("No tiene permiso para actualizar datos de ciudades");
@@ -107,5 +94,24 @@ class CiudadController extends SecuredController
         $ciudades = $this->getCiudades();
         $logStatus = $this->SessionActive();
         $this->view->mostrarTablaCiudades($logStatus, $ciudades);
+    }
+
+    function uploadImage()
+    {
+        $id_ciudad = filter_input(INPUT_POST, 'id_ciudad');
+        $files = $_FILES['imagenes']['tmp_name'];
+
+        try {
+            if ($this->SessionActive()['ADMIN']) {
+                if (!empty($id_ciudad) && !empty($files)) {
+                        $this->images->agregarImagenes($files, $id_ciudad);
+                } else {
+                    throw new Exception("Error Processing Request");
+                }
+            } else {
+                throw new Exception("Error Processing Request");
+            }
+        } catch (Exception $e) {
+        }
     }
 }
