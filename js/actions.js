@@ -292,10 +292,10 @@ $( document ).ready( function() {
 			data:JSON.stringify(JSdata),
 			type:'POST',
 			url: window.location.origin + window.location.pathname + metodo,
-			success: sfunction
+			success: function(){
+				actualizarComentarios(JSdata.id_aerolinea);
+			}
 		})
-
-		actualizarComentarios(JSdata.id_aerolinea)
 	}
 
 	function autoRefresh(){
