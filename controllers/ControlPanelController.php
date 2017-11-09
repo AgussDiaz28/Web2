@@ -25,8 +25,7 @@ class ControlPanelController extends SecuredController
   function borrarUsuario()
   {
     $id_usuario = filter_input(INPUT_POST, 'usuarioABorrar');
-    var_dump($id_usuario);
-    if(!$this->SessionActive()['ADMIN'])
+    if($this->SessionActive()['ADMIN'])
     {
       $this->modelo->borrarUsser([$id_usuario]);
     }else {
@@ -43,7 +42,7 @@ class ControlPanelController extends SecuredController
     try {
       $values = array((int)$esAdmin,(int)$id_usuario);
 
-      if(!$this->SessionActive()['ADMIN'])
+      if($this->SessionActive()['ADMIN'])
       {
         $this->modelo->actualizarUssers($values);
       }else {

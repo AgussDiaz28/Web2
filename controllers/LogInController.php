@@ -47,13 +47,12 @@ class LoginController extends SecuredController{
         $user = $this->model->getUser($userName);
         $esAdmin = (int) $user[0]['ADMIN'];
 
-        $this->loguearse();
+        $this->loguearse($userName, $esAdmin, $user);
       }
   }
 
-  private function loguearse(){
+  private function loguearse($userName, $esAdmin, $user){
     session_start();
-
     $_SESSION['USER'] = $userName;
     $_SESSION['USER_ID'] = $user[0]['ID_USUARIO'];
 
@@ -76,7 +75,7 @@ class LoginController extends SecuredController{
         $user = $this->model->getUser($userName);
         $esAdmin = (int) $user[0]['ADMIN'];
         if((!empty($user)) && password_verify($password, $user[0]['PASSWORD'])) {
-          $this->loguearse();
+          $this->loguearse($userName, $esAdmin, $user);
         }
         else{
           header('Location: '.HOME);
