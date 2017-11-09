@@ -338,6 +338,10 @@ $( document ).ready( function() {
 			ajaxMethods(data,'/borrarUsuario',actualizarTablaPermisos);
 		}
 
+		function renderImagenes(data){
+			$('#listaImagenes').html(data);
+		}
+
 	//----------- /FIN ABM USUARIO ---------
 	// ----------------- CARGAR PAGINA / ******* EVENTOS ********* ---------------------
 	function cargar(data){
@@ -350,6 +354,14 @@ $( document ).ready( function() {
 			$('.uploadForm').show();
 			let IDCiudad= $(this).attr('id');
 			$('#hiddenInput').val(IDCiudad);
+		})
+
+		$('.viewPhotos').on('click',function () {
+			let IDCiudad= $(this).attr('id');
+			data = {
+				id_ciudad : IDCiudad
+			}
+			ajaxMethods(data,"/getImages",renderImagenes);
 		})
 
 		$('.comentAerolinea').on('click',function(){

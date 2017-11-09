@@ -25,14 +25,14 @@ class ImagenesModel extends dbModel
 
     public function getImages($id)
     {
-        $sentencia = $this->db->prepare("SELECT * FROM vw_comentarios WHERE ID_AEROLINEA = ?");
+        $sentencia = $this->db->prepare("SELECT * FROM imagen WHERE ID_CIUDAD = ?");
         $sentencia->execute([$id]);
         return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function deleteImages($id)
     {
-        $sentencia = $this->db->prepare( "DELETE FROM Comentario WHERE ID_COMENTARIO= ?");
+        $sentencia = $this->db->prepare( "DELETE FROM imagen WHERE ID_IMAGEN = ?");
         $sentencia->execute([$id]);
     }
 }

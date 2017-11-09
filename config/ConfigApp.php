@@ -42,5 +42,6 @@ class ConfigApp
 
       'newDB' => 'dbModel#newDB', // Esta bien llamar al modelo de aca ?
       'uploadImage' => 'CiudadController#uploadImage',
+      'getImages' => 'CiudadController#getImages'
     ];
 }

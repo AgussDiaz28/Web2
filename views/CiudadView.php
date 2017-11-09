@@ -3,25 +3,31 @@ include_once 'libs/Smarty.class.php';
 
 class CiudadView
 {
-  private $ciudades;
+    private $ciudades;
 
-  function __construct()
-  {
-    $this->ciudades = new Smarty();
-  }
+    function __construct()
+    {
+        $this->ciudades = new Smarty();
+    }
 
-  function mostrarTablaCiudades($logStatus,$Ciudades=''){
-    $this->ciudades->assign('Admin',$logStatus["ADMIN"]);
-    $this->ciudades->assign('ciudades',$Ciudades);
-    $this->ciudades->display('templates/tciudades.tpl');
-  }
+    function mostrarTablaCiudades($logStatus, $Ciudades = '')
+    {
+        $this->ciudades->assign('Admin', $logStatus["ADMIN"]);
+        $this->ciudades->assign('ciudades', $Ciudades);
+        $this->ciudades->display('templates/tciudades.tpl');
+    }
 
-  function mostrarPCiudades($logStatus,$Ciudades=''){
-    $this->ciudades->assign('Admin',$logStatus["ADMIN"]);
-    $this->ciudades->assign('ciudades',$Ciudades);
-    $this->ciudades->display('templates/pCiudades.tpl');
-  }
+    function mostrarPCiudades($logStatus, $Ciudades = '')
+    {
+        $this->ciudades->assign('Admin', $logStatus["ADMIN"]);
+        $this->ciudades->assign('ciudades', $Ciudades);
+        $this->ciudades->display('templates/pCiudades.tpl');
+    }
 
+    function mostrarImagenes($imagenes, $logStatus)
+    {
+        $this->ciudades->assign('Admin', $logStatus["ADMIN"]);
+        $this->ciudades->assign('images', $imagenes);
+        $this->ciudades->display('templates/listaImagenes.tpl');
+    }
 }
-
-?>

@@ -108,10 +108,21 @@ class CiudadController extends SecuredController
                 } else {
                     throw new Exception("Error Processing Request");
                 }
+                header('Location: '.HOME);
             } else {
                 throw new Exception("Error Processing Request");
             }
         } catch (Exception $e) {
+        }
+    }
+
+    function getImages()
+    {
+        $id_ciudad = filter_input(INPUT_POST, 'id_ciudad');
+        if (!empty($id_ciudad)) {
+            $imagenes =  $this->images->getImages($id_ciudad);
+            $logStatus = $this->SessionActive();
+            $this->view->mostrarImagenes($imagenes, $logStatus);
         }
     }
 }
