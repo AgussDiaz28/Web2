@@ -2,3 +2,4 @@ libs/*
 templates_c/*
 .bash_profile
 dbconfig.php
+.idea/
