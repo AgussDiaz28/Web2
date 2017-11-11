@@ -267,7 +267,18 @@ $( document ).ready( function() {
 		$('.deleteComentario').on('click',function() {
 			deleteComentario(this);
 		})
-	}
+
+		$("#rateYo").rateYo().on("rateyo.set", function (e, data) {
+			data = { puntajeComentario : data.rating};
+			IDComentario = $(this).attr('cvalue');
+			$.ajax({
+				type:'PUT',
+				data:JSON.stringify(data),
+				url: window.location.origin + window.location.pathname + "/api/comentario/"+IDComentario,
+				success: function(){actualizarComentarios(IDAerolinea);}
+			})
+    })
+	};
 
 	function deleteComentario(thisElement){
 		let IDComentario = $(thisElement).val();
@@ -340,6 +351,14 @@ $( document ).ready( function() {
 
 		function renderImagenes(data){
 			$('#listaImagenes').html(data);
+			$('.deleteImg').on('click',function(){
+				jdata = {
+					id_ciudad : $(this).attr('avalue'),
+					id_imagen : $(this).val()
+				}
+				console.log(jdata);
+				ajaxMethods(jdata,'/deleteImage',renderImagenes);
+			})
 		}
 
 	//----------- /FIN ABM USUARIO ---------

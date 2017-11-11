@@ -3,24 +3,28 @@ require_once('models/dbModel.php');
 class ComentarioModel extends dbModel
 {
 
-  public function getComentarios($id)
-  {
-    $sentencia = $this->db->prepare("SELECT * FROM vw_comentarios WHERE ID_AEROLINEA = ?");
-    $sentencia->execute([$id]);
-    return $sentencia->fetchAll(PDO::FETCH_ASSOC);
-  }
+    public function getComentarios($id)
+    {
+        $sentencia = $this->db->prepare("SELECT * FROM vw_comentarios WHERE ID_AEROLINEA = ?");
+        $sentencia->execute([$id]);
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-  public function borrarComentario($id)
-  {
-    $sentencia = $this->db->prepare( "DELETE FROM Comentario WHERE ID_COMENTARIO= ?");
-    $sentencia->execute([$id]);
-  }
+    public function borrarComentario($id)
+    {
+        $sentencia = $this->db->prepare( "DELETE FROM Comentario WHERE ID_COMENTARIO = ?");
+        $sentencia->execute([$id]);
+    }
 
-  public function agregarComentarioAerolinea($id_aerolinea,$descripcion,$id_usuario) //Comentario trae en la primer posicion el DETALLE y ID_AEROLINEA
-  {
-    $sentencia = $this->db->prepare( "INSERT INTO Comentario(DETALLE,ID_AEROLINEA,ID_USUARIO) VALUES (?,?,?) ");
-    $sentencia->execute([$descripcion,$id_aerolinea,$id_usuario]);
-  }
+    public function agregarComentarioAerolinea($id_aerolinea, $descripcion, $id_usuario) //Comentario trae en la primer posicion el DETALLE y ID_AEROLINEA
+    {
+        $sentencia = $this->db->prepare( "INSERT INTO Comentario(DETALLE,ID_AEROLINEA,ID_USUARIO) VALUES (?,?,?) ");
+        $sentencia->execute([$descripcion,$id_aerolinea,$id_usuario]);
+    }
 
+    public function setPuntajeComentario($id_comentario, $nuevoPuntaje)
+    {
+        $sentencia = $this->db->prepare( "UPDATE Comentario SET PUNTAJE = ? WHERE ID_COMENTARIO = ? ");
+        $sentencia->execute([$nuevoPuntaje,$id_comentario]);
+    }
 }
- ?>

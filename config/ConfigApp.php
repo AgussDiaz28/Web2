@@ -41,7 +41,9 @@ class ConfigApp
       'modificarAerolinea' => 'AerolineaController#modificarAerolinea',
 
       'newDB' => 'dbModel#newDB', // Esta bien llamar al modelo de aca ?
+
       'uploadImage' => 'CiudadController#uploadImage',
-      'getImages' => 'CiudadController#getImages'
+      'getImages' => 'CiudadController#getImages',
+      'deleteImage' => 'CiudadController#borrarImagen'
     ];
 }

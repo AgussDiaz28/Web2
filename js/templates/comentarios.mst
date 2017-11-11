@@ -6,6 +6,7 @@
       <div class="commentText">
           <p class="">{{DetalleComentario}}</p>
       </div>
+      <div id="rateYo" data-rateyo-rating="{{PuntajeComentario}}" cvalue="{{ComentarioID}}"></div>
   </li>
   <div class="actionBox" style="padding:0%;"></div>
   {{/comentarios}}

@@ -33,11 +33,18 @@ class ComentariosController extends Api
         $body = json_decode($this->raw_data);
         $id_aerolinea = $body->id_aerolinea;
         $descripcion = $body->descripcion;
-        if(!isset($_SESSION))
-        {
+        if (!isset($_SESSION)) {
             session_start();
         }
         $id_usuario = $_SESSION['USER_ID'];
         $this->model->agregarComentarioAerolinea($id_aerolinea, $descripcion, $id_usuario);
+    }
+
+    public function puntajeConmentario($url_params = [])
+    {
+        $id_comentario = $url_params[":id"];
+        $body = json_decode($this->raw_data);
+        $nuevoPuntaje = $body->puntajeComentario;
+        $this->model->setPuntajeComentario($id_comentario, $nuevoPuntaje);
     }
 }
