@@ -19,7 +19,7 @@
         </div>
     </div>
 
-  <div class="col-sm-4">
+  <div class="col-sm-6">
     <label>Nuestros Destinos</label>
       <table class="table table-striped .table-responsive">
         <thead>

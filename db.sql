@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Nov 07, 2017 at 02:47 AM
+-- Generation Time: Nov 11, 2017 at 01:45 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.6
 
@@ -32,8 +32,8 @@ CREATE TABLE `Aerolineas` (
 --
 
 INSERT INTO `Aerolineas` (`ID_AEROLINEA`, `NOMBRE_AEROLINEA`, `PAIS_ORIGEN`, `CANT_AVIONES`) VALUES
-(2, 'GOL', 'BRASIL', 230),
-(3, 'EMIRATES', 'EMIRATOS ARABES', 460),
+(2, 'GOL', 'BRASIL', 254),
+(3, 'EMIRATES', 'EMIRATOS ARABES', 461),
 (4, 'AIR CANADA', 'CANADA', 370),
 (5, 'AEROLINEAS ARGENTINA', 'ARGENTINA', 420),
 (6, 'QATAR', 'QATAR', 313);
@@ -59,9 +59,7 @@ INSERT INTO `Ciudades` (`ID_CIUDAD`, `NOMBRE_CIUDAD`) VALUES
 (3, 'Las Vegas'),
 (4, 'Miami'),
 (5, 'Sydney'),
-(6, 'Dubai'),
-(7, 'Tandil2'),
-(8, 'tandil3');
+(6, 'Dubai');
 
 -- --------------------------------------------------------
 
@@ -74,19 +72,38 @@ CREATE TABLE `Comentario` (
   `DETALLE` text NOT NULL,
   `ID_AEROLINEA` int(11) NOT NULL,
   `ID_USUARIO` int(11) NOT NULL,
-  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `puntaje` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Comentario`
 --
 
-INSERT INTO `Comentario` (`ID_COMENTARIO`, `DETALLE`, `ID_AEROLINEA`, `ID_USUARIO`, `Fecha`) VALUES
-(3, 'No hay vuelta atras luego de viajar con Emirates', 6, 1, '2017-11-02 01:23:13'),
-(4, 'No pudo ser mejor', 3, 3, '2017-11-05 15:33:43'),
-(40, 'Horrendo', 3, 2, '2017-11-07 01:47:11'),
-(41, 'Horrendo', 3, 2, '2017-11-07 01:47:11'),
-(42, 'Horrendo', 3, 2, '2017-11-07 01:47:11');
+INSERT INTO `Comentario` (`ID_COMENTARIO`, `DETALLE`, `ID_AEROLINEA`, `ID_USUARIO`, `Fecha`, `puntaje`) VALUES
+(3, 'No hay vuelta atras luego de viajar con Emirates', 6, 1, '2017-11-02 01:23:13', 4),
+(4, 'No pudo ser mejor', 3, 3, '2017-11-05 15:33:43', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Imagen`
+--
+
+CREATE TABLE `Imagen` (
+  `ID_IMAGEN` int(11) NOT NULL,
+  `PATH` varchar(3000) NOT NULL,
+  `ID_CIUDAD` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Imagen`
+--
+
+INSERT INTO `Imagen` (`ID_IMAGEN`, `PATH`, `ID_CIUDAD`) VALUES
+(3, 'images/5a04b1f6e4fc7.jpg', 1),
+(4, 'images/5a04b22ab18cf.jpg', 5),
+(6, 'images/5a04b88953a76.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -133,8 +150,8 @@ CREATE TABLE `Vuelos` (
 
 INSERT INTO `Vuelos` (`ID_VUELO`, `ID_AEROLINEA`, `ID_DESTINO`, `ID_ORIGEN`, `FECHA_SALIDA`, `CODIGO_VUELO`, `PRECIO`) VALUES
 (7, 2, 3, 4, '2017-09-28', 'GL764', 4234),
-(9, 4, 2, 3, '2017-09-22', 'LA9542', 23214),
-(11, 3, 5, 2, '2017-08-21', 'gw314', 25984);
+(9, 4, 2, 3, '2017-09-22', 'LA9542', 14),
+(11, 3, 5, 2, '2017-08-21', 'gw314', 23);
 
 -- --------------------------------------------------------
 
@@ -148,6 +165,7 @@ CREATE TABLE `vw_comentarios` (
 ,`ID_AEROLINEA` int(11)
 ,`ID_USUARIO` int(11)
 ,`ComentarioUsuario` varchar(30)
+,`PuntajeComentario` int(5)
 );
 
 -- --------------------------------------------------------
@@ -176,7 +194,7 @@ CREATE TABLE `vw_vuelos` (
 --
 DROP TABLE IF EXISTS `vw_comentarios`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`Comentario`@`%` SQL SECURITY INVOKER VIEW `vw_comentarios`  AS  select `comentario`.`ID_COMENTARIO` AS `ComentarioID`,`comentario`.`DETALLE` AS `DetalleComentario`,`comentario`.`ID_AEROLINEA` AS `ID_AEROLINEA`,`comentario`.`ID_USUARIO` AS `ID_USUARIO`,`usuario`.`USERNAME` AS `ComentarioUsuario` from (`comentario` join `usuario`) where (`usuario`.`ID_USUARIO` = `comentario`.`ID_USUARIO`) order by `comentario`.`Fecha` desc WITH LOCAL CHECK OPTION ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`Comentario`@`%` SQL SECURITY INVOKER VIEW `vw_comentarios`  AS  select `comentario`.`ID_COMENTARIO` AS `ComentarioID`,`comentario`.`DETALLE` AS `DetalleComentario`,`comentario`.`ID_AEROLINEA` AS `ID_AEROLINEA`,`comentario`.`ID_USUARIO` AS `ID_USUARIO`,`usuario`.`USERNAME` AS `ComentarioUsuario`,`comentario`.`puntaje` AS `PuntajeComentario` from (`comentario` join `usuario`) where (`usuario`.`ID_USUARIO` = `comentario`.`ID_USUARIO`) order by `comentario`.`Fecha` desc WITH LOCAL CHECK OPTION ;
 
 -- --------------------------------------------------------
 
@@ -212,6 +230,13 @@ ALTER TABLE `Comentario`
   ADD KEY `ID_USUARIO` (`ID_USUARIO`);
 
 --
+-- Indexes for table `Imagen`
+--
+ALTER TABLE `Imagen`
+  ADD PRIMARY KEY (`ID_IMAGEN`),
+  ADD KEY `ID_CIUDAD` (`ID_CIUDAD`);
+
+--
 -- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
@@ -239,12 +264,17 @@ ALTER TABLE `Aerolineas`
 -- AUTO_INCREMENT for table `Ciudades`
 --
 ALTER TABLE `Ciudades`
-  MODIFY `ID_CIUDAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_CIUDAD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `Comentario`
 --
 ALTER TABLE `Comentario`
   MODIFY `ID_COMENTARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+--
+-- AUTO_INCREMENT for table `Imagen`
+--
+ALTER TABLE `Imagen`
+  MODIFY `ID_IMAGEN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
@@ -263,7 +293,14 @@ ALTER TABLE `Vuelos`
 -- Constraints for table `Comentario`
 --
 ALTER TABLE `Comentario`
-  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`ID_AEROLINEA`) REFERENCES `Aerolineas` (`ID_AEROLINEA`);
+  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`ID_AEROLINEA`) REFERENCES `Aerolineas` (`ID_AEROLINEA`),
+  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `Imagen`
+--
+ALTER TABLE `Imagen`
+  ADD CONSTRAINT `imagen_ibfk_1` FOREIGN KEY (`ID_CIUDAD`) REFERENCES `Ciudades` (`ID_CIUDAD`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `Vuelos`

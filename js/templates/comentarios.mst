@@ -1,13 +1,20 @@
 <ul>
   {{#comentarios}}
   <li>
-      <button type="button" class="close deleteComentario" value="{{ComentarioID}}" data-aerolineaID="{{ID_AEROLINEA}}">&times;</button>
-      <p>{{ComentarioUsuario}}</p>
-      <div class="commentText">
-          <p class="">{{DetalleComentario}}</p>
-      </div>
-      <div id="rateYo" data-rateyo-rating="{{PuntajeComentario}}" cvalue="{{ComentarioID}}"></div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <div style="float:right">
+            <span class="glyphicon glyphicon-remove deleteComentario" cvalue="{{ComentarioID}}" data-aerolineaID="{{ID_AEROLINEA}}"></span>
+          </div>
+          <h4>{{ComentarioUsuario}}</h4>
+        </div>
+        <div class="panel-body">
+            <h5>{{DetalleComentario}}</h5>
+        </div>
+        <div class="panel-footer">
+          <div class="rateYo" data-rateyo-rating="{{PuntajeComentario}}" cvalue="{{ComentarioID}}"></div>
+        </div>
+    </div>
   </li>
-  <div class="actionBox" style="padding:0%;"></div>
   {{/comentarios}}
 </ul>

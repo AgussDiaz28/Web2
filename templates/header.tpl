@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
       <!-- Agustin Diaz Gargiulo  - Nicolas Strella 2017 -->
    </head>
 
@@ -33,7 +34,7 @@
                <ul class="nav navbar-nav">
                   <li class="active" id="home"><a>Home</a></li>
                   <li id="vuelos"><a>Vuelos</a></li>
-                      {if ( isset($Usser)) && ($Usser != false)}
+                      {if ( isset($user)) && ($user != false)}
                           <li id="ciudades" class="admin"><a>Ciudades</a></li>
                           <li id="aerolineas" class="admin"><a>Aerolineas</a></li>
                           {if ( isset($Admin)) && ($Admin != false)}

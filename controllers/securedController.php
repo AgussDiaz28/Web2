@@ -21,19 +21,19 @@ class SecuredController extends Controller
 
   function SessionActive()
   {
-    $usserStatus = FALSE;
+    $userStatus = FALSE;
     $adminStatus = FALSE;
     if(!isset($_SESSION))
     {
         session_start();
     }
     if(isset($_SESSION['LOGGED']) && $_SESSION['LOGGED']){
-      $usserStatus = $_SESSION['LOGGED'];
+      $userStatus = $_SESSION['LOGGED'];
     }
     if(isset($_SESSION['ADMIN']) && $_SESSION['ADMIN']){
       $adminStatus = $_SESSION['ADMIN'];
     }
-    return $session = array("ADMIN" => $adminStatus, "USSER" => $usserStatus);
+    return $session = array("ADMIN" => $adminStatus, "user" => $userStatus);
   }
 }
 

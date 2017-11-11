@@ -13,21 +13,18 @@
     {/if}
     <hr>
     <div class="row" id="comentariosHolder">
-      <div class="detailBox" style="width: inherit;margin: 7%;">
           <div class="titleBox">
               <label id="AerolineaLabel"> Comentarios De la Aerolinea </label>
           </div>
-          <div class="commentList">
-
-          </div>
-          <div class="actionBox" style="padding:0%;"></div>
           <div class="form-group">
-              <input class="form-control" type="text" id="NComentario" placeholder="Agrega Tu Comentario" />
+              <input class="form-control" type="text" id="NComentario" placeholder="Agrega Tu Comentario"/>
               <button class="btn btn-default" id="ANComentario" dvalue="" >Agregar</button>
           </div>
-      </div>
+          <div id="commentList">
 
+          </div>
     </div>
+
 </div>
 
 
@@ -51,11 +48,19 @@
                 <td>{$Aerolinea.NOMBRE_AEROLINEA}</td>
                 <td>{$Aerolinea.PAIS_ORIGEN}</td>
                 <td>{$Aerolinea.CANT_AVIONES}</td>
-                <td><span class="glyphicon glyphicon-comment comentAerolinea" id="{$Aerolinea.ID_AEROLINEA}"></span></td>
-              {if $Admin == TRUE}
-                <td class="admin"><span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"></span><span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}"></span></td>
-              {/if}
-
+                <td class="admin col-sm-2">
+                  <div class="col-sm-4">
+                    <span class="glyphicon glyphicon-comment comentAerolinea" id="{$Aerolinea.ID_AEROLINEA}"></span>
+                  </div>
+                  {if $Admin == TRUE}
+                    <div class="col-sm-4">
+                      <span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"></span>
+                    </div>
+                    <div class="col-sm-4">
+                      <span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}"></span>
+                    </div>
+                  {/if}
+                </td>
             </tr>
             {/foreach}
           {/if}

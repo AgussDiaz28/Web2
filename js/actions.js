@@ -262,13 +262,13 @@ $( document ).ready( function() {
 	function cargarComentarios(data){
 		IDAerolinea = $('#ANComentario').attr('dvalue');
 		let rendered = Mustache.render(templateComentarios, data);
-		$('.commentList').html(rendered);
+		$('#commentList').html(rendered);
 
 		$('.deleteComentario').on('click',function() {
 			deleteComentario(this);
 		})
 
-		$("#rateYo").rateYo().on("rateyo.set", function (e, data) {
+		$(".rateYo").rateYo({starWidth: "20px"}).on("rateyo.set", function (e, data) { // http://rateyo.fundoocode.ninja/#option-maxValue
 			data = { puntajeComentario : data.rating};
 			IDComentario = $(this).attr('cvalue');
 			$.ajax({
@@ -281,7 +281,7 @@ $( document ).ready( function() {
 	};
 
 	function deleteComentario(thisElement){
-		let IDComentario = $(thisElement).val();
+		let IDComentario = $(thisElement).attr("cvalue");
 		let IDAerolinea = $(thisElement).attr("data-aerolineaID");
 		$.ajax({
 			type:'DELETE',
@@ -319,7 +319,7 @@ $( document ).ready( function() {
 		function actualizarTablaPermisos(data){
 			$("#tpermisos").html(data);
 
-			$('.deleteUsserRow').on('click',function() {
+			$('.deleteuserRow').on('click',function() {
 				borrarUsuario(this);
 			})
 
@@ -328,23 +328,23 @@ $( document ).ready( function() {
 			})
 		}
 
-		function editarUsuario(thisUsser){
+		function editarUsuario(thisuser){
 			let esAdmin = 0;
 
-			if ($(thisUsser).is(':checked')){
+			if ($(thisuser).is(':checked')){
 				esAdmin = 1;
 			}
 
 			data = {
-				usuarioAEditar : $(thisUsser).attr('id'),
+				usuarioAEditar : $(thisuser).attr('id'),
 				permisoAdmin : esAdmin
 			}
 			ajaxMethods(data,'/actualizarUsuario',actualizarTablaPermisos);
 		}
 
-		function borrarUsuario(thisUsser){
+		function borrarUsuario(thisuser){
 			data = {
-				usuarioABorrar : $(thisUsser).attr('id')
+				usuarioABorrar : $(thisuser).attr('id')
 			}
 			ajaxMethods(data,'/borrarUsuario',actualizarTablaPermisos);
 		}
@@ -437,7 +437,7 @@ $( document ).ready( function() {
 		});
 
 		// ---------------------------------------------------------- PANEL DE CONTROL ------------------------------------------------------
-		$(".deleteUsserRow").on('click',function() {
+		$(".deleteuserRow").on('click',function() {
 			borrarUsuario(this);
 		})
 

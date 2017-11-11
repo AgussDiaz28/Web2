@@ -11,22 +11,22 @@
       </thead>
       <tbody id="tpermisos">
         {if !empty($usuarios) }
-          {foreach from=$usuarios item=usser}
+          {foreach from=$usuarios item=user}
           <tr>
-              <td value="{$usser.ID_USUARIO}" class="usuario">{$usser.USERNAME}</td>
-              <td>{$usser.EMAIL}</td>
+              <td value="{$user.ID_USUARIO}" class="usuario">{$user.USERNAME}</td>
+              <td>{$user.EMAIL}</td>
               <td>
                 <div class="checkbox">
                   <label>
-                    {if $usser.ADMIN == 1}
-                      <input type="checkbox" class="permisoAdmin" id="{$usser.ID_USUARIO}" checked>
+                    {if $user.ADMIN == 1}
+                      <input type="checkbox" class="permisoAdmin" id="{$user.ID_USUARIO}" checked>
                     {else}
-                      <input type="checkbox" class="permisoAdmin" id="{$usser.ID_USUARIO}">
+                      <input type="checkbox" class="permisoAdmin" id="{$user.ID_USUARIO}">
                     {/if}
                   </label>
                 </div>
               </td>
-              <td class="admin"><span class="glyphicon glyphicon-trash deleteUsserRow" id="{$usser.ID_USUARIO}"></span></td>
+              <td class="admin"><span class="glyphicon glyphicon-trash deleteuserRow" id="{$user.ID_USUARIO}"></span></td>
           </tr>
           {/foreach}
         {/if}
