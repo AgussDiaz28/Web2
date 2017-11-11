@@ -389,7 +389,7 @@ $( document ).ready( function() {
 			$('#ANComentario').attr('dvalue',IDAerolinea);
 			actualizarComentarios(IDAerolinea);
 
-
+			$('#ANComentario').off('click');
 			$('#ANComentario').on('click',function(){
 				addComentario();
 			})
