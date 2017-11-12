@@ -258,11 +258,11 @@ $( document ).ready( function() {
 	function comentarios(thisElement){
 		$('#comentariosHolder').show();
 		let IDAerolinea = $(thisElement).attr('id');
-		$('#ANComentario').attr('dvalue',IDAerolinea);
 		actualizarComentarios(IDAerolinea);
 
 		$('#ANComentario').off('click');
-		$('#ANComentario').on('click',function(){
+		$('#ANComentario').on('click',function(e){
+			e.preventDefault();
 			addComentario();
 		})
 		// setInterval(autoRefresh,2000); // No puedo hacer que refresque correctamente con el id correspondiente
@@ -277,12 +277,16 @@ $( document ).ready( function() {
 	}
 
 	function cargarComentarios(data){
-		IDAerolinea = $('#ANComentario').attr('dvalue');
 		let rendered = Mustache.render(templateComentarios, data);
 		$('#commentList').html(rendered);
 
 		$('.deleteComentario').on('click',function() {
 			deleteComentario(this);
+		})
+
+		$('#ANComentario').on('click',function(e){
+			e.preventDefault();
+			addComentario();
 		})
 
 		$(".rateYo").rateYo({starWidth: "20px"}).on("rateyo.set", function (e, data) { // http://rateyo.fundoocode.ninja/#option-maxValue
@@ -311,10 +315,13 @@ $( document ).ready( function() {
 
 		JSdata = {
 			descripcion : $('#NComentario').val(),
-			id_aerolinea : IDAerolinea,
+			id_aerolinea : $('#ANComentario').attr('dvalue'),
+			captcha : $('#captcha').val()
 		}
 
 		let metodo = "/api/comentario";
+
+		console.log(JSdata);
 
 		$.ajax({
 			data:JSON.stringify(JSdata),

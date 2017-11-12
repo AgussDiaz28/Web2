@@ -4,6 +4,7 @@ require_once('models/ComentarioModel.php');
 
 class ComentariosController extends Api
 {
+    private $captcha;
 
     function __construct()
     {
@@ -20,9 +21,14 @@ class ComentariosController extends Api
         $response->comentarios = $comentarios;
         $response->admin = FALSE;
         $response->status = 200;
+        $response->id_aerolinea = $id;
         if ($this->SessionActive()['ADMIN']){
           $response->admin = TRUE;
         }
+
+        $_SESSION['captcha_array'] = $this->SessionActive()['CAPTCHA'];
+        $response->captcha_img = $_SESSION['captcha_array']['image_src'];
+
         return $this->json_response($response, 200);
     }
 
@@ -39,11 +45,18 @@ class ComentariosController extends Api
       $body = json_decode($this->raw_data);
       $id_aerolinea = $body->id_aerolinea;
       $descripcion = $body->descripcion;
+      $captcha_code = $body->captcha;
       if (!isset($_SESSION)) {
           session_start();
       }
       $id_usuario = $_SESSION['USER_ID'];
-      $this->model->agregarComentarioAerolinea($id_aerolinea, $descripcion, $id_usuario);
+      var_dump($_SESSION['captcha_array']['code']);
+      var_dump($captcha_code);
+      if($_SESSION['captcha_array']['code'] == $captcha_code){
+        $this->model->agregarComentarioAerolinea($id_aerolinea, $descripcion, $id_usuario);
+      }else{
+        throw new Exception("Captcha incorrecto. Vuelva a intentar");
+      }
     }
 
     public function puntajeConmentario($url_params = [])

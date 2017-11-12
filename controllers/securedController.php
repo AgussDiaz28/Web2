@@ -1,5 +1,6 @@
 <?php
 require_once('controllers/Controller.php') ;
+require_once('vendor/simple-php-captcha-master/simple-php-captcha.php');
 class SecuredController extends Controller
 {
 
@@ -33,7 +34,9 @@ class SecuredController extends Controller
     if(isset($_SESSION['ADMIN']) && $_SESSION['ADMIN']){
       $adminStatus = $_SESSION['ADMIN'];
     }
-    return $session = array("ADMIN" => $adminStatus, "USER" => $userStatus);
+    //captcha
+    $_SESSION['captcha'] = simple_php_captcha();
+    return $session = array("ADMIN" => $adminStatus, "USER" => $userStatus, "CAPTCHA" => $_SESSION['captcha']);
   }
 }
 

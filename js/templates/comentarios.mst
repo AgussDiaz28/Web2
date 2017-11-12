@@ -1,22 +1,37 @@
-<ul>
-  {{#comentarios}}
-  <li>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-          <div style="float:right">
-            {{#admin}}
-            <span class="glyphicon glyphicon-remove deleteComentario" cvalue="{{ComentarioID}}" data-aerolineaID="{{ID_AEROLINEA}}"></span>
-            {{/admin}}
+{{#admin}}
+<div class="row">
+  <div class="form-group col">
+      <input class="form-control" type="text" id="NComentario" placeholder="Agrega Tu Comentario"/>
+      <hr>
+      <img src="{{captcha_img}}" alt="captcha">
+      <hr>
+      <input type="text" id="captcha" placeholder="ingresar captcha" value="">
+      <hr>
+      <button class="btn btn-default" id="ANComentario" dvalue="{{id_aerolinea}}" >Agregar</button>
+  </div>
+</div>
+{{/admin}}
+<div class="row">
+  <ul class="col">
+    {{#comentarios}}
+    <li>
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <div style="float:right">
+              {{#admin}}
+              <span class="glyphicon glyphicon-remove deleteComentario" cvalue="{{ComentarioID}}" data-aerolineaID="{{ID_AEROLINEA}}"></span>
+              {{/admin}}
+            </div>
+            <h4>{{ComentarioUsuario}}</h4>
           </div>
-          <h4>{{ComentarioUsuario}}</h4>
-        </div>
-        <div class="panel-body">
-            <h5>{{DetalleComentario}}</h5>
-        </div>
-        <div class="panel-footer">
-          <div class="rateYo" data-rateyo-rating="{{PuntajeComentario}}" cvalue="{{ComentarioID}}"></div>
-        </div>
-    </div>
-  </li>
-  {{/comentarios}}
-</ul>
+          <div class="panel-body">
+              <h5>{{DetalleComentario}}</h5>
+          </div>
+          <div class="panel-footer">
+            <div class="rateYo" data-rateyo-rating="{{PuntajeComentario}}" cvalue="{{ComentarioID}}"></div>
+          </div>
+      </div>
+    </li>
+    {{/comentarios}}
+  </ul>
+</div>

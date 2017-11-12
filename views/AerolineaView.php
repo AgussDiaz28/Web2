@@ -8,6 +8,7 @@ class AerolineaView
   function __construct()
   {
     $this->aerolinea = new Smarty();
+
   }
 
   function mostrarAerolineas($Aerolineas=''){

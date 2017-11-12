@@ -16,12 +16,6 @@
           <div class="titleBox">
               <label id="AerolineaLabel"> Comentarios De la Aerolinea </label>
           </div>
-          {if $user == TRUE}
-          <div class="form-group">
-              <input class="form-control" type="text" id="NComentario" placeholder="Agrega Tu Comentario"/>
-              <button class="btn btn-default" id="ANComentario" dvalue="" >Agregar</button>
-          </div>
-          {/if}
           <div id="commentList">
 
           </div>
