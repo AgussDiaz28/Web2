@@ -33,7 +33,7 @@ class SecuredController extends Controller
     if(isset($_SESSION['ADMIN']) && $_SESSION['ADMIN']){
       $adminStatus = $_SESSION['ADMIN'];
     }
-    return $session = array("ADMIN" => $adminStatus, "user" => $userStatus);
+    return $session = array("ADMIN" => $adminStatus, "USER" => $userStatus);
   }
 }
 

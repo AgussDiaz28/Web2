@@ -11,13 +11,13 @@ class IndexView
   }
 
   function mostrarIndex($logStatus){
-    $this->smarty->assign('user',$logStatus["user"]);
+    $this->smarty->assign('user',$logStatus["USER"]);
     $this->smarty->assign('Admin',$logStatus["ADMIN"]);
     $this->smarty->display('templates/index.tpl');
   }
 
   function navBar($logStatus){
-    $this->smarty->assign('user',$logStatus["user"]);
+    $this->smarty->assign('user',$logStatus["USER"]);
     $this->smarty->assign('Admin',$logStatus["ADMIN"]);
     $this->smarty->display('templates/navbar.tpl');
   }
