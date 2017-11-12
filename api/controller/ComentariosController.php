@@ -18,26 +18,32 @@ class ComentariosController extends Api
         $comentarios = $this->model->getComentarios($id);
         $response = new stdClass();
         $response->comentarios = $comentarios;
+        $response->admin = FALSE;
         $response->status = 200;
+        if ($this->SessionActive()['ADMIN']){
+          $response->admin = TRUE;
+        }
         return $this->json_response($response, 200);
     }
 
     public function borrarComentario($url_params = [])
     {
+      if ($this->SessionActive()['ADMIN']){
         $id_comentario = $url_params[":id"];
         $this->model->borrarComentario($id_comentario);
+      }
     }
 
     public function agregarComentarioAerolinea($url_params = [])
     {
-        $body = json_decode($this->raw_data);
-        $id_aerolinea = $body->id_aerolinea;
-        $descripcion = $body->descripcion;
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        $id_usuario = $_SESSION['USER_ID'];
-        $this->model->agregarComentarioAerolinea($id_aerolinea, $descripcion, $id_usuario);
+      $body = json_decode($this->raw_data);
+      $id_aerolinea = $body->id_aerolinea;
+      $descripcion = $body->descripcion;
+      if (!isset($_SESSION)) {
+          session_start();
+      }
+      $id_usuario = $_SESSION['USER_ID'];
+      $this->model->agregarComentarioAerolinea($id_aerolinea, $descripcion, $id_usuario);
     }
 
     public function puntajeConmentario($url_params = [])

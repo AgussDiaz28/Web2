@@ -42,28 +42,7 @@
           </tr>
         </thead>
         <tbody id="tAerolinea">
-          {if !empty($Aerolineas) }
-            {foreach from=$Aerolineas item=Aerolinea}
-            <tr>
-                <td>{$Aerolinea.NOMBRE_AEROLINEA}</td>
-                <td>{$Aerolinea.PAIS_ORIGEN}</td>
-                <td>{$Aerolinea.CANT_AVIONES}</td>
-                <td class="admin col-sm-2">
-                  <div class="col-sm-4">
-                    <span class="glyphicon glyphicon-comment comentAerolinea" id="{$Aerolinea.ID_AEROLINEA}"></span>
-                  </div>
-                  {if $Admin == TRUE}
-                    <div class="col-sm-4">
-                      <span class="glyphicon glyphicon-edit editAerolienaRow" id="{$Aerolinea.ID_AEROLINEA}"></span>
-                    </div>
-                    <div class="col-sm-4">
-                      <span class="glyphicon glyphicon-trash deleteAerolineaRow" id="{$Aerolinea.ID_AEROLINEA}"></span>
-                    </div>
-                  {/if}
-                </td>
-            </tr>
-            {/foreach}
-          {/if}
+          {include file="tAerolinea.tpl"}
         </tbody>
       </table>
   </div>

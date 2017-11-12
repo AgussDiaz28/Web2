@@ -79,6 +79,10 @@ $( document ).ready( function() {
 		$('.editAerolienaRow').on('click',function(){
 			editAerolinea(this);
 		})
+
+		$('.comentAerolinea').on('click',function(){
+			comentarios(this);
+		});
 	}
 
 	function limpiarFormularioAerolineas(){ //Limpia el formulario de Aerolinas despues de Agregar o modificar una tupla
@@ -251,6 +255,19 @@ $( document ).ready( function() {
 		$('#PVuelo').val(pvuelo)
 	}
 
+	function comentarios(thisElement){
+		$('#comentariosHolder').show();
+		let IDAerolinea = $(thisElement).attr('id');
+		$('#ANComentario').attr('dvalue',IDAerolinea);
+		actualizarComentarios(IDAerolinea);
+
+		$('#ANComentario').off('click');
+		$('#ANComentario').on('click',function(){
+			addComentario();
+		})
+		// setInterval(autoRefresh,2000); // No puedo hacer que refresque correctamente con el id correspondiente
+	}
+
 	function actualizarComentarios(IDAerolinea){ //Trae todos los comentarios de la aerolinea correspondiente
 		$.ajax({
 			type:'GET',
@@ -384,16 +401,7 @@ $( document ).ready( function() {
 		})
 
 		$('.comentAerolinea').on('click',function(){
-			$('#comentariosHolder').show();
-			let IDAerolinea = $(this).attr('id');
-			$('#ANComentario').attr('dvalue',IDAerolinea);
-			actualizarComentarios(IDAerolinea);
-
-			$('#ANComentario').off('click');
-			$('#ANComentario').on('click',function(){
-				addComentario();
-			})
-			// setInterval(autoRefresh,2000); // No puedo hacer que refresque correctamente con el id correspondiente
+			comentarios(this);
 		});
 
 		// -------------------------------------------------- AEROLINEAS ----------------------------------------------

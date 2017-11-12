@@ -4,7 +4,9 @@
     <div class="panel panel-default">
         <div class="panel-heading">
           <div style="float:right">
+            {{#admin}}
             <span class="glyphicon glyphicon-remove deleteComentario" cvalue="{{ComentarioID}}" data-aerolineaID="{{ID_AEROLINEA}}"></span>
+            {{/admin}}
           </div>
           <h4>{{ComentarioUsuario}}</h4>
         </div>

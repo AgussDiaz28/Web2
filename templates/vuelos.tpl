@@ -62,7 +62,7 @@
                 <td class="rdata" value="{$vuelo.FECHA_SALIDA}">{$vuelo.FECHA_SALIDA}</td>
                 <td class="rdata" value="{$vuelo.PRECIO}">{$vuelo.PRECIO}</td>
                 {if $Admin == true}
-                    <td class="admin"><span class="glyphicon glyphicon-edit editRow" id="{$vuelo.ID_VUELO}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteRow" id="{$vuelo.ID_VUELO}">  </span></td>
+                    <td class="admin"><span class="glyphicon glyphicon-edit editRow" id="{$vuelo.ID_VUELO}"> &nbsp;  </span><span class="glyphicon glyphicon-trash deleteRow" id="{$vuelo.ID_VUELO}">  </span></td>
                 {/if}
               </tr>
               {/foreach}

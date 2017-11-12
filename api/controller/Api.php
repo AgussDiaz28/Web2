@@ -1,6 +1,6 @@
 <?php
-
-abstract class Api{
+require_once('controllers/SecuredController.php') ;
+abstract class Api extends SecuredController{
   protected $model;
   protected $raw_data;
 

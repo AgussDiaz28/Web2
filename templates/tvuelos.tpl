@@ -9,7 +9,7 @@
       <td class="rdata" value="{$vuelo.PRECIO}">{$vuelo.PRECIO}</td>
       {if !empty($Admin)}
           {if $Admin == TRUE}
-          <td class="admin"><span class="glyphicon glyphicon-edit editRow" id="{$vuelo.ID_VUELO}"> &nbsp  </span><span class="glyphicon glyphicon-trash deleteRow" id="{$vuelo.ID_VUELO}">  </span></td>
+          <td class="admin"><span class="glyphicon glyphicon-edit editRow" id="{$vuelo.ID_VUELO}"> &nbsp;  </span><span class="glyphicon glyphicon-trash deleteRow" id="{$vuelo.ID_VUELO}">  </span></td>
           {/if}
       {/if}
     </tr>

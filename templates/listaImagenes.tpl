@@ -5,7 +5,6 @@
         {if $Admin == TRUE}
             <button type="button" class="close deleteImg" avalue="{$imagen.ID_CIUDAD}" value="{$imagen.ID_IMAGEN}" >&times;</button>
         {/if}
-
       </div>
     {/foreach}
 {/if}
