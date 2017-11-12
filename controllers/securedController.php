@@ -34,9 +34,8 @@ class SecuredController extends Controller
     if(isset($_SESSION['ADMIN']) && $_SESSION['ADMIN']){
       $adminStatus = $_SESSION['ADMIN'];
     }
-    //captcha
-    $_SESSION['captcha'] = simple_php_captcha();
-    return $session = array("ADMIN" => $adminStatus, "USER" => $userStatus, "CAPTCHA" => $_SESSION['captcha']);
+
+    return $session = array("ADMIN" => $adminStatus, "USER" => $userStatus);
   }
 }
 

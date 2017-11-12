@@ -1,7 +1,7 @@
 <?php
 require_once('Api.php');
 require_once('models/ComentarioModel.php');
-
+require_once('vendor/simple-php-captcha-master/simple-php-captcha.php');
 class ComentariosController extends Api
 {
     private $captcha;
@@ -25,8 +25,8 @@ class ComentariosController extends Api
         if ($this->SessionActive()['ADMIN']){
           $response->admin = TRUE;
         }
-
-        $_SESSION['captcha_array'] = $this->SessionActive()['CAPTCHA'];
+        //captcha
+        $_SESSION['captcha_array'] = $_SESSION['captcha'] = simple_php_captcha();
         $response->captcha_img = $_SESSION['captcha_array']['image_src'];
 
         return $this->json_response($response, 200);
@@ -57,6 +57,7 @@ class ComentariosController extends Api
       }else{
         throw new Exception("Captcha incorrecto. Vuelva a intentar");
       }
+      $_SESSION['captcha_array'] = $_SESSION['captcha'] = simple_php_captcha();
     }
 
     public function puntajeConmentario($url_params = [])
