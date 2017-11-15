@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Nov 11, 2017 at 01:45 AM
+-- Generation Time: Nov 16, 2017 at 12:40 AM
 -- Server version: 5.6.35
 -- PHP Version: 7.1.6
 
@@ -81,8 +81,20 @@ CREATE TABLE `Comentario` (
 --
 
 INSERT INTO `Comentario` (`ID_COMENTARIO`, `DETALLE`, `ID_AEROLINEA`, `ID_USUARIO`, `Fecha`, `puntaje`) VALUES
-(3, 'No hay vuelta atras luego de viajar con Emirates', 6, 1, '2017-11-02 01:23:13', 4),
-(4, 'No pudo ser mejor', 3, 3, '2017-11-05 15:33:43', 1);
+(4, 'No pudo ser mejor', 3, 3, '2017-11-05 15:33:43', 1),
+(43, 'Locura', 6, 1, '2017-11-11 15:03:11', 2),
+(48, 'Locura', 3, 1, '2017-11-11 15:03:53', 5),
+(62, 'hi', 2, 1, '2017-11-11 15:11:22', 3),
+(63, 'Como Estas', 2, 1, '2017-11-11 15:12:49', 1),
+(64, 'bladl vlada ldasldal d dla lda dlal d', 2, 1, '2017-11-11 15:25:20', 3),
+(65, 'Una Porqueria', 2, 1, '2017-11-11 15:25:31', 4),
+(68, 'comentario nuevo', 3, 1, '2017-11-15 22:46:06', 0),
+(69, 'Comentario nuevo 2', 3, 1, '2017-11-15 22:46:30', 0),
+(70, 'Comentario a GOL', 2, 1, '2017-11-15 22:46:49', 0),
+(72, 'Nuevo a Qatar', 6, 1, '2017-11-15 22:47:19', 0),
+(73, 'Comentarioa a Aerolineas Argentinas', 5, 1, '2017-11-15 22:47:31', 0),
+(74, 'AIR CANADA no doubt', 4, 1, '2017-11-15 22:47:51', 0),
+(75, 'comentario Nuevo', 5, 1, '2017-11-15 23:08:51', 5);
 
 -- --------------------------------------------------------
 
@@ -101,9 +113,10 @@ CREATE TABLE `Imagen` (
 --
 
 INSERT INTO `Imagen` (`ID_IMAGEN`, `PATH`, `ID_CIUDAD`) VALUES
-(3, 'images/5a04b1f6e4fc7.jpg', 1),
-(4, 'images/5a04b22ab18cf.jpg', 5),
-(6, 'images/5a04b88953a76.jpg', 4);
+(6, 'images/5a04b88953a76.jpg', 4),
+(7, 'images/5a09fb968b7ab.jpg', 1),
+(8, 'images/5a09fc0211b7b.jpg', 1),
+(9, 'images/5a09fc2445cb1.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -125,8 +138,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`ID_USUARIO`, `USERNAME`, `PASSWORD`, `EMAIL`, `ADMIN`) VALUES
 (1, 'AgussDiaz28', '$2y$10$A8k4TsiHgQc6cD/hrS3hleYZQFQMH/Gbdh4Vpfk7lRYadsowP9nJC', 'agussdiaz28@gmail.com', 1),
-(2, 'admin', '$2y$10$ab6yhEPtujOZ9AHQVVUZ8u1y2aCCBuxN98lCDt0ZkBLedj8rrwLIe', '', 0),
-(3, 'Agustin', '$2y$10$WYOr6oF8wuYo5pfVPoX3POSUvFG3BJVzV1DEqLQeGEi6O44Y5gQly', 'adiaz28@qwavee.com', 0);
+(3, 'Agustin', '$2y$10$WYOr6oF8wuYo5pfVPoX3POSUvFG3BJVzV1DEqLQeGEi6O44Y5gQly', 'adiaz28@qwavee.com', 0),
+(4, 'admin', '$2y$10$dM7P9zgnkEIwNEFeFrX9K.rFgODjSrO7k0kzcZu1JThN1gwlBWJwK', 'admin@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -269,17 +282,17 @@ ALTER TABLE `Ciudades`
 -- AUTO_INCREMENT for table `Comentario`
 --
 ALTER TABLE `Comentario`
-  MODIFY `ID_COMENTARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID_COMENTARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 --
 -- AUTO_INCREMENT for table `Imagen`
 --
 ALTER TABLE `Imagen`
-  MODIFY `ID_IMAGEN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_IMAGEN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `Vuelos`
 --

@@ -255,6 +255,8 @@ $( document ).ready( function() {
 		$('#PVuelo').val(pvuelo)
 	}
 
+	//--------- FIN Funciones Vuelo----------
+	// --------- Comentarios ----------------
 	function comentarios(thisElement){
 		$('#comentariosHolder').show();
 		let IDAerolinea = $(thisElement).attr('id');
@@ -338,6 +340,8 @@ $( document ).ready( function() {
 		actualizarComentarios(IDAerolinea);
 	}
 
+	// -- FIN de funciones de Comentarios ----
+
 	//----------- ABM USUARIO -----------
 
 		function actualizarTablaPermisos(data){
@@ -386,6 +390,7 @@ $( document ).ready( function() {
 		}
 
 	//----------- /FIN ABM USUARIO ---------
+
 	// ----------------- CARGAR PAGINA / ******* EVENTOS ********* ---------------------
 	function cargar(data){
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
