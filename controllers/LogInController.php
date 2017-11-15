@@ -75,12 +75,14 @@ class LoginController extends SecuredController
         $password = $_POST['password'];
         if (!empty($userName) && !empty($password)) {
             $user = $this->model->getUser($userName);
-            $esAdmin = (int) $user[0]['ADMIN'];
             if ((!empty($user)) && password_verify($password, $user[0]['PASSWORD'])) {
+                $esAdmin = (int) $user[0]['ADMIN'];
                 $this->loguearse($userName, $esAdmin, $user);
             } else {
                 header('Location: '.HOME);
             }
+        } else {
+            header('Location: '.HOME);
         }
     }
 
