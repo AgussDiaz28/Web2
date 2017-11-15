@@ -19,11 +19,11 @@ class ComentariosController extends Api
         $comentarios = $this->model->getComentarios($id);
         $response = new stdClass();
         $response->comentarios = $comentarios;
-        $response->admin = FALSE;
+        $response->admin = false;
         $response->status = 200;
         $response->id_aerolinea = $id;
-        if ($this->SessionActive()['ADMIN']){
-          $response->admin = TRUE;
+        if ($this->SessionActive()['ADMIN']) {
+            $response->admin = true;
         }
         //captcha
         $_SESSION['captcha_array'] = $_SESSION['captcha'] = simple_php_captcha();
@@ -34,37 +34,46 @@ class ComentariosController extends Api
 
     public function borrarComentario($url_params = [])
     {
-      if ($this->SessionActive()['ADMIN']){
-        $id_comentario = $url_params[":id"];
-        $this->model->borrarComentario($id_comentario);
-      }
+        if ($this->SessionActive()['ADMIN']) {
+            $id_comentario = $url_params[":id"];
+            $this->model->borrarComentario($id_comentario);
+        }
     }
 
     public function agregarComentarioAerolinea($url_params = [])
     {
-      $body = json_decode($this->raw_data);
-      $id_aerolinea = $body->id_aerolinea;
-      $descripcion = $body->descripcion;
-      $captcha_code = $body->captcha;
-      if (!isset($_SESSION)) {
-          session_start();
-      }
-      $id_usuario = $_SESSION['USER_ID'];
-      var_dump($_SESSION['captcha_array']['code']);
-      var_dump($captcha_code);
-      if($_SESSION['captcha_array']['code'] == $captcha_code){
-        $this->model->agregarComentarioAerolinea($id_aerolinea, $descripcion, $id_usuario);
-      }else{
-        throw new Exception("Captcha incorrecto. Vuelva a intentar");
-      }
-      $_SESSION['captcha_array'] = $_SESSION['captcha'] = simple_php_captcha();
+        if ($this->SessionActive()['USER']) {
+            $body = json_decode($this->raw_data);
+            $id_aerolinea = $body->id_aerolinea;
+            $descripcion = $body->descripcion;
+            $captcha_code = $body->captcha;
+            if (!isset($_SESSION)) {
+                session_start();
+            }
+            $id_usuario = $_SESSION['USER_ID'];
+            if ($_SESSION['captcha_array']['code'] == $captcha_code) {
+                $this->model->agregarComentarioAerolinea($id_aerolinea, $descripcion, $id_usuario);
+            } else {
+                $response = "No incerto correctamente el capcha.";
+                return $this->json_response($response, 404);
+            }
+                $_SESSION['captcha_array'] = $_SESSION['captcha'] = simple_php_captcha();
+        } else {
+            $response = "No tiene Permiso para agregar Comentarios.";
+            return $this->json_response($response, 404);
+        }
     }
 
     public function puntajeConmentario($url_params = [])
     {
-        $id_comentario = $url_params[":id"];
-        $body = json_decode($this->raw_data);
-        $nuevoPuntaje = $body->puntajeComentario;
-        $this->model->setPuntajeComentario($id_comentario, $nuevoPuntaje);
+        if ($this->SessionActive()['USER']) {
+            $id_comentario = $url_params[":id"];
+            $body = json_decode($this->raw_data);
+            $nuevoPuntaje = $body->puntajeComentario;
+            $this->model->setPuntajeComentario($id_comentario, $nuevoPuntaje);
+        } else {
+            $response = "No tiene Permiso para modificar la calificacion.";
+            return $this->json_response($response, 404);
+        }
     }
 }
