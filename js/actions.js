@@ -393,6 +393,13 @@ $( document ).ready( function() {
 	function cargar(data){
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
 
+		//Library implemented http://www.daterangepicker.com/#example5
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'left',
+        }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+
 		$('#comentariosHolder').hide();
 		$('.uploadForm').hide();
 
