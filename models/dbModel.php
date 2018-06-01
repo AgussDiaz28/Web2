@@ -4,7 +4,6 @@ class dbModel{
 
   protected $db;
   protected $dbp;
-  protected $view;
 
     private function constructMysql(){ // Contruyo mi base MySqL
         $host = HOST;
@@ -32,32 +31,32 @@ class dbModel{
         $host = HOSTP;
         $dbn = DBP;
 
-        $config = "pgsql:host=$host;charset=utf8";
+        $config = "pgsql:host=$host;port=6432;";
         $this->dbp = new PDO($config, USERNAMEP, PASSWORDP);
 
         $this->dbp->exec('CREATE DATABASE IF NOT EXISTS '.$dbn);
         $this->dbp->exec('USE '. $dbn);
 
-        $query = $this->dbp->exec( "SELECT * FROM usuario");
+        $query = $this->dbp->exec( "SELECT * FROM GR10_Reserva");
 
         $sqlPostgress = file_get_contents('Reservas_create.sql');
 
         if (!$query){
             $this->dbp->exec($sqlPostgress);
-            $config = "mysql:host=$host;dbname=$dbn;charset=utf8";
+            $config = "pgsql:host=$host;port=6432;dbname=$dbn";
             $this->dbp = new PDO($config, USERNAMEP, PASSWORDP);
         }
     }
 
   function __construct(){
-    try{
+        try{
 
-        $this->constructMysql();
-        $this->constructPMySql();
+            $this->constructMysql();
+            $this->constructPMySql();
 
-    }catch (Exception $e) {
+        }catch (Exception $e) {
 
-    }
+        }
 
   }
 

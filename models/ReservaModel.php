@@ -6,7 +6,14 @@
  * Time: 16:17
  */
 
-class ReservaModel
+class ReservaModel extends dbModel
 {
 
+    public function getConnection(){
+        return $this->dbp;
+    }
+
+    public function getConnectionNormal(){
+        return $this->db;
+    }
 }

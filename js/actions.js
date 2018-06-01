@@ -400,7 +400,14 @@ $( document ).ready( function() {
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
 
-		$('#comentariosHolder').hide();
+        let fyc = $('#full-year-calendar').fullYearCalendar({
+            yearStart: new Date('2018-06-01'),
+            yearEnd : new Date('2018-08-01'),
+            publicHolidays: ['2018-06-25', '2018-06-15'],
+        });
+
+
+        $('#comentariosHolder').hide();
 		$('.uploadForm').hide();
 
 		$('.uploadImage').on('click',function() {

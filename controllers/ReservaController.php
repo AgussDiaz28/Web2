@@ -13,6 +13,8 @@ class ReservaController extends SecuredController
     }
 
     function verDisponibilidad(){
+        var_dump($this->modelo->getConnection());
+        var_dump($this->modelo->getConnectionNormal());
         $this->view->mostrarReservas();
     }
 
