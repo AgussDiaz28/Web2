@@ -40,6 +40,9 @@ class ConfigApp
       'mostrarAerolineas' => 'AerolineaController#mostrarAerolineas',
       'modificarAerolinea' => 'AerolineaController#modificarAerolinea',
 
+
+      'verDisponibilidad' => 'ReservaController#verDisponibilidad',
+
       'newDB' => 'dbModel#newDB', // Esta bien llamar al modelo de aca ?
 
       'uploadImage' => 'CiudadController#uploadImage',

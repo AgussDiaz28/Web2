@@ -20,6 +20,7 @@ class dbModel{
       $query = $this->db->exec( "SELECT * FROM usuario");
 
       $sql = file_get_contents('db.sql');
+      $sqlPostgress = file_get_contents('Reservas_create.sql');
 
       if (!$query){
           $this->db->exec($sql);

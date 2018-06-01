@@ -34,6 +34,7 @@
                <ul class="nav navbar-nav">
                   <li class="active" id="home"><a>Home</a></li>
                   <li id="vuelos"><a>Vuelos</a></li>
+                   <li id="reservas" class="admin"><a>Reservas</a></li>
                   <li id="aerolineas" class="admin"><a>Aerolineas</a></li>
                       {if ( isset($user)) && ($user != false)}
                           <li id="ciudades" class="admin"><a>Ciudades</a></li>

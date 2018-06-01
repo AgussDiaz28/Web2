@@ -323,8 +323,6 @@ $( document ).ready( function() {
 
 		let metodo = "/api/comentario";
 
-		console.log(JSdata);
-
 		$.ajax({
 			data:JSON.stringify(JSdata),
 			type:'POST',
@@ -509,6 +507,11 @@ $( document ).ready( function() {
 	e.preventDefault();
 	render('#LogIn','/LogIn');
 	});
+
+	$("#reservas").click(function (e) {
+		e.preventDefault();
+		render('#reservas','/verDisponibilidad')
+    })
 
 	$( "#SignUp" ).on( "click", function(e) {
 	e.preventDefault();

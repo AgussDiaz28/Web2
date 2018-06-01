@@ -25,6 +25,9 @@ class NavController extends SecuredController
     $logStatus = $this->SessionActive();
     $this->index->navBar($logStatus);
   }
+
+
+
 }
 
 
