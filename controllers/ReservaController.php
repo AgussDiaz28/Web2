@@ -13,7 +13,9 @@ class ReservaController extends SecuredController
     }
 
     function verDisponibilidad(){
+        echo 'Coneecion a postgres: ';
         var_dump($this->modelo->getConnection());
+        echo 'Coneecion a Mysql: ';
         var_dump($this->modelo->getConnectionNormal());
         $this->view->mostrarReservas();
     }

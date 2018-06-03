@@ -27,23 +27,21 @@ class dbModel{
     }
 
     // Coneccion con la base postgres
-    private function constructPMySql(){
+    protected function constructPMySql(){
         $host = HOSTP;
         $dbn = DBP;
 
-        $config = "pgsql:host=$host;port=6432;";
+        $config = "pgsql:host=$host;port=6432;dbname=$dbn";
+
         $this->dbp = new PDO($config, USERNAMEP, PASSWORDP);
 
-        $this->dbp->exec('CREATE DATABASE IF NOT EXISTS '.$dbn);
-        $this->dbp->exec('USE '. $dbn);
-
-        $query = $this->dbp->exec( "SELECT * FROM GR10_Reserva");
+        $query = $this->dbp->exec( "SELECT * FROM unc_248415.gr10_tipo_pago");
 
         $sqlPostgress = file_get_contents('Reservas_create.sql');
 
         if (!$query){
             $this->dbp->exec($sqlPostgress);
-            $config = "pgsql:host=$host;port=6432;dbname=$dbn";
+
             $this->dbp = new PDO($config, USERNAMEP, PASSWORDP);
         }
     }
@@ -55,7 +53,7 @@ class dbModel{
             $this->constructPMySql();
 
         }catch (Exception $e) {
-
+            var_dump($e);
         }
 
   }

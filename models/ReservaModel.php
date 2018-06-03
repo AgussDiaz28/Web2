@@ -10,6 +10,10 @@ class ReservaModel extends dbModel
 {
 
     public function getConnection(){
+
+        if (($this->dbp) != 'NULL' ){
+            $this->constructPMySql();
+        }
         return $this->dbp;
     }
 
