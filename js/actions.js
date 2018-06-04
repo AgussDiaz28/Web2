@@ -1,7 +1,7 @@
 $( document ).ready( function() {
 	// **************MUSTACHE*****************
 
-	let templateComentarios;
+	var templateComentarios;
 	$.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComentarios = template);
 
 	//***************FUNCIONES****************
@@ -45,8 +45,8 @@ $( document ).ready( function() {
 	}
 
 	function editAerolinea(thisElement){
-		let AerolineaAEditar = $(thisElement).attr('id');
-		let codigo = $(thisElement).closest('tr').find('.rdata')
+        var AerolineaAEditar = $(thisElement).attr('id');
+        var codigo = $(thisElement).closest('tr').find('.rdata')
 		llenarFormularioAerolinea(codigo);
 		$('#AAerolinea').off('click');
 		$('#AAerolinea').on('click',function() {
@@ -120,8 +120,8 @@ $( document ).ready( function() {
 	}
 
 	function editarCiudad(thisElement){
-		let ciudadAEditar = $(thisElement).attr('id');
-		let nombreCiudad = $(thisElement).closest('tr').find('.ciudad').text();
+        var ciudadAEditar = $(thisElement).attr('id');
+        var nombreCiudad = $(thisElement).closest('tr').find('.ciudad').text();
 		$('#NCiudad').val(nombreCiudad); //cargo formulario con el nombre de la ciudad a modificar
 		$('#ACiudad').off('click');
 		$('#ACiudad').on('click',function() {
@@ -170,7 +170,7 @@ $( document ).ready( function() {
 	}	// AGREGA VUELOS
 
 	function eliminarVuelo(thisElement){
-		let vueloABorrar = $(thisElement).attr('id');
+        var vueloABorrar = $(thisElement).attr('id');
 		$.ajax({
 					data: vueloABorrar,
 					type:'POST',
@@ -180,9 +180,9 @@ $( document ).ready( function() {
 	}
 
 	function editarVuelo(thisElement){
-		let vueloAEditar = $(thisElement).attr('id');
-		let id_vuelo = $(thisElement).attr("id");
-		let codigo = $(thisElement).closest('tr').find('.rdata').map(function () {
+        var vueloAEditar = $(thisElement).attr('id');
+        var id_vuelo = $(thisElement).attr("id");
+        var codigo = $(thisElement).closest('tr').find('.rdata').map(function () {
 				return $(thisElement).val();
 	  	});
 	  	llenarFormulario(codigo);
@@ -259,7 +259,7 @@ $( document ).ready( function() {
 	// --------- Comentarios ----------------
 	function comentarios(thisElement){
 		$('#comentariosHolder').show();
-		let IDAerolinea = $(thisElement).attr('id');
+        var IDAerolinea = $(thisElement).attr('id');
 		actualizarComentarios(IDAerolinea);
 
 		$('#ANComentario').off('click');
@@ -279,7 +279,7 @@ $( document ).ready( function() {
 	}
 
 	function cargarComentarios(data){
-		let rendered = Mustache.render(templateComentarios, data);
+        var rendered = Mustache.render(templateComentarios, data);
 		$('#commentList').html(rendered);
 
 		$('.deleteComentario').on('click',function() {
@@ -304,8 +304,8 @@ $( document ).ready( function() {
 	};
 
 	function deleteComentario(thisElement){
-		let IDComentario = $(thisElement).attr("cvalue");
-		let IDAerolinea = $(thisElement).attr("data-aerolineaID");
+		var IDComentario = $(thisElement).attr("cvalue");
+        var IDAerolinea = $(thisElement).attr("data-aerolineaID");
 		$.ajax({
 			type:'DELETE',
 			url: window.location.origin + window.location.pathname + "/api/comentario/"+IDComentario,
@@ -321,7 +321,7 @@ $( document ).ready( function() {
 			captcha : $('#captcha').val()
 		}
 
-		let metodo = "/api/comentario";
+        var metodo = "/api/comentario";
 
 		$.ajax({
 			data:JSON.stringify(JSdata),
@@ -334,7 +334,7 @@ $( document ).ready( function() {
 	}
 
 	function autoRefresh(){
-		let IDAerolinea = $('.comentAerolinea').attr('id');
+		var IDAerolinea = $('.comentAerolinea').attr('id');
 		actualizarComentarios(IDAerolinea);
 	}
 
@@ -355,7 +355,7 @@ $( document ).ready( function() {
 		}
 
 		function editarUsuario(thisuser){
-			let esAdmin = 0;
+            var esAdmin = 0;
 
 			if ($(thisuser).is(':checked')){
 				esAdmin = 1;
@@ -389,9 +389,46 @@ $( document ).ready( function() {
 
 	//----------- /FIN ABM USUARIO ---------
 
+    var hideAllPopovers = function() {
+        $('.popup-marker').each(function() {
+            $(this).popover('hide');
+        });
+    };
+
+    // -----
+
+    function loadCalendars() {
+
+        var fyc = $('#full-year-calendar').fullYearCalendar({
+            yearStart: new Date('2018-06-01'),
+            yearEnd : new Date('2018-07-01'),
+            publicHolidays: ['2018-07-14','2018-06-13'],
+        });
+
+        $('.fyc-day').attr('data-toggle','popover');
+        $('.fyc-day').attr('title','Estado del departamento');
+        $('.fyc-day').attr('data-content','Dia Libre');
+        //$('.fyc-day').attr('data-trigger','focus');
+
+        $('.fyc-public-holiday').attr('data-toggle','popover');
+        $('.fyc-public-holiday').attr('title','Estado del departamento');
+        $('.fyc-public-holiday').attr('data-content','Dia Ocupado');
+      //  $('.fyc-public-holiday').attr('data-trigger','focus');
+
+        //funcion para agregar nuevas fechas al calendario
+        fyc.addHoliday({type: 'publicHolidays', from: '2018-07-05'});
+    }
+
 	// ----------------- CARGAR PAGINA / ******* EVENTOS ********* ---------------------
 	function cargar(data){
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
+
+        loadCalendars();
+
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+
+        });
 
 		//Library implemented http://www.daterangepicker.com/#example5
         $('input[name="daterange"]').daterangepicker({
@@ -400,24 +437,17 @@ $( document ).ready( function() {
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
 
-        let fyc = $('#full-year-calendar').fullYearCalendar({
-            yearStart: new Date('2018-06-01'),
-            yearEnd : new Date('2018-08-01'),
-            publicHolidays: ['2018-06-25', '2018-06-15'],
-        });
-
-
         $('#comentariosHolder').hide();
 		$('.uploadForm').hide();
 
 		$('.uploadImage').on('click',function() {
 			$('.uploadForm').show();
-			let IDCiudad= $(this).attr('id');
+            var IDCiudad= $(this).attr('id');
 			$('#hiddenInput').val(IDCiudad);
 		})
 
 		$('.viewPhotos').on('click',function () {
-			let IDCiudad= $(this).attr('id');
+            var IDCiudad= $(this).attr('id');
 			data = {
 				id_ciudad : IDCiudad
 			}
