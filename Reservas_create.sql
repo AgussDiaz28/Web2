@@ -37,7 +37,7 @@ CREATE TABLE GR10_Departamento (
 -- Table: GR10_EstadoLuegoOcupacion
 CREATE TABLE GR10_EstadoLuegoOcupacion (
     id_reserva int  NOT NULL,
-    fecha int  NOT NULL,
+    fecha date  NOT NULL,
     comentario varchar(2048)  NOT NULL,
     CONSTRAINT PK_GR10_ESTADO_LUEGO_OCUPACION PRIMARY KEY (id_reserva,fecha)
 );

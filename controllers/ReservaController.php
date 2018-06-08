@@ -13,7 +13,8 @@ class ReservaController extends SecuredController
     }
 
     function verDisponibilidad(){
-        $this->view->mostrarReservas();
+        $departamentos = $this->modelo->getDepartamentos();
+        $this->view->mostrarReservas($departamentos);
     }
 
 }

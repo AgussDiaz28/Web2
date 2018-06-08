@@ -4,9 +4,9 @@
         <label for="departamentos"> Seleccione el departamento a buscar </label>
         <select class="form-control" id="Departamentos"name="">
             <option value="">Departamentos</option>
-            {if !empty($Aerolineas) }
-                {foreach from=$Aerolineas item=Aerolinea}
-                    <option value="{$Aerolinea.ID_AEROLINEA}">{$Aerolinea.NOMBRE_AEROLINEA}</option>
+            {if !empty($departamentos) }
+                {foreach from=$departamentos item=departamento}
+                    <option value="{$departamento.id_dpto}">{$departamento.descripcion}</option>
                 {/foreach}
             {/if}
         </select>

@@ -34,8 +34,8 @@ class dbModel{
         $config = "pgsql:host=$host;port=6432;dbname=$dbn";
 
         $this->dbp = new PDO($config, USERNAMEP, PASSWORDP);
-
-        $query = $this->dbp->exec( "SELECT * FROM unc_248415.gr10_tipo_pago");
+        $this->dbp->exec('SET SEARCH_PATH TO unc_248415');
+        $query = $this->dbp->exec( "SELECT * FROM gr10_tipo_pago");
 
         $sqlPostgress = file_get_contents('Reservas_create.sql');
 

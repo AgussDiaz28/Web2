@@ -17,7 +17,23 @@ class ReservaModel extends dbModel
         return $this->dbp;
     }
 
-    public function getConnectionNormal(){
-        return $this->db;
+
+    //Funcion que devuelve los departamentos existentes en la base de datos
+    public function getDepartamentos(){
+        $sentencia = $this->dbp->prepare( "SELECT id_dpto,descripcion FROM gr10_departamento");
+        $sentencia->execute([]);
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    //Devuelve todas las reserva realizadas en un dado periodo de tiempo, por lo cual sacando el periodo de esas
+    // reservas, el departamento se encuentra disponible
+    public function getDisponibilidad($depto,$fromDate,$upToDate){
+
+        $sentencia = $this->dbp->prepare( "SELECT fecha_desde,fecha_hasta FROM Reserva WHERE id_depto = ? and (fecha_desde => ? and fecha_hasta <= ?)");
+        $sentencia->execute([$depto,$fromDate,$upToDate]);
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
 }

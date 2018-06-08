@@ -14,9 +14,8 @@ class ReservaView
         $this->vista = new Smarty();
     }
 
-    function mostrarReservas($departamento=''){
-//        $this->vista->assign('ciudades',$departamento);
-//        $this->vista->assign('Aerolineas',$mes);
+    function mostrarReservas($departamentos=''){
+        $this->vista->assign('departamentos',$departamentos);
         $this->vista->display('templates/reserva.tpl');
     }
 }

@@ -43,8 +43,8 @@ insert into gr10_persona values (1,38524932,'Diaz','Agustin','1995-01-28','aguss
 insert into gr10_persona values (2,42908673,'Diaz Gargiulo','Mariano','1999-08-31','marianodiaz@gmail.com');
 insert into gr10_persona values (3,13244453,'Diaz','Ricardo','1959-11-01','rjdiazt@gmail.com');
 
-insert into gr10_persona values (4,13244453,'Diaz','Ricardo','1959-11-01','rjdiazt@gmail.com');
-insert into gr10_persona values (5,13244453,'Diaz','Ricardo','1959-11-01','rjdiazt@gmail.com');
+insert into gr10_persona values (1,27890165,'Pizzi','Alejandra','1979-08-11','alejandra@qwavee.com');
+insert into gr10_persona values (1,25908361,'Rodriguez','Diego','1977-01-17','diego@qwavee.com');
 
 /*  FALTAN AGREGAR TUPLAS A ESTA TABLA */
 
@@ -55,30 +55,27 @@ create table gr10_ciudad (
 	constraint pk_gr10_ciudad primary key (id_ciudad)
 )
 
-insert into gr10_ciudad (1,'Tandil');
-insert into gr10_ciudad (2,'Mar Del Plata');
-insert into gr10_ciudad (3,'Buenos Aires');
-insert into gr10_ciudad (4,'Necochea');
-insert into gr10_ciudad (5,'La Plata');
+insert into gr10_ciudad values (1,'Tandil');
+insert into gr10_ciudad values (2,'Mar Del Plata');
+insert into gr10_ciudad values (3,'Buenos Aires');
+insert into gr10_ciudad values (4,'Necochea');
+insert into gr10_ciudad values (5,'La Plata');
 
 /* Modificacion de departamento */
 
 alter table gr10_departamento add column id_ciudad int;
 
-alter colum gr10_departamento 
+alter table gr10_departamento  
 add constraint FK_GR10_CIUDAD_DEPARTAMENTO 
-FOREIGN KEY (id_ciudad) references gr10_ciudad (id_ciudad)
-NOT DEFERRABLE
-INITIALLY immediate;
+FOREIGN KEY (id_ciudad) references gr10_ciudad (id_ciudad);
 
 
 /* insert de departamentos */
-
-insert into gr10_departamento values (1,'',54,1,1,38524932,400);
-insert into gr10_departamento values (2,'',74,2,1,38524932,600);
-insert into gr10_departamento values (3,'',120,2,1,38524932,800);
-insert into gr10_departamento values (4,'',74,1,2,42908673,600);
-insert into gr10_departamento values (5,'',74,3,3,13244453,600);
+insert into gr10_departamento values (1,'Departamento1',54,3,1,38524932,400,1);
+insert into gr10_departamento values (2,'Departamento2',74,4,1,38524932,600,1);
+insert into gr10_departamento values (3,'Departamento3',99,1,1,38524932,800,5);
+insert into gr10_departamento values (4,'Departamento4',68,1,2,42908673,600,5);
+insert into gr10_departamento values (5,'Departamento5',94,3,3,13244453,600,2);
 
 /* insert costo de depto*/
 
@@ -89,35 +86,30 @@ insert into gr10_costodepto values (3,'2018-01-01','2018-04-01',500);
 insert into gr10_costodepto values (1,'2018-07-15','2018-08-15',1500);
 
 /* insert de Huesped */
-
 insert into gr10_huesped values (1,38524932);
-/* El resto de los inserts no funcionan, verificar*/
-insert into gr10_huesped values (2,32524932);
-insert into gr10_huesped values (1,38524931);
-insert into gr10_huesped values (1,13524932);
-insert into gr10_huesped values (1,27534332);
+insert into gr10_huesped values (2,42908673);
+insert into gr10_huesped values (3,13244453);
+insert into gr10_huesped values (1,27890165);
+insert into gr10_huesped values (1,25908361);
 
 
 /* inserts de reserva */
-/* columna tipo ??????? es necesario el tipo_doc y nro_doc en esta tabla ? */
-insert into gr10_reserva values (1,'2017-10-01','2018-01-01','2018-01-14','TIPO',1,600,1,1,38524932);
-insert into gr10_reserva values (2,'2017-10-01','2018-01-01','2018-01-14','TIPO',1,600,1,1,38524932);
-insert into gr10_reserva values (3,'2017-10-01','2018-01-01','2018-01-14','TIPO',1,600,1,1,38524932);
-insert into gr10_reserva values (4,'2017-10-01','2018-01-01','2018-01-14','TIPO',1,600,1,1,38524932);
-insert into gr10_reserva values (5,'2017-10-01','2018-01-01','2018-01-14','TIPO',1,600,1,1,38524932);
-
-/* insert comentarios */
-insert into gr10_comentario values (1,38524932,1,now,'Preferentemente quiero la habitacion en un piso alto de ser posible',5);
-/*FALTAN COMENTARIOS*/
-
+insert into gr10_reserva values (1,'2017-10-01','2018-01-01','2018-01-24','TIPO',3,1600,1,1,38524932);
+insert into gr10_reserva values (2,'2017-11-30','2018-02-01','2018-03-14','TIPO',4,800,1,2,42908673);
+insert into gr10_reserva values (3,'2017-09-18','2018-04-01','2018-04-10','TIPO',5,600,1,3,13244453);
+insert into gr10_reserva values (4,'2017-10-14','2018-01-01','2018-01-14','TIPO',2,500,1,1,27890165);
+insert into gr10_reserva values (5,'2017-12-12','2018-05-01','2018-05-8','TIPO',1,450,1,1,25908361);
 
 /* insert huesped reserva */
-insert into gr10_huesped_reserva values(1,38514832,1);
-insert into gr10_huesped_reserva values(1,38514832,2);
-insert into gr10_huesped_reserva values(1,38514832,3);
-/* Cambiar de huesped a las reservas 5 y */
-insert into huesped_reserva values(1,38514832,4);
-insert into huesped_reserva values(1,38514832,5);
+insert into gr10_huesped_reserva values(1,38524932,1);
+insert into gr10_huesped_reserva values(1,27890165,4);
+insert into gr10_huesped_reserva values(1,25908361,5);
+insert into gr10_huesped_reserva values(3,13244453,3);
+insert into gr10_huesped_reserva values(2,42908673,2);
+
+/* insert comentarios */
+insert into gr10_comentario values (1,38524932,1,now(),'Preferentemente quiero la habitacion en un piso alto de ser posible',5);
+/*FALTAN AGREGAR COMENTARIOS*/
 
 /* inserts en estado Luego Ocupacion */
 
@@ -128,4 +120,5 @@ insert into gr10_estadoluegoocupacion values (4,'2018-01-15','comentario 4');
 insert into gr10_estadoluegoocupacion values (5,'2018-01-15','comentario 5');
 
 
+SELECT * FROM gr10_departamento;
 
