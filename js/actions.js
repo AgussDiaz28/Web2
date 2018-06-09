@@ -2,7 +2,8 @@ $( document ).ready( function() {
 	// **************MUSTACHE*****************
 
 	var templateComentarios;
-	$.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComentarios = template);
+	var fyc;
+    $.ajax({ url: 'js/templates/comentarios.mst'}).done( template => templateComentarios = template);
 
 	//***************FUNCIONES****************
 
@@ -397,45 +398,93 @@ $( document ).ready( function() {
 
     // -----
 
-    function loadCalendars() {
+    function loadCalendars(ocupado) {
+
+        $('#full-year-calendar').html('');
 
         var fyc = $('#full-year-calendar').fullYearCalendar({
-            yearStart: new Date('2018-06-01'),
-            yearEnd : new Date('2018-07-01'),
-            publicHolidays: ['2018-07-14','2018-06-13'],
+            yearStart: new Date('2018-02-01'),
+            yearEnd : new Date('2018-04-01'),
         });
 
         $('.fyc-day').attr('data-toggle','popover');
         $('.fyc-day').attr('title','Estado del departamento');
         $('.fyc-day').attr('data-content','Dia Libre');
-        //$('.fyc-day').attr('data-trigger','focus');
 
         $('.fyc-public-holiday').attr('data-toggle','popover');
         $('.fyc-public-holiday').attr('title','Estado del departamento');
         $('.fyc-public-holiday').attr('data-content','Dia Ocupado');
-      //  $('.fyc-public-holiday').attr('data-trigger','focus');
 
         //funcion para agregar nuevas fechas al calendario
-        fyc.addHoliday({type: 'publicHolidays', from: '2018-07-05'});
+        ocupado.forEach(function (elem) {
+            fyc.addHoliday({type: 'publicHolidays', from: elem});
+        })
     }
+
+    function loadDateRange (){
+        //Library implemented http://www.daterangepicker.com/#example5
+        $('input[name="daterange"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+
+        $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+        });
+    }
+
+    function getAvailability(id,from,to) {
+        data = {
+            id_departamento : id,
+            from : from,
+            to : to
+        }
+        ajaxMethods(data,'/getAvailability',renderNewCalendar);
+    }
+
+    function renderNewCalendar(data){
+        var arr = [];
+        data.forEach(function (elem) {
+            elem.forEach(function (e) {
+                e.forEach(function (a) {
+                    arr.push(a);
+                })
+            })
+        })
+
+        loadCalendars(arr);
+
+    }
+
 
 	// ----------------- CARGAR PAGINA / ******* EVENTOS ********* ---------------------
 	function cargar(data){
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
 
-        loadCalendars();
+        //loadCalendars();
 
-        $(document).ready(function(){
-            $('[data-toggle="popover"]').popover();
+     	loadDateRange();
 
-        });
+        // $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+        //     var dates = $(this).val();
+        //     deptoID =  $('#Departamentos').val();
+        //     console.log(dates);
+        //     console.log(deptoID);
+        //     getAvailability(deptoID,from,to);
+        // });
 
-		//Library implemented http://www.daterangepicker.com/#example5
-        $('input[name="daterange"]').daterangepicker({
-            opens: 'left',
-        }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        });
+     	$('#Departamentos').on('change',function () {
+     	    var deptoID = $(this).val();
+     	    var dates =  $('input[name="daterange"]').val();
+            if (dates != ''){
+                arr = dates.split("-");
+                from = arr[0];
+                to = arr[1];
+                getAvailability(deptoID,from,to);
+            }
+        })
 
         $('#comentariosHolder').hide();
 		$('.uploadForm').hide();

@@ -29,9 +29,8 @@ class ReservaModel extends dbModel
     // reservas, el departamento se encuentra disponible
     public function getDisponibilidad($depto,$fromDate,$upToDate){
 
-        $sentencia = $this->dbp->prepare( "SELECT fecha_desde,fecha_hasta FROM Reserva WHERE id_depto = ? and (fecha_desde => ? and fecha_hasta <= ?)");
+        $sentencia = $this->dbp->prepare( "SELECT fecha_desde,fecha_hasta FROM gr10_reserva WHERE id_dpto = ? and (fecha_desde >= ? and fecha_hasta <= ?)");
         $sentencia->execute([$depto,$fromDate,$upToDate]);
-        $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
     }

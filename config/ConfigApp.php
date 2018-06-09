@@ -42,6 +42,7 @@ class ConfigApp
 
 
       'verDisponibilidad' => 'ReservaController#verDisponibilidad',
+      'getAvailability' => 'ReservaController#getAvailability',
 
       'newDB' => 'dbModel#newDB', // Esta bien llamar al modelo de aca ?
 

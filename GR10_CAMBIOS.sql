@@ -120,5 +120,4 @@ insert into gr10_estadoluegoocupacion values (4,'2018-01-15','comentario 4');
 insert into gr10_estadoluegoocupacion values (5,'2018-01-15','comentario 5');
 
 
-SELECT * FROM gr10_departamento;
 
