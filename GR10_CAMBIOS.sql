@@ -119,5 +119,98 @@ insert into gr10_estadoluegoocupacion values (3,'2018-01-15','comentario 3');
 insert into gr10_estadoluegoocupacion values (4,'2018-01-15','comentario 4');
 insert into gr10_estadoluegoocupacion values (5,'2018-01-15','comentario 5');
 
+/* insert de habitaciones */
+
+/* 
+ * Depto 1 : Tipo de depto 3 ; habitacion -> 1 ; banio -> 1 ; max_huespedes -> 2 
+ * Depto 2 : Tipo de depto 4 ; habitacion -> 3 ; banio -> 1 ; max_huespedes -> 6
+ * Depto 3 : Tipo de depto 1 ; habitacion -> 4 ; banio -> 2 ; max_huespedes -> 6
+ * Depto 4 : Tipo de depto 1 ; habitacion -> 4 ; banio -> 2 ; max_huespedes -> 6
+ * Depto 5 : Tipo de depto 3 ; habitacion -> 1 ; banio -> 2 ; max_huespedes -> 2
+*/
+
+/* Insert de habitacion para depto 1*/
+insert into gr10_habitacion values (1,1,0,1,1,true,1,1,true,1,true);
+/* Insert de habitacion para depto 2*/
+insert into gr10_habitacion values (2,2,1,1,1,true,1,1,true,1,true);
+insert into gr10_habitacion values (2,3,1,1,1,true,1,1,true,1,true);
+insert into gr10_habitacion values (2,4,1,1,1,true,1,1,true,1,true);
+/* Insert de habitacion para depto 3*/
+insert into gr10_habitacion values (3,5,1,1,1,true,1,1,true,1,true);
+insert into gr10_habitacion values (3,6,1,1,1,true,1,1,true,1,true);
+insert into gr10_habitacion values (3,7,1,1,1,true,1,1,true,1,true);
+insert into gr10_habitacion values (3,8,1,1,1,true,1,1,true,1,true);
+/* Insert de habitacion para depto 4*/
+insert into gr10_habitacion values (4,9,1,1,1,true,1,1,true,1,true);
+insert into gr10_habitacion values (4,10,1,1,1,true,1,1,true,1,true);
+insert into gr10_habitacion values (4,11,1,1,1,true,1,1,true,1,true);
+insert into gr10_habitacion values (4,12,1,1,1,true,1,1,true,1,true);
+/* Insert de habitacion para depto 5*/
+insert into gr10_habitacion values (5,13,0,1,1,true,1,1,true,1,true);
+
+------
+/* After insets */
+
+/* Punto a. Que las fechas de las reservas sean consistentes, es decir que la fecha de inicio de la reserva sea menor que la fecha de finalización. */
+
+select * from gr10_reserva;
+
+alter table gr10_reserva add constraint gr10_reserva_check_fecha_reserva check ( fecha_reserva <= now());
+alter table gr10_reserva add check (fecha_reserva <= fecha_desde);
+alter table gr10_reserva add check ( fecha_desde < fecha_hasta);
+
+/*
+ * 	Ejemplo de tuplas no aceptadas luego de las restricciones
+ *  
+ * insert into gr10_reserva values (1,'2018-08-01','2018-10-15','2018-11-14','TIPO',3,1300,1,1,38524932); 
+ * insert into gr10_reserva values (1,'2018-03-01','2018-02-15','2018-02-19','TIPO',3,1300,1,1,38524932);
+ * insert into gr10_reserva values (1,'2018-03-01','2018-04-15','2018-04-14','TIPO',3,1300,1,1,38524932);
+ * */
+
+/* Punto b. Que el detalle de las habitaciones sea consistente con el tipo de departamento, es decir que si el tipo de departamento es de 2 habitaciones, en el detalle se consideren como máximo 2 habitaciones. */
+
+/* CONSULTA SOBRE LA FORMA DE HACERLO, SI CON UN COUNT DE HABITACIONES O AGREGAR UNA COLUMNA A LA TABLA DE DEPARTAMENTO Y COMPARAR CON TIPO_DEPTO
+
+select * from gr10_departamento; 
+select * from gr10_tipo_dpto;
+
+select * from gr10_habitacion;
+
+alter table gr10_departamento add constraint gr10_departamento_check_cant_habitaciones
+*/
+
+/* Punto c. Que tanto la persona que realiza la reserva como los huéspedes no sea el propietario del departamento  */
+
+
+select *
+from gr10_reserva ;
+join gr10_departamento on (gr10_departamento.id_dpto = gr10_reserva.id_dpto);
+
+select * from gr10_huesped_reserva;
+
+create or replace function trfn_gr10_check_propietario_no_alquila () returns trigger AS $body$
+BEGIN
+    IF ((SELECT COUNT(*)
+        FROM gr01_reserva r
+        LEFT JOIN gr10_huesped_reserva hr ON r.id_reserva = hr.id_reserva
+        WHERE r.id_dpto IN (SELECT d.id_dpto
+                            FROM gr10_departamento d
+                            WHERE (r.tipo_doc = d.tipo_doc AND r.nro_doc = d.nro_doc)
+                                OR (hr.tipo_doc = d.tipo_doc AND hr.nro_doc = d.nro_doc))) > 0) THEN
+            RAISE EXCEPTION 'EL propietario del departamento no puede ser huesped del mismo';
+    END IF;
+    RETURN NEW;
+END;
+$body$ LANGUAGE plpgsql;
+
+create  trigger gr10_reserva_departamento_persona 
+before insert or update on gr10_reserva
+for each statement
+execute procedure trfn_gr10_check_propietario_no_alquila();
+
+
+/* Punto d. Que la cantidad de huéspedes no supere la cantidad máxima de personas permitidas para una reserva */
+
+
 
 
