@@ -293,7 +293,7 @@ begin
                       FROM gr10_departamento d
                       LEFT JOIN gr10_reserva r ON d.id_dpto = r.id_dpto
                       AND ((r.fecha_desde NOT BETWEEN f_desde AND f_hasta) AND (r.fecha_hasta NOT BETWEEN f_desde AND f_hasta))
-                      WHERE id_ciudad = v_id_ciudad
+                      WHERE d.id_ciudad = v_id_ciudad
                       GROUP BY d.id_dpto
                       ORDER BY d.id_dpto)
         LOOP
