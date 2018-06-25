@@ -49,7 +49,7 @@ class dbModel{
   function __construct(){
         try{
 
-            $this->constructMysql();
+        //    $this->constructMysql();
             $this->constructPMySql();
 
         }catch (Exception $e) {
