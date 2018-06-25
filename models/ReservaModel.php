@@ -31,12 +31,10 @@ class ReservaModel extends dbModel
         $sentencia = $this->dbp->prepare( "SELECT
                                             fecha_desde
                                             ,fecha_hasta
-                                            ,(fecha_hasta - fecha_desde) as dias_reserva
-                                            ,(fecha_desde - ?) as desde
-                                            ,(fecha_hasta - ?) as hasta
+                                            ,(? - fecha_desde ) as desde
                                           FROM gr10_reserva
-                                          WHERE id_dpto = ? and (fecha_desde >= ? and fecha_hasta <= ?)");
-        $sentencia->execute([$fromDate,$upToDate,$depto,$fromDate,$upToDate]);
+                                          WHERE id_dpto = ? and (fecha_desde <= ? and fecha_hasta >= ?)");
+        $sentencia->execute([$fromDate,$depto,$upToDate,$fromDate]);
         return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
     }

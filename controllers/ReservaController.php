@@ -42,12 +42,12 @@ class ReservaController extends SecuredController
 
         return $date;
     }
-
+    
     function fullRangeDatesForView($from,$to){
         $fullRange = [];
 
-        list($diaF,$mesF,$anioF) = explode('/', $from);
-        list($diaT,$mesT,$anioT) = explode('/', $to);
+        list($anioF,$mesF,$diaF) = explode('-', $from);
+        list($anioT,$mesT,$diaT) = explode('-', $to);
 
         //Guardo el inicio de la se reserva
         $fullRange[] = "'$anioF-$mesF-$diaF'";
@@ -70,11 +70,33 @@ class ReservaController extends SecuredController
 
         return $fullRange;
     }
+    
+    private function getTheRightStart($dbDate,$requestedDate){
+        $dbDate = new \DateTime($dbDate);
+        $requestedDate = new \DateTime($requestedDate);
+        if ($dbDate < $requestedDate ){
+            return $requestedDate->format('Y-m-d');
+        }else{
+            return $dbDate->format('Y-m-d');
+        }
+    }
+    
+    private function getTheRightEnd($dbDate,$requestedDate){
+        $dbDate = new \DateTime($dbDate);
+        $requestedDate = new \DateTime($requestedDate);
+        if ($dbDate > $requestedDate ){
+            return $requestedDate->format('Y-m-d');
+        }else{
+            return $dbDate->format('Y-m-d');
+        }
+    }
 
     function getAvailability(){
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
         //inicializacion de variables
         $fullRange = [];
-        $range = [];
 
         //Obtengo los datos enviados por post a esta funcion
         $depto_id   = filter_input(INPUT_POST, 'id_departamento');
@@ -84,14 +106,12 @@ class ReservaController extends SecuredController
         if (!empty($depto_id) && !empty($from) && !empty($to)){
 
             $dates = $this->modelo->getDisponibilidad($depto_id,$from,$to);
-
             //Si encontro algun departamento ocupado para esas fechas
             if (!empty($dates)){
                 foreach ($dates as $date){
-                    $from = $this->formatDateForView($date['fecha_desde']);
-                    $to = $this->formatDateForView($date['fecha_hasta']);
-                    $fullRange[] = $this->fullRangeDatesForView($from,$to);
-                    $range[] = ['from' => $from, 'to' => $to];
+                    $desde= $this->getTheRightStart($date['fecha_desde'],$from);
+                    $hasta = $this->getTheRightEnd($date['fecha_hasta'],$to);
+                    $fullRange[] = $this->fullRangeDatesForView($desde,$hasta);
                 }
             }
         }

@@ -1,4 +1,30 @@
 $( document ).ready( function() {
+
+	/// **************************************
+
+			Date.isLeapYear = function (year) {
+			    return (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0));
+			};
+
+			Date.getDaysInMonth = function (year, month) {
+			    return [31, (Date.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
+			};
+
+			Date.prototype.isLeapYear = function () {
+			    return Date.isLeapYear(this.getFullYear());
+			};
+
+			Date.prototype.getDaysInMonth = function () {
+			    return Date.getDaysInMonth(this.getFullYear(), this.getMonth());
+			};
+
+			Date.prototype.addMonths = function (value) {
+			    var n = this.getDate();
+			    this.setDate(1);
+			    this.setMonth(this.getMonth() + value);
+			    this.setDate(Math.min(n, this.getDaysInMonth()));
+			    return this;
+			};
 	// **************MUSTACHE*****************
 
 	var templateComentarios;
@@ -400,12 +426,22 @@ $( document ).ready( function() {
 
     function loadCalendars(ocupado) {
 
-        $('#full-year-calendar').html('');
+		var rango =  $('#monthSelector').val();
+		arr = rango.split("/");
+		from = arr[0];
+		to = arr[1];
 
-         fyc = $('#full-year-calendar').fullYearCalendar({
-            yearStart: new Date('2018-02-01'),
-            yearEnd : new Date('2018-04-01'),
-        });
+		var inicio =  new Date(from);
+		inicio.addMonths(1);
+		var fin = new Date(from);
+		fin.addMonths(2);
+
+		$('#full-year-calendar').html('');
+
+		fyc = $('#full-year-calendar').fullYearCalendar({
+			yearStart: inicio,
+			yearEnd : fin,
+		});
 
         $('.fyc-day').attr('data-toggle','popover');
         $('.fyc-day').attr('title','Estado del departamento');
