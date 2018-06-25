@@ -12,21 +12,20 @@
         </select>
     </div>
     <div class="col-sm-3">
-        <label for="daterange"> Seleccione fecha para ver disponibilidad </label>
+        <label for="daterange"> Seleccione mes </label>
             <select class="form-control" id="monthSelector"name="">
                 {if !empty($meses) }
                     {foreach from=$meses item=mes}
                         <option value="{$mes.start}/{$mes.end}">{$mes.nombre}</option>
                     {/foreach}
                 {/if}
-
+            </select>
     </div>
 </div>
 <br>
 <div class="row">
     <div class="col-sm-12">
-        <div id="full-year-calendar"></div>
+        <div id="full-year-calendar"> </div>
     </div>
-    <div id="lala"></div>
 
 </div>

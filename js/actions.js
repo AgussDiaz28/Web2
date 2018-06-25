@@ -402,7 +402,7 @@ $( document ).ready( function() {
 
         $('#full-year-calendar').html('');
 
-        var fyc = $('#full-year-calendar').fullYearCalendar({
+         fyc = $('#full-year-calendar').fullYearCalendar({
             yearStart: new Date('2018-02-01'),
             yearEnd : new Date('2018-04-01'),
         });
@@ -417,7 +417,6 @@ $( document ).ready( function() {
 
         //funcion para agregar nuevas fechas al calendario
         ocupado.forEach(function (elem) {
-					 console.log(elem);
             fyc.addHoliday({type: 'publicHolidays', from: elem});
         })
     }
