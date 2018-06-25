@@ -1,0 +1,24 @@
+drop table gr10_persona cascade;
+drop table gr10_reserva cascade;
+drop table gr10_huesped_reserva cascade;
+drop table gr10_tipo_dpto cascade;
+drop table gr10_departamento cascade;
+drop table gr10_habitacion cascade;
+drop table gr10_comentario cascade;
+drop table gr10_estadoluegoocupacion cascade;
+drop table gr10_costodepto cascade;
+drop table gr10_huesped cascade;
+drop table gr10_pago cascade;
+drop table gr10_tipo_pago cascade;
+drop table gr10_tipo_doc cascade;
+drop table gr10_ciudad cascade;
+
+drop function if exists fn_gr10_departametos_disponibles (date, date, character varying);
+drop function if exists fn_gr10_listar_estado_departamento (date);
+drop function if exists trfn_gr10_check_cant_hab_tipo_dpto();
+drop function if exists trfn_gr10_check_cant_huesped_reserva();
+drop function if exists trfn_gr10_check_depto_habitaciones();
+drop function if exists trfn_gr10_check_propietario_huesped_reserva();
+drop function if exists trfn_gr10_check_propietario_no_esta_reservando();
+drop function if exists trfn_gr10_check_propietario_reserva();
+drop function if exists trfn_gr10_check_tipo_dpto_capacidad();	
