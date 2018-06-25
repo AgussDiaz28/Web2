@@ -402,7 +402,7 @@ $( document ).ready( function() {
 
         $('#full-year-calendar').html('');
 
-        var fyc = $('#full-year-calendar').fullYearCalendar({
+         fyc = $('#full-year-calendar').fullYearCalendar({
             yearStart: new Date('2018-02-01'),
             yearEnd : new Date('2018-04-01'),
         });
@@ -419,20 +419,6 @@ $( document ).ready( function() {
         ocupado.forEach(function (elem) {
             fyc.addHoliday({type: 'publicHolidays', from: elem});
         })
-    }
-
-    function loadDateRange (){
-        //Library implemented http://www.daterangepicker.com/#example5
-        $('input[name="daterange"]').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                cancelLabel: 'Clear'
-            }
-        });
-
-        $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        });
     }
 
     function getAvailability(id,from,to) {
@@ -453,9 +439,7 @@ $( document ).ready( function() {
                 })
             })
         })
-
         loadCalendars(arr);
-
     }
 
 
@@ -463,30 +447,29 @@ $( document ).ready( function() {
 	function cargar(data){
 		$( "#main" ).html( data );	// <Div> donde se carga el contenido de las paginas
 
-        //loadCalendars();
-
-     	loadDateRange();
-
-        // $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
-        //     var dates = $(this).val();
-        //     deptoID =  $('#Departamentos').val();
-        //     console.log(dates);
-        //     console.log(deptoID);
-        //     getAvailability(deptoID,from,to);
-        // });
-
      	$('#Departamentos').on('change',function () {
      	    var deptoID = $(this).val();
-     	    var dates =  $('input[name="daterange"]').val();
-            if (dates != ''){
-                arr = dates.split("-");
+     	    var rango =  $('#monthSelector').val();
+					if (rango != ''){
+                arr = rango.split("/");
                 from = arr[0];
                 to = arr[1];
                 getAvailability(deptoID,from,to);
             }
-        })
+      });
 
-        $('#comentariosHolder').hide();
+			$('#monthSelector').on('change',function () {
+     	    var deptoID = $('#Departamentos').val();
+					var rango =  $(this).val();
+					if (rango != ''){
+								 arr = rango.split("/");
+								 from = arr[0];
+								 to = arr[1];
+								 getAvailability(deptoID,from,to);
+						 }
+      })
+
+    $('#comentariosHolder').hide();
 		$('.uploadForm').hide();
 
 		$('.uploadImage').on('click',function() {

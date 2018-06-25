@@ -28,9 +28,15 @@ class ReservaModel extends dbModel
     //Devuelve todas las reserva realizadas en un dado periodo de tiempo, por lo cual sacando el periodo de esas
     // reservas, el departamento se encuentra disponible
     public function getDisponibilidad($depto,$fromDate,$upToDate){
-
-        $sentencia = $this->dbp->prepare( "SELECT fecha_desde,fecha_hasta FROM gr10_reserva WHERE id_dpto = ? and (fecha_desde >= ? and fecha_hasta <= ?)");
-        $sentencia->execute([$depto,$fromDate,$upToDate]);
+        $sentencia = $this->dbp->prepare( "SELECT
+                                            fecha_desde
+                                            ,fecha_hasta
+                                            ,(fecha_hasta - fecha_desde) as dias_reserva
+                                            ,(fecha_desde - ?) as desde
+                                            ,(fecha_hasta - ?) as hasta
+                                          FROM gr10_reserva
+                                          WHERE id_dpto = ? and (fecha_desde >= ? and fecha_hasta <= ?)");
+        $sentencia->execute([$fromDate,$upToDate,$depto,$fromDate,$upToDate]);
         return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
     }
