@@ -1,6 +1,6 @@
 
 <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-6">
         <label for="departamentos"> Seleccione el departamento a buscar </label>
         <select class="form-control" id="Departamentos"name="">
             <option value="">Departamentos</option>
@@ -11,7 +11,7 @@
             {/if}
         </select>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-6">
         <label for="daterange"> Seleccione mes </label>
             <select class="form-control" id="monthSelector"name="">
                 {if !empty($meses) }
